@@ -4,7 +4,7 @@ Sequelize = require('sequelize');
 conf = require '../etc/config'
 
 
-sequelize2 = new Sequelize 'intercitybus', 'root', '',
+sequelize2 = new Sequelize 'intercitybus', 'intercitybus', 'intercitybus123890',
     host: 'localhost'
     dialect: "mysql"
 #    dialect: 'sqlite'

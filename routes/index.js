@@ -25,16 +25,31 @@
       gbusline = busline;
       return busline.getStartCity();
     }).then(function(city) {
-      gbusline.startCity = city.name;
+      gbusline.startCity = {
+        id: city.id,
+        name: city.name,
+        stations: []
+      };
       return gbusline.getEndCity();
     }).then(function(city2) {
-      gbusline.endCity = city2.name;
+      gbusline.endCity = {
+        id: city2.id,
+        name: city2.name,
+        stations: []
+      };
       return gbusline.getStartTime();
     }).then(function(time) {
       gbusline.starttimes = time;
       return gbusline.getStations();
     }).then(function(stations) {
-      return gbusline.stations = stations;
+      gbusline.stations = stations;
+      return _.each(stations, function(element, index, list) {
+        if (element.cityId === gbusline.startCity.id) {
+          return gbusline.startCity.stations.push(element);
+        } else if (element.cityId === gbusline.endCity.id) {
+          return gbusline.endCity.stations.push(element);
+        }
+      });
     }).then(function() {
       return res.render('busline', {
         busline: gbusline

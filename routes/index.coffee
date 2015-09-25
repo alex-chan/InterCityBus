@@ -26,16 +26,29 @@ router.get '/busline/:id', (req, res, next)->
         busline.getStartCity()
 
     .then (city)->
-        gbusline.startCity = city.name
+        gbusline.startCity =
+            id: city.id
+            name: city.name
+            stations: []
         gbusline.getEndCity()
     .then (city2)->
-        gbusline.endCity = city2.name
+        gbusline.endCity =
+            id: city2.id
+            name: city2.name
+            stations: []
         gbusline.getStartTime()
     .then (time)->
         gbusline.starttimes = time
         gbusline.getStations()
     .then (stations)->
         gbusline.stations = stations
+
+        _.each stations, (element, index, list)->
+            if element.cityId == gbusline.startCity.id
+                gbusline.startCity.stations.push element
+            else if element.cityId == gbusline.endCity.id
+                gbusline.endCity.stations.push element
+
     .then ->
         res.render 'busline',
             busline: gbusline
