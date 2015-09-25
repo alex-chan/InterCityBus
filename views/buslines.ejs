@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+
+<table>
+    <tr>
+    <th>编号</th>
+    <th>名称</th>
+    <th>始发城市</th>
+    <th>到达城市</th>
+        <th>出发时间</th>
+    </tr>
+
+<% for(var i=0; i<buslines.length;i++) { %>
+    <tr>
+        <td>
+            <%= buslines[i].id  %>
+        </td>
+        <td>
+            <%= buslines[i].name  %>
+        </td>
+        <td>
+            <%= buslines[i].startCity  %>
+        </td>
+        <td>
+            <%= buslines[i].endCity  %>
+        </td>
+        <td>
+            <% for(var startTime = buslines[i].startTime, j=0; j<startTime.length;j++) { %>
+            <%= startTime[j].time   %>
+            <% } %>
+        </td>
+    </tr>
+<% } %>
+
+</table>
+
+
+</body>
+</html>

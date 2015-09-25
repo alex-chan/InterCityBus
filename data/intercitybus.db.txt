@@ -1,0 +1,28 @@
+
+    return model.Busline.findById(req.params.id).then(function(busline) {
+      return busline.getStartCity().then(function(city) {
+        busline.startCity = city.name;
+        return busline.getEndCity().then(function(city2) {
+          busline.endCity = city2.name;
+          return res.render('busline', {
+            busline: busline
+          });
+        });
+      });
+    });
+  });
+
+
+
+      return model.Busline.findById(req.params.id).then(function(busline) {
+        return busline.getStartCity();
+      }).then(function(city) {
+        busline.startCity = city.name;
+        return busline.getEndCity();
+      }).then(function(city2) {
+        busline.endCity = city2.name;
+        return res.render('busline', {
+          busline: busline
+        });
+      });
+    });

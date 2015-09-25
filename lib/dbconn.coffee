@@ -1,23 +1,24 @@
 
 #mysql = require "mysql"
 Sequelize = require('sequelize');
-#config = require '../config'
+conf = require '../etc/config'
 
 
-sequelize2 = new Sequelize 'database', 'czz', 'sb',
+sequelize2 = new Sequelize 'intercitybus', 'root', '',
     host: 'localhost'
-    dialect: 'sqlite'
+    dialect: "mysql"
+#    dialect: 'sqlite'
 
-#    timezone: '+08:00'
+    timezone: '+08:00'
 
-    logging: false
+    logging: true
 
     pool:
         max: 5
         min: 0
         idle: 10000
 
-    storage: 　'./database.sqite'
+#    storage: 　'./database.sqite'
 
 
 module.exports = sequelize2

@@ -12,22 +12,21 @@ Promise = require("sequelize").Promise
 City = squelize.define 'city',
     name: Sequelize.STRING
 
-,freezeTableName: true
-
 
 Station = squelize.define 'station',
     name: Sequelize.STRING
     address: Sequelize.STRING
+    latitude: Sequelize.DOUBLE
+    longitude: Sequelize.DOUBLE
 
-,freezeTableName: true
 
 
 Company = squelize.define 'company',
     name: Sequelize.STRING
-    phones:Sequelize.STRING
-    address: Sequelize.TEXT(500)
+    address: Sequelize.STRING
 
-, freezeTableName: true
+Phone = squelize.define 'phone',
+    phoneNumber: Sequelize.STRING
 
 
 Busline = squelize.define 'busline',
@@ -46,33 +45,45 @@ User = squelize.define 'user',
     password: Sequelize.STRING
 
 
-,freezeTableName: true
-
-
-BusLineStation = squelize.define 'busline_station'
-,freezeTableName: true
 
 
 
+BusLineStation = squelize.define 'busline_station',
+    id:
+        type: Sequelize.INTEGER
+        autoIncrement: true
+        primaryKey: true
 
 
-Stime = squelize.define 'start_time',
+
+
+
+Stime = squelize.define 'starttime',
     time: Sequelize.TIME
-,freezeTableName: true
 
 
 
-BusLineStartTime = squelize.define 'busline_starttime'
-,freezeTableName: true
+
+BusLineStartTime = squelize.define 'busline_starttime',
+    id:
+        type: Sequelize.INTEGER
+        autoIncrement: true
+        primaryKey: true
+
 
 
 City.hasMany Station
 Station.belongsTo City
 
+Company.hasMany Phone
+Phone.belongsTo Company
 
 
 #BusLine.hasMany Station
 #Station.belongsTo BusLine
+
+Busline.hasMany Phone
+Phone.belongsTo Busline
 
 Busline.belongsToMany Station,
     through: BusLineStation
@@ -109,17 +120,62 @@ City.hasMany Busline,
 
 Company.hasMany Busline,
     as: 'Lines'
-#BusLine.belongsTo Company
+
+Busline.belongsTo Company
 
 
 
 
 
 
-Stime.sync
-    force: true
-.then ->
 
+
+
+
+
+
+getDate = (timeString)->
+    return new Date( "2015 1 1,"+ timeString + ":00")
+
+
+#Promise.reduce cityList, (total, item)->
+#    city = City.create
+#        name: item
+#, 0
+
+
+
+squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
+
+    Stime.sync
+        force: true
+    .then ->
+        Company.sync
+            force: true
+    .then ->
+        City.sync
+            force: true
+    .then ->
+        Busline.sync
+            force: true
+    .then ->
+        Phone.sync
+            force: true
+    .then ->
+        Station.sync
+            force: true
+    .then ->
+        BusLineStation.sync
+            force: true
+    .then ->
+        BusLineStartTime.sync
+            force: true
+    .then ->
+        addRecords()
+
+
+
+addStartTime = ->
     baseTime = new Date(2015,0,1,0,0,0)
     t = baseTime.getTime()
 
@@ -128,162 +184,106 @@ Stime.sync
     timeMap = _.map timeSecList, (val, key, list)->
         return time: new Date( t + val * 1800e3 ) # half an hour
 
-
     Stime.bulkCreate timeMap
-    .then (lst)->
 
 
 
 
-BusLineStartTime.sync
-    force: true
 
-BusLineStation.sync
-    force: true
+addRecords = ->
+    addStartTime().then (lst)->
 
 
+        gcities = null
+        gcomp = null
+        gphone = null
+        gline = null
 
-Company.sync
-    force: true
+        cityList = ["广州","深圳","珠海","佛山","惠州","湛江","梅州","汕头","汕尾"]
+        stationList1 = ["广州大学城官洲地铁站","暨南大学西门"]
+        stationList2 = ["深圳大学北门","世界之窗"]
+
+        cityMap = _.map cityList, (val, key, list)->
+            return 'name': val
+
+        City.bulkCreate cityMap
+        .then (cities)->
+            gcities = cities
+            Company.create
+                name: "Corp A"
+                address: "xxx street"
+
+        .then (comp)->
+            gcomp = comp
+            Phone.create
+                phoneNumber: "13800138000"
+
+        .then (phone)->
+            gphone = phone
+            Busline.create
+                name: 'line one'
+                price: 40
+                description: "no desc"
+                paymethod: "no pay method"
+
+        .then (line)->
+            gline = line
+            line.startCityId = cityList.indexOf("广州")+1
+            line.endCityId = cityList.indexOf("深圳")+1
+            line.setCompany gcomp
+            line.setPhones gphone
+            line.save()
+
+        .then ->
+            Promise.reduce stationList1, (total, item)->
+                Station.create
+                    name: item
+                .then (sta)->
+                    sta.setCity  cityList.indexOf("广州")+1
+            , 0
+
+        .then ->
+            Promise.reduce stationList2, (total, item)->
+                Station.create
+                    name: item
+                .then (sta)->
+                    sta.setCity  cityList.indexOf("深圳")+1
+            , 0
+
+        .then ->
+            Station.findAll()
+
+        .then (stations)->
+            gline.setStations stations
+            Stime.findAll
+                where:
+                    $or:
+                        [ time: getDate("08:30"),
+                            time: getDate("10:00") ]
+
+        .then (t)->
+            gline.setStartTime t
 
 
-getDate = (timeString)->
-    return new Date( "2015 1 1,"+ timeString + ":00")
+#
+#                City.findById 1
+#                    .then (city)->
+
+#                        console.log city.get
+#                            plain: true
+#
+#                        console.log city.name
+#
+#                        city.getLinesAsStartCity().then (lines)->
+#                            console.log lines
 
 
-City.sync(
-    force: true
-).then ->
-    cityList = ["广州","深圳","珠海","佛山","惠州","湛江","梅州","汕头","汕尾"]
-
-    cityMap = _.map cityList, (val, key, list)->
-        return 'name': val
 
 
 #    Promise.reduce cityList, (total, item)->
 #        city = City.create
 #            name: item
 #    , 0
-
-    City.bulkCreate cityMap
-#        fields: ['name']
-    .then (lst)->
-
-
-        Busline.sync
-            force: true
-        .then ->
-            Busline.create
-                name: 'line one'
-                price: 40
-
-            .then (line)->
-
-                line.startCityId = cityList.indexOf("广州")+1
-                line.endCityId = cityList.indexOf("深圳")+1
-                line.save().then ->
-
-
-                    Station.sync
-                        force: true
-                    .then ->
-                        stationList1 = ["暨南大学西门","广州大学城官洲地铁站"]
-
-                        Promise.reduce stationList1, (total, item)->
-                            Station.create
-                                name: item
-                            .then (sta)->
-                                sta.setCity  cityList.indexOf("广州")+1
-                        , 0
-
-                        .then ->
-
-
-                            stationList2 = ["深圳大学北门","世界之窗"]
-
-                            Promise.reduce stationList2, (total, item)->
-                                Station.create
-                                    name: item
-                                .then (sta)->
-                                    sta.setCity  cityList.indexOf("深圳")+1
-                            , 0
-
-                            .then ->
-
-                                Station.findAll().then (stations)->
-
-
-                                    line.setStations stations
-
-                                    Stime.findAll
-                                        where:
-                                            $or:
-                                                [ time: getDate("08:30"),
-                                                  time: getDate("10:00") ]
-
-                                    .then (t)->
-                                        line.setStartTime t
-
-#                                    line.setStations stations
-#                                    console.log stations
-
-
-
-
-
-
-
-
-
-
-
-    #
-    #                City.findById 1
-    #                    .then (city)->
-
-    #                        console.log city.get
-    #                            plain: true
-    #
-    #                        console.log city.name
-    #
-    #                        city.getLinesAsStartCity().then (lines)->
-    #                            console.log lines
-
-
-
-
-#
-#Person = squelize.define('Person', {})
-#
-#Person.hasOne(Person, {as: 'Father'})
-#
-#Person.sync
-#    force:  true
-#.then ->
-#
-#    Person.create().then (p)->
-#        Person.create().then (p2)->
-#
-#            p.setFather p2
-#            .then ->
-#                p.getFather().then (father)->
-#                    console.log father.get
-#                        plain: true
-
-#
-#User = squelize.define('User', {})
-#Project = squelize.define('Project', {})
-#
-#
-#Project.hasMany(User, {as: 'Workers'})
-#Project.sync
-#    force:  true
-#.then ->
-#    Project.create().then (p)->
-#        User.create().then (u)->
-#            u.setWorkers [p]
-#            console.log p.getWorkers()
-
 
 
 module.exports.City = City

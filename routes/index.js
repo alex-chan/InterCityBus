@@ -18,24 +18,48 @@
     });
   });
 
+  router.get('/busline/:id', function(req, res, next) {
+    var gbusline;
+    gbusline = null;
+    return model.Busline.findById(req.params.id).then(function(busline) {
+      gbusline = busline;
+      return busline.getStartCity();
+    }).then(function(city) {
+      gbusline.startCity = city.name;
+      return gbusline.getEndCity();
+    }).then(function(city2) {
+      gbusline.endCity = city2.name;
+      return gbusline.getStartTime();
+    }).then(function(time) {
+      gbusline.starttimes = time;
+      return gbusline.getStations();
+    }).then(function(stations) {
+      return gbusline.stations = stations;
+    }).then(function() {
+      return res.render('busline', {
+        busline: gbusline
+      });
+    });
+  });
+
   router.get('/buslines', function(req, res, next) {
     return model.Busline.findAll().then(function(buslines) {
       var bus;
       bus = _.map(buslines, function(val, key, lst) {
         return val.getStartCity().then(function(city) {
           lst[key].startCity = city.name;
-          return val.getEndCity().then(function(city2) {
-            lst[key].endCity = city2.name;
-            return val.getStartTime().then(function(tm) {
-              lst[key].startTime = tm;
-              return Promise.resolve();
-            });
-          });
+          return val.getEndCity();
+        }).then(function(city2) {
+          lst[key].endCity = city2.name;
+          return val.getStartTime();
+        }).then(function(tm) {
+          lst[key].startTime = tm;
+          return Promise.resolve();
         });
       });
       return Promise.all(bus).then(function() {
         console.log(buslines[0].startCity);
-        return res.render('busline', {
+        return res.render('buslines', {
           buslines: buslines
         });
       });

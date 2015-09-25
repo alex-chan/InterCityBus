@@ -8,34 +8,40 @@
 
 <table>
     <tr>
-    <th>编号</th>
-    <th>名称</th>
-    <th>始发城市</th>
-    <th>到达城市</th>
+        <th>编号</th>
+        <th>名称</th>
+        <th>始发城市</th>
+        <th>到达城市</th>
         <th>出发时间</th>
     </tr>
 
-<% for(var i=0; i<buslines.length;i++) { %>
+
     <tr>
         <td>
-            <%= buslines[i].id  %>
+            <%= busline.id  %>
         </td>
         <td>
-            <%= buslines[i].name  %>
+            <%= busline.name  %>
         </td>
         <td>
-            <%= buslines[i].startCity  %>
+            <%= busline.startCity  %>
         </td>
         <td>
-            <%= buslines[i].endCity  %>
+            <%= busline.endCity  %>
         </td>
         <td>
-            <% for(var startTime = buslines[i].startTime, j=0; j<startTime.length;j++) { %>
-                <%=: startTime[j].time | first  %>
+            <% for(var startTime = busline.starttimes, j=0; j<startTime.length;j++) { %>
+            <%= startTime[j].time   %>
             <% } %>
         </td>
+        <td>
+            <% for(var stations = busline.stations, j=0; j<stations.length;j++) { %>
+            <%= stations[j].name   %>
+            <% } %>
+        </td>
+
     </tr>
-<% } %>
+
 
 </table>
 
