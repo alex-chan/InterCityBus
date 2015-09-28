@@ -17,7 +17,8 @@
       body { background: #eee; padding-top: 0.88rem; }
       .wrap { padding-bottom: .9rem; background: none; }
       .container { margin: 0 .3rem; }
-      .query { background-color: #ff9c00; margin-top: .42rem; margin-bottom: .46rem; font-size: .36rem; text-align: center; height: .72rem; line-height: .72rem; color: #fff; border-radius: .1rem; }
+      .query { width:100%;background-color: #ff9c00; margin-top: .42rem; margin-bottom: .46rem; font-size: .36rem; text-align: center; height: .72rem; line-height: .72rem; color: #fff; border-radius: .1rem; }
+
       .hairlines-bottom::after { bottom: 0; }
       .title_advice .title_span { display: block; font-size: .26rem; color: #656565; margin: 0 .3rem .09rem; }
       .elephant_pic { margin: 1.52rem auto .2rem; width: 2.95rem; height: 2.29rem; background: url(../image/icon_elephant01.png?t=20150731) 0 0 no-repeat; background-size: 2.95rem 2.29rem; }
@@ -83,22 +84,42 @@
     </nav>
 
     <div class="container">
+      <form name="query" method="get" action="/search">
       <div class="m-select_site">
         <div class="panel">
           <div class="site_replace"></div>
           <div class="on_site">
             <span class="left_image"></span>
-            <div class="hairlines-bottom" data-location="on_site" data-default-name="<span>出发地</span>"><span>出发城市</span></div>
+            <div class="hairlines-bottom" data-location="on_site" data-default-name="<span>出发地</span>">
+              <span>出发城市</span>
+              <span>
+                  <select name="start">
+                    <% for(var i=0; i<cities.length;i++) { %>
+                      <option value="<%= cities[i].id %>"><%= cities[i].name %></option>
+                    <% } %>
+                  </select>
+              </span>
+            </div>
             <!--ms-if-->
           </div>
           <div class="off_site">
             <span class="left_image"></span>
-            <div data-location="off_site" data-default-name="<span>目的地</span>"><span>目的城市</span></div>
+            <div data-location="off_site" data-default-name="<span>目的地</span>">
+              <span>目的城市</span>
+              <span>
+                  <select name="end">
+                    <% for(var i=0; i<cities.length;i++) { %>
+                    <option value="<%= cities[i].id %>" <%if (i==1) { %>selected="true"<% } %> ><%= cities[i].name %></option>
+                    <% } %>
+                  </select>
+              </span>
+            </div>
             <!--ms-if-->
           </div>
         </div>
-        <div class="query">查询大巴</div>
+        <button type="submit" class="query">查询大巴</button>
       </div>
+      </form>
     </div>
 
     <!-- 默认或无内容-大象 -->

@@ -10,21 +10,17 @@ model = require "../lib/model"
 
 # GET home page.
 router.get '/', (req, res, next)->
-    res.render 'index',
-            title: 'InterCity Bus!'
+
+    model.City.findAll()
+    .then (cities)->
+        res.render 'index',
+            cities: cities
 
 
+fulfillBusline = (busline)->
+    gbusline = busline
 
-
-router.get '/busline/:id', (req, res, next)->
-
-    gbusline = null
-
-    model.Busline.findById req.params.id
-    .then (busline)->
-        gbusline = busline
-        busline.getStartCity()
-
+    busline.getStartCity()
     .then (city)->
         gbusline.startCity =
             id: city.id
@@ -36,6 +32,7 @@ router.get '/busline/:id', (req, res, next)->
             id: city2.id
             name: city2.name
             stations: []
+
         gbusline.getStartTime()
     .then (time)->
         gbusline.starttimes = time
@@ -49,43 +46,65 @@ router.get '/busline/:id', (req, res, next)->
             else if element.cityId == gbusline.endCity.id
                 gbusline.endCity.stations.push element
 
-    .then ->
+        return gbusline
+
+
+router.get '/busline/:id', (req, res, next)->
+
+
+    model.Busline.findById req.params.id
+    .then (busline)->
+        fulfillBusline busline
+    .then (busline)->
         res.render 'busline',
-            busline: gbusline
+            busline: busline
 
 
 
 router.get '/buslines', (req, res, next)->
 
-    model.Busline.findAll().then (buslines)->
 
-        bus = _.map buslines, (val,key,lst)->
+    model.Busline.findAll()
+    .then (buslines)->
+        buslines = _.map buslines, (val,key,lst)->
+            fulfillBusline val
+        Promise.all buslines
 
-            val.getStartCity()
-            .then (city)->
-                lst[key].startCity = city.name
-                val.getEndCity()
-            .then (city2)->
-                lst[key].endCity = city2.name
-                val.getStartTime()
-            .then (tm)->
-                lst[key].startTime = tm
-                return Promise.resolve()
+    .then (buslines)->
+        res.render 'buslines',
+            buslines: buslines
+
+router.get '/search', (req, res, next)->
 
 
 
-        Promise.all bus
-        .then ->
-            console.log buslines[0].startCity
+
+    model.Busline.findAll
+        where:
+            startCityId: req.query.start
+            endCityId: req.query.end
+
+
+    .then (buslines)->
+
+
+
+        buslines = _.map buslines, (val,key,lst)->
+            fulfillBusline val
+        Promise.all buslines
+
+    .then (buslines)->
+        if buslines.length == 0
+            res.render 'nobus'
+        else
             res.render 'buslines',
                 buslines: buslines
 
-
+    .catch (err)->
+        res.end err.toString()
 
 router.get '/cities', (req, res, next)->
     model.City.findAll().then (cities)->
-
-
         res.render 'city',
             cities: cities
 
