@@ -2,7 +2,7 @@
 <html>
 <head>
 
-    <title>购票</title>
+    <title>查询结果</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,13 +31,15 @@
 
 <div class="wrapper">
 
-    <% for(var len = buslines.length, j=0; j<len;j++) { var busline = buslines[j] %>
+    共找到<%= buslines.length %>条线路
 
+    <% buslines.forEach(function(busline){   %>
 
 
     <div class="line_con">
         <h3 class="line_title"><%= busline.startCity.name  %> 一 <%= busline.endCity.name  %></h3>
         <!--repeat772240903229-->
+        <a href="/busline/<%= busline.id%>">
         <figure class="line_model">
             <figcaption class="line_info dis_box">
                 <div class="name_title">
@@ -50,7 +52,15 @@
                     <div class="white_bg"></div>
                     <ul class="start">
                         <% for(var stations = busline.startCity.stations, j=0; j<stations.length;j++) { %>
-                        <!--repeat890691768378--><li> <i class="ico"></i><!--html36718429625--><span><%= stations[j].name.substr(0,5) %></span><span class="pl6"><%= stations[j].name.substr(5) %></span><!--html36718429625:end--></li>
+                        <!--repeat890691768378--><li> <i class="ico"></i><!--html36718429625-->
+                                <% if( stations[j].name.length > 5 ){ %>
+                                    <span><%= stations[j].name.substr(0,5) %></span><span class="pl6"><%= stations[j].name.substr(5) %></span>
+                                <% }else{ %>
+                                    <span><%= stations[j].name %></span>
+                                <% } %>
+
+
+                            <!--html36718429625:end--></li>
                         <% } %>
                         <!--repeat890691768378--><!--ms-if--><!--repeat890691768378--><!--ms-if--><!--repeat890691768378--><!--repeat890691768378:end-->
                     </ul>
@@ -59,26 +69,34 @@
                     <ul class="end">
                         <!--repeat44274443388--><!--ms-if--><!--repeat44274443388--><!--ms-if--><!--repeat44274443388-->
                         <% for(var stations = busline.endCity.stations, j=0; j<stations.length;j++) { %>
-                        <li><i class="ico"></i><!--html842129003257--><span><%= stations[j].name.substr(0,5) %></span><span class="pl6"><%= stations[j].name.substr(5) %></span><!--html842129003257:end--></li><!--repeat44274443388-->
+                        <li><i class="ico"></i><!--html842129003257-->
+
+                            <% if( stations[j].name.length > 5 ){ %>
+                                <span><%= stations[j].name.substr(0,5) %></span><span class="pl6"><%= stations[j].name.substr(5) %></span>
+                            <% }else{ %>
+                                <span><%= stations[j].name %></span>
+                            <% } %>
+
+                            <!--html842129003257:end--></li><!--repeat44274443388-->
                         <% } %>
-                        >
                     </ul>
                     <div class="white_bg_right"></div>
                 </div>
                 <div class="line_more">
                     <span>首班 <%= busline.starttimes[0].time   %></span>
                     <span>末班 <%= busline.starttimes[busline.starttimes.length-1].time   %></span>
-                    <span>共趟班次</span>
+                    <span>共<%=busline.starttimes.length%>趟班次</span>
                     <!--<a class="ad" href="http://mp.weixin.qq.com/s?__biz=MzAxNDMzNjc2MQ==&amp;mid=215531709&amp;idx=1&amp;sn=00604c9cf5104357b51a41bb80257c87#rd">-->
                     <!--<img src="../image/icon_ad.png" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 1px 1px;">-->
                     <!--</a>-->
                 </div>
             </div>
         </figure><!--repeat772240903229--><!--repeat772240903229:end-->
+        </a>
     </div>
 
 
-    <% } %>
+    <% }); %>
 
 
 </div>

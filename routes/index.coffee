@@ -8,13 +8,40 @@ Promise =  require("sequelize").Promise
 
 model = require "../lib/model"
 
+
+fulfillHotlines = (hotline)->
+    hotline.getStartCity()
+    .then (city)->
+        hotline.startCity =
+            name: city.name
+            id: city.id
+        hotline.getEndCity()
+    .then (city)->
+        hotline.endCity =
+            name: city.name
+            id: city.id
+        return hotline
+
+
 # GET home page.
 router.get '/', (req, res, next)->
 
+    gcities = null
     model.City.findAll()
     .then (cities)->
+        gcities = cities
+        model.Hotline.findAll()
+    .then (hotlines)->
+
+        hotlines2 = _.map hotlines, (val,key,lst)->
+            fulfillHotlines val
+        Promise.all hotlines2
+
+    .then (hotlines)->
+
         res.render 'index',
-            cities: cities
+            cities: gcities
+            hotlines: hotlines
 
 
 fulfillBusline = (busline)->
@@ -51,10 +78,16 @@ fulfillBusline = (busline)->
 
 router.get '/busline/:id', (req, res, next)->
 
-
+    gbusline = null
     model.Busline.findById req.params.id
     .then (busline)->
         fulfillBusline busline
+    .then (busline)->
+        gbusline = busline
+        busline.getPhones()
+    .then (phones)->
+        gbusline.phones = phones
+        return gbusline
     .then (busline)->
         res.render 'busline',
             busline: busline
@@ -91,6 +124,9 @@ router.get '/search', (req, res, next)->
 
         buslines = _.map buslines, (val,key,lst)->
             fulfillBusline val
+
+
+
         Promise.all buslines
 
     .then (buslines)->

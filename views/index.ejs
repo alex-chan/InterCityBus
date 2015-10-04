@@ -29,6 +29,14 @@
       .buy_tab h3 { color: #ff9c00; height: 0.6rem; line-height: 0.6rem; text-align: center; }
       .buy_tab h3.active { background: #ff9c00; color: #fff; }
       a, a:link, a:visited, a:hover, a:active { color: inherit; }
+
+
+      .m-line { height: 1.0rem;  }
+      .m-line > .info { margin-top: 0.2rem ;}
+
+
+      .m-line > .subinfo button{ width: 1.2rem; height: .5rem; margin-top: .24rem; border: 1px solid #ff9c00; border-radius: .1rem; color: #ff9c00; font-size: .24rem; }
+
     </style>
 
 
@@ -120,7 +128,35 @@
         <button type="submit" class="query">查询大巴</button>
       </div>
       </form>
+
+
+
+
+        <div ms-if="!ztc_dis" >
+            <div class="title_advice">
+                <span class="title_span">热门线路</span>
+            </div>
+            <div class="common_history">
+                <% hotlines.forEach(function(hotline){   %>
+
+                    <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                        <div class="info">
+                            <div class="place">
+                                <span class="start"><%= hotline.startCity.name %></span> -<span class="end"><%= hotline.endCity.name %></span>
+                            </div>
+                        </div>
+                        <div class="subinfo">
+                            <button class="choose-hotline" data-start-city-id="<%= hotline.startCity.id %>" data-end-city-id="<%= hotline.endCity.id %>">选择</button>
+                        </div>
+                    </section>
+                <% }); %>
+
+            </div>
+        </div>
+
+
     </div>
+
 
     <!-- 默认或无内容-大象 -->
     <div class="elephant_panel">
@@ -128,8 +164,32 @@
       <div class="elephant_con"></div>
     </div>
 
+
     <!-- 有内容 -->
     <!--ms-if-->
   </div>
+  <script src="/javascripts/zepto.min.js"></script>
+  <script type="text/javascript">
+      $(function(){
+            $(".choose-hotline").on("click", function(e){
+                var endCityId= $(this).data("end-city-id");
+                var startCityId= $(this).data("start-city-id");
+                $("select[name='start']").val( startCityId );
+                $("select[name='end']").val( endCityId );
+
+            });
+
+
+            $(".site_replace").on("click", function(e){
+                var start =  $("select[name='start']");
+                var end =  $("select[name='end']");
+
+                var tmp = start.val();
+                start.val( end.val() );
+                end.val( tmp);
+
+            });
+      });
+  </script>
   </body>
 </html>

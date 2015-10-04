@@ -38,6 +38,7 @@ Busline = squelize.define 'busline',
 
 
 
+
 User = squelize.define 'user',
     name: Sequelize.STRING
     realName: Sequelize.STRING
@@ -70,6 +71,23 @@ BusLineStartTime = squelize.define 'busline_starttime',
         autoIncrement: true
         primaryKey: true
 
+
+
+Hotline = squelize.define 'hotline',
+    id:
+        type: Sequelize.INTEGER
+        autoIncrement: true
+        primaryKey: true
+
+
+
+Hotline.belongsTo City,
+    as: 'startCity'
+    foreignKey: 'startCityId'
+
+Hotline.belongsTo City,
+    as: 'endCity'
+    foreignKey: 'endCityId'
 
 
 City.hasMany Station
@@ -171,6 +189,9 @@ squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
         BusLineStartTime.sync
             force: true
     .then ->
+        Hotline.sync
+            force: true
+    .then ->
         addRecords()
 
 
@@ -198,10 +219,14 @@ addRecords = ->
         gcomp = null
         gphone = null
         gline = null
+        gline2 = null
+        gphone2 = null
 
         cityList = ["广州","深圳","珠海","佛山","惠州","湛江","梅州","汕头","汕尾"]
-        stationList1 = ["暨南大学西门","广州大学城官洲地铁站"]
-        stationList2 = ["深圳大学北门","世界之窗"]
+        stationList1 = ["暨南大学西门","广州大学城官洲地铁站","广园汽车站","不知道哪个站"]
+        stationList2 = ["深圳大学北门","世界之窗","深圳大剧院","西乡汽车站"]
+
+
 
         cityMap = _.map cityList, (val, key, list)->
             return 'name': val
@@ -230,8 +255,10 @@ addRecords = ->
             gline = line
             line.startCityId = cityList.indexOf("广州")+1
             line.endCityId = cityList.indexOf("深圳")+1
+            line.isHotline = true
             line.setCompany gcomp
-            line.setPhones gphone
+            line.addPhones gphone
+
             line.save()
 
         .then ->
@@ -251,7 +278,13 @@ addRecords = ->
             , 0
 
         .then ->
-            Station.findAll()
+            Station.findAll
+                where:
+                    id:
+                        $or:
+                            $lt: 3
+                            $gt: 5
+
 
         .then (stations)->
             gline.setStations stations
@@ -264,6 +297,64 @@ addRecords = ->
         .then (t)->
             gline.setStartTime t
 
+
+        # create busline 2
+        .then ->
+            Phone.create
+                phoneNumber: "13800138001"
+
+        .then (phone)->
+            gphone2 = phone
+            Busline.create
+                name: 'line two'
+                price: 45
+                description: "no desc"
+                paymethod: "no pay method"
+
+        .then (line)->
+            gline2 = line
+            line.startCityId = cityList.indexOf("广州")+1
+            line.endCityId = cityList.indexOf("深圳")+1
+            line.isHotline = true
+            line.setCompany gcomp
+            line.addPhones gphone2
+            line.save()
+
+        .then ->
+            Station.findAll
+                where:
+                    id:
+                        $and:
+                            $gt: 2
+                            $lt: 7
+
+        .then (stations)->
+            gline2.setStations stations
+            Stime.findAll
+                where:
+                    $or:
+                        [ time: getDate("10:30"),
+                            time: getDate("12:00") ]
+
+        .then (t)->
+            gline2.setStartTime t
+
+
+        .then ->
+            Hotline.create()
+
+        .then (line)->
+            line.startCityId = cityList.indexOf("广州")+1
+            line.endCityId = cityList.indexOf("深圳")+1
+            line.save()
+
+        .then ->
+            Hotline.create()
+
+        .then (line)->
+            line.startCityId = cityList.indexOf("深圳")+1
+            line.endCityId = cityList.indexOf("广州")+1
+            line.save()
 
 #
 #                City.findById 1
@@ -289,7 +380,7 @@ addRecords = ->
 module.exports.City = City
 module.exports.User = User
 module.exports.Busline = Busline
-
+module.exports.Hotline = Hotline
 
 
 
