@@ -7,7 +7,7 @@ Promise =  require("sequelize").Promise
 
 
 model = require "../lib/model"
-
+config = require "../etc/config"
 
 fulfillHotlines = (hotline)->
     hotline.getStartCity()
@@ -30,7 +30,9 @@ router.get '/', (req, res, next)->
     model.City.findAll()
     .then (cities)->
         gcities = cities
-        model.Hotline.findAll()
+        model.Hotline.findAll
+            limit: config.maxHotlines
+            order: [ ['queryCount', 'DESC']]
     .then (hotlines)->
 
         hotlines2 = _.map hotlines, (val,key,lst)->
@@ -111,11 +113,20 @@ router.get '/search', (req, res, next)->
 
 
 
-
-    model.Busline.findAll
+    model.Hotline.findOrCreate
         where:
             startCityId: req.query.start
             endCityId: req.query.end
+    .spread( (hotline, created)->
+        hotline.queryCount += 1
+        hotline.save()
+
+    ).then ->
+
+        model.Busline.findAll
+            where:
+                startCityId: req.query.start
+                endCityId: req.query.end
 
 
     .then (buslines)->

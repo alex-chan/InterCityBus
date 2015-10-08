@@ -79,6 +79,10 @@ Hotline = squelize.define 'hotline',
         autoIncrement: true
         primaryKey: true
 
+    queryCount:
+        type: Sequelize.INTEGER
+        defaultValue: 0
+
 
 
 Hotline.belongsTo City,
@@ -346,6 +350,7 @@ addRecords = ->
         .then (line)->
             line.startCityId = cityList.indexOf("广州")+1
             line.endCityId = cityList.indexOf("深圳")+1
+            line.queryCount = 3
             line.save()
 
         .then ->
@@ -354,6 +359,7 @@ addRecords = ->
         .then (line)->
             line.startCityId = cityList.indexOf("深圳")+1
             line.endCityId = cityList.indexOf("广州")+1
+            line.queryCount = 2
             line.save()
 
 #
