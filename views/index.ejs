@@ -140,7 +140,9 @@
                             </div>
                         </div>
                         <div class="subinfo">
-                            <button class="choose-hotline" data-start-city-id="<%= hotline.startCity.id %>" data-end-city-id="<%= hotline.endCity.id %>">选择</button>
+                            <a href="/search?start=<%=hotline.startCity.id%>&end=<%=hotline.endCity.id%>">
+                                <button class="choose-hotline" data-start-city-id="<%= hotline.startCity.id %>" data-end-city-id="<%= hotline.endCity.id %>">查询</button>
+                            </a>
                         </div>
                     </section>
                 <% }); %>
@@ -169,13 +171,13 @@
   <script src="/javascripts/zepto.min.js"></script>
   <script type="text/javascript">
       $(function(){
-            $(".choose-hotline").on("click", function(e){
-                var endCityId= $(this).data("end-city-id");
-                var startCityId= $(this).data("start-city-id");
-                $("select[name='start']").val( startCityId );
-                $("select[name='end']").val( endCityId );
-
-            });
+//            $(".choose-hotline").on("click", function(e){
+//                var endCityId= $(this).data("end-city-id");
+//                var startCityId= $(this).data("start-city-id");
+//                $("select[name='start']").val( startCityId );
+//                $("select[name='end']").val( endCityId );
+//
+//            });
 
 
             $(".site_replace").on("click", function(e){
