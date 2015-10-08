@@ -83,13 +83,7 @@
       }, false);
     </script>
 
-    <nav class="g-navbar">
-      <!--<div class="buy_tab dis_box">-->
-        <!--<h3 class="two active"><a></a></h3>-->
-        <!--<h3 class="two "><a href="ztc_search.html"></a></h3>-->
-        <!--<div class="icon_event"></div>-->
-      <!--</div>-->
-    </nav>
+    <% include inc/header %>
 
     <div class="container">
       <form name="query" method="get" action="/search">
@@ -168,6 +162,10 @@
     <!-- 有内容 -->
     <!--ms-if-->
   </div>
+  <% var active = [true, false, false ] ;%>
+    <% include inc/footer %>
+
+
   <script src="/javascripts/zepto.min.js"></script>
   <script type="text/javascript">
       $(function(){

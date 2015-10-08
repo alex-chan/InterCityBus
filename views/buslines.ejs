@@ -31,7 +31,16 @@
 
 <div class="wrapper">
 
-    共找到<%= buslines.length %>条线路
+    <% var active = [true, false, false ] ;%>
+    <% include inc/header %>
+
+
+    <% if( buslines.length == 0 ){   %>
+    <span>对不起，暂时没有找到该线路</span>
+    <% } else { %>
+        共找到<%= buslines.length %>条线路
+    <% } %>
+
 
     <% buslines.forEach(function(busline){   %>
 
@@ -99,9 +108,11 @@
     <% }); %>
 
 
+
+
 </div>
 
-
+<% include inc/footer %>
 
 
 </body>

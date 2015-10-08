@@ -124,13 +124,9 @@
       });
       return Promise.all(buslines);
     }).then(function(buslines) {
-      if (buslines.length === 0) {
-        return res.render('nobus');
-      } else {
-        return res.render('buslines', {
-          buslines: buslines
-        });
-      }
+      return res.render('buslines', {
+        buslines: buslines
+      });
     })["catch"](function(err) {
       return res.end(err.toString());
     });
@@ -142,6 +138,14 @@
         cities: cities
       });
     });
+  });
+
+  router.get('/info', function(req, res, next) {
+    return res.render('info');
+  });
+
+  router.get('/contact', function(req, res, next) {
+    return res.render('contact');
   });
 
   module.exports = router;

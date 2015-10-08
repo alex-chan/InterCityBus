@@ -22,6 +22,12 @@
         .elephant_con { margin-bottom: .95rem; font-size: .3rem; text-align: center; color: #999; }
         .ad { display: inline-block;  margin-top: .1rem; }
         .ad img{ width: 1rem; vertical-align: middle; }
+
+        .title_advice .title_span { display: block; font-size: .26rem; color: #656565; margin: 0 .3rem .09rem; }
+
+        .m-line { height: 1.0rem;  }
+        .m-line > .info { margin-top: 0.2rem ;}
+        .m-line > .subinfo button{ width: 1.2rem; height: .5rem; margin-top: .24rem; border: 1px solid #ff9c00; border-radius: .1rem; color: #ff9c00; font-size: .24rem; }
     </style>
 
 
@@ -31,8 +37,10 @@
 
 <div class="wrapper">
 
+    <% include inc/header %>
 
-<div class="line_con">
+
+    <div class="line_con">
     <h3 class="line_title"><%= busline.startCity.name  %> 一 <%= busline.endCity.name  %></h3>
     <!--repeat772240903229-->
     <figure class="line_model">
@@ -88,16 +96,77 @@
 
     </figure><!--repeat772240903229--><!--repeat772240903229:end-->
 
-    订票电话：<% busline.phones.forEach(function(phone){ %>
-    <%= phone.phoneNumber %>
-    <% }) %>
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">订票电话：</span>
+            </div>
+            <div class="common_history">
+
+
+                <% busline.phones.forEach(function(phone){ %>
+
+
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <span class=""><%= phone.phoneNumber %></span>
+                        </div>
+                    </div>
+                    <div class="subinfo">
+                        <a href="tel:<%= phone.phoneNumber %>"><button> 拨打 </button></a>
+                        <!--<button class="choose-hotline" data-start-city-id="1" data-end-city-id="2">选择</button>-->
+                    </div>
+                </section>
+
+
+                <% }) %>
+
+            </div>
+        </div>
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">付费方法：</span>
+            </div>
+            <div class="common_history">
+
+
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <span class=""><%= busline.paymethod %></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">温馨提示：</span>
+            </div>
+            <div class="common_history">
+
+
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <span class=""><%= busline.description %></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
 
 </div>
 
 </div>
 
-
-
+<% var active = [true, false, false ] ;%>
+<% include inc/footer %>
 
 </body>
 </html>

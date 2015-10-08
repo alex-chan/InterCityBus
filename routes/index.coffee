@@ -130,11 +130,11 @@ router.get '/search', (req, res, next)->
         Promise.all buslines
 
     .then (buslines)->
-        if buslines.length == 0
-            res.render 'nobus'
-        else
-            res.render 'buslines',
-                buslines: buslines
+#        if buslines.length == 0
+#            res.render 'nobus'
+#        else
+        res.render 'buslines',
+            buslines: buslines
 
     .catch (err)->
         res.end err.toString()
@@ -144,5 +144,12 @@ router.get '/cities', (req, res, next)->
         res.render 'city',
             cities: cities
 
+
+
+router.get '/info', (req, res, next)->
+    res.render 'info'
+
+router.get '/contact', (req, res, next)->
+    res.render 'contact'
 
 module.exports = router

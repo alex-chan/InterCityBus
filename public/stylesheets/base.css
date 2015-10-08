@@ -1776,7 +1776,7 @@ html.wait-bus .m-line {
     /*margin-bottom: .08rem;*/
     width: .42rem;
     height: .5rem;
-    background: url(../images/footer_icon.png) 0 0 no-repeat;
+    background: url("/images/footer_icon.png") 0 0 no-repeat;
     background-size: 1.5rem 1.4rem;
     margin-left: 50%;
     -webkit-transform: translateX(-50%);
