@@ -11,9 +11,10 @@
 
     <script src="/javascripts/wjs-setrem.js"></script>
 
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+
     <link rel='stylesheet' href='/stylesheets/base.css' />
     <link rel='stylesheet' href='/stylesheets/city.css' />
+    <link rel='stylesheet' href='/stylesheets/style.css' />
 
     <style>
         a, a:link, a:visited, a:hover, a:active { color: inherit; }
@@ -24,6 +25,8 @@
         .ad img{ width: 1rem; vertical-align: middle; }
 
         .title_advice .title_span { display: block; font-size: .26rem; color: #656565; margin: 0 .3rem .09rem; }
+
+        .line_details .line_name { width: 7rem; }
 
         .m-line { height: 1.0rem;  }
         .m-line > .info { margin-top: 0.2rem ;}
@@ -82,19 +85,33 @@
                 </ul>
                 <div class="white_bg_right"></div>
             </div>
-            <div class="line_more">
-                <span>首班 <%= busline.starttimes[0].time   %></span>
-                <span>末班 <%= busline.starttimes[busline.starttimes.length-1].time   %></span>
-                <span>共<%=busline.starttimes.length%>趟班次</span>
-                <!--<a class="ad" href="http://mp.weixin.qq.com/s?__biz=MzAxNDMzNjc2MQ==&amp;mid=215531709&amp;idx=1&amp;sn=00604c9cf5104357b51a41bb80257c87#rd">-->
-                    <!--<img src="../image/icon_ad.png" width="0" height="0" style="display: none !important; visibility: hidden !important; opacity: 0 !important; background-position: 1px 1px;">-->
-                <!--</a>-->
-            </div>
+
         </div>
 
 
 
     </figure><!--repeat772240903229--><!--repeat772240903229:end-->
+
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">发车时间(<span>共<%=busline.starttimes.length%>趟班次</span>)：</span>
+            </div>
+            <div class="start_time">
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <% busline.starttimes.forEach(function(time){ %>
+                                <%= time.time %>&nbsp;&nbsp;
+                            <% }) %>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+
 
         <div ms-if="!ztc_dis">
             <div class="title_advice">
@@ -167,6 +184,38 @@
 
 <% var active = [true, false, false ] ;%>
 <% include inc/footer %>
+<script src="/javascripts/zepto.min.js"></script>
+<script>
+    $(function(){
 
+        var lineName =  $(".line_name");
+
+        var w1 = $("ul[class='start']").width()
+        var w2 = $("ul[class='end']").width()
+
+        var w = lineName.width();
+//
+//        $("ul[class='start']").width(w1+10)
+        $("ul[class='end']").width(w2+20)
+
+        $("ul[class='end']").css("right", -(w1+w2+20-w) )
+
+
+        lineName.css("max-width", w-20)
+                .height("1.90rem")
+//                .width( w1 + w2 + 10)
+                .css("margin-top",0)
+                .css("overflow-x","autho")
+                .css("overflow-y","hidden")
+
+        $(".white_bg_right").css("right",-(w1+w2-w) );
+
+        lineName.children().each(function(index, item){
+            $(item).css("margin-top","0.22rem");
+        });
+
+
+    })
+</script>
 </body>
 </html>

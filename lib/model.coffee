@@ -170,33 +170,33 @@ getDate = (timeString)->
 squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
 
     Stime.sync
-        force: true
+#        force: true
     .then ->
         Company.sync
-            force: true
+#            force: true
     .then ->
         City.sync
-            force: true
+#            force: true
     .then ->
         Busline.sync
-            force: true
+#            force: true
     .then ->
         Phone.sync
-            force: true
+#            force: true
     .then ->
         Station.sync
-            force: true
+#            force: true
     .then ->
         BusLineStation.sync
-            force: true
+#            force: true
     .then ->
         BusLineStartTime.sync
-            force: true
+#            force: true
     .then ->
         Hotline.sync
-            force: true
+#            force: true
     .then ->
-        addRecords()
+#        addRecords()
 
 
 
