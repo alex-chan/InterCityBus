@@ -26,7 +26,7 @@
 
         .title_advice .title_span { display: block; font-size: .26rem; color: #656565; margin: 0 .3rem .09rem; }
 
-        .line_details .line_name { width: 7rem; }
+        .line_details .line_name { width: 6.1rem; }
 
         .m-line { height: 1.0rem;  }
         .m-line > .info { margin-top: 0.2rem ;}
@@ -130,7 +130,7 @@
                         </div>
                     </div>
                     <div class="subinfo">
-                        <a href="tel:<%= phone.phoneNumber %>"><button> 拨打 </button></a>
+                        <a href="tel:<%= phone.phoneNumber.replace(/\s+/g,"") %>"><button> 拨打 </button></a>
                         <!--<button class="choose-hotline" data-start-city-id="1" data-end-city-id="2">选择</button>-->
                     </div>
                 </section>
@@ -190,29 +190,34 @@
 
         var lineName =  $(".line_name");
 
+
+
         var w1 = $("ul[class='start']").width()
         var w2 = $("ul[class='end']").width()
 
         var w = lineName.width();
-//
-//        $("ul[class='start']").width(w1+10)
-        $("ul[class='end']").width(w2+20)
 
-        $("ul[class='end']").css("right", -(w1+w2+40-w) )
+        if( w1+w2 > w ){
+
+            $("ul[class='end']").width(w2)
+
+            $("ul[class='end']").css("right", -(w1+w2-w) )
 
 
-        lineName.css("max-width", w-20)
-                .height("1.90rem")
+            lineName.css("max-width", w)
+                    .height("1.90rem")
 //                .width( w1 + w2 + 10)
-                .css("margin-top",0)
-                .css("overflow-x","autho")
-                .css("overflow-y","hidden")
+                    .css("margin-top",0)
+                    .css("overflow-x","autho")
+                    .css("overflow-y","hidden")
 
-        $(".white_bg_right").css("right",-(w1+w2+38-w) );
+            $(".white_bg_right").css("right",-(w1+w2-w) );
 
-        lineName.children().each(function(index, item){
-            $(item).css("margin-top","0.22rem");
-        });
+            lineName.children().each(function(index, item){
+                $(item).css("margin-top","0.22rem");
+            });
+
+        }
 
 
     })
