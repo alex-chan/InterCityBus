@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>线路详情</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script src="/assets/javascripts/wjs-setrem.js"></script>
+
+
+    <link rel='stylesheet' href='/assets/stylesheets/base.css' />
+    <link rel='stylesheet' href='/assets/stylesheets/city.css' />
+    <link rel='stylesheet' href='/assets/stylesheets/style.css' />
+
+    <style>
+        a, a:link, a:visited, a:hover, a:active { color: inherit; }
+        /*h3::-webkit-scrollbar { width: 0; height: 0; }*/
+
+        .elephant_con { margin-bottom: .95rem; font-size: .3rem; text-align: center; color: #999; }
+        .ad { display: inline-block;  margin-top: .1rem; }
+        .ad img{ width: 1rem; vertical-align: middle; }
+
+        .title_advice .title_span { display: block; font-size: .26rem; color: #656565; margin: 0 .3rem .09rem; }
+
+        .line_details .line_name { width: 6.1rem; }
+
+        .m-line { height: 1.0rem;  }
+        .m-line > .info { margin-top: 0.2rem ;}
+        .m-line > .subinfo button{ width: 1.2rem; height: .5rem; margin-top: .24rem; border: 1px solid #ff9c00; border-radius: .1rem; color: #ff9c00; font-size: .24rem; }
+    </style>
+
+
+</head>
+<body>
+
+
+<div class="wrapper">
+
+    <% include inc/header %>
+
+
+    <div class="line_con">
+    <h3 class="line_title"><%= busline.startCity.name  %> 一 <%= busline.endCity.name  %></h3>
+    <!--repeat772240903229-->
+    <figure class="line_model">
+        <figcaption class="line_info dis_box">
+            <div class="name_title">
+                <h3 class="name name_animate"><%= busline.startCity.stations[0].name %> 一 <%= busline.endCity.stations[busline.endCity.stations.length-1].name %></h3>
+            </div>
+            <h3 class="price orange"><span class="f36"><%= busline.price %></span>元起</h3>
+        </figcaption>
+        <div class="line_details box">
+            <div class="line_name">
+                <div class="white_bg"></div>
+                <ul class="start">
+                    <% for(var stations = busline.startCity.stations, j=0; j<stations.length;j++) { %>
+                    <!--repeat890691768378--><li> <i class="ico"></i><!--html36718429625-->
+                        <% if( stations[j].name.length > 5 ){ %>
+                        <span><%= stations[j].name.substr(0,5) %></span><span class="pl6"><%= stations[j].name.substr(5) %></span>
+                        <% }else{ %>
+                        <span><%= stations[j].name %></span>
+                        <% } %>
+                        <!--html36718429625:end--></li>
+                    <% } %>
+                    <!--repeat890691768378--><!--ms-if--><!--repeat890691768378--><!--ms-if--><!--repeat890691768378--><!--repeat890691768378:end-->
+                </ul>
+
+                <div class="solid" ms-class="dotted:(line.site_list.length > 6)"></div>
+                <ul class="end">
+                    <!--repeat44274443388--><!--ms-if--><!--repeat44274443388--><!--ms-if--><!--repeat44274443388-->
+                    <% for(var stations = busline.endCity.stations, j=0; j<stations.length;j++) { %>
+                    <li><i class="ico"></i><!--html842129003257-->
+                        <% if( stations[j].name.length > 5 ){ %>
+                        <span><%= stations[j].name.substr(0,5) %></span><span class="pl6"><%= stations[j].name.substr(5) %></span>
+                        <% }else{ %>
+                        <span><%= stations[j].name %></span>
+                        <% } %>
+                        <!--html842129003257:end--></li><!--repeat44274443388-->
+                    <% } %>
+
+                </ul>
+                <div class="white_bg_right"></div>
+            </div>
+
+        </div>
+
+
+
+    </figure><!--repeat772240903229--><!--repeat772240903229:end-->
+
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">发车时间(<span>共<%=busline.starttimes.length%>趟班次</span>)：</span>
+            </div>
+            <div class="start_time">
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <% busline.starttimes.forEach(function(time){ %>
+                                <%= time.time %>&nbsp;&nbsp;
+                            <% }) %>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+
+
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">订票电话：</span>
+            </div>
+            <div class="common_history">
+
+
+                <% busline.phones.forEach(function(phone){ %>
+
+
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <span class=""><%= phone.phoneNumber %></span>
+                        </div>
+                    </div>
+                    <div class="subinfo">
+                        <a href="tel:<%= phone.phoneNumber.replace(/\s+/g,"") %>"><button> 拨打 </button></a>
+                        <!--<button class="choose-hotline" data-start-city-id="1" data-end-city-id="2">选择</button>-->
+                    </div>
+                </section>
+
+
+                <% }) %>
+
+            </div>
+        </div>
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">付费方法：</span>
+            </div>
+            <div class="common_history">
+
+
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <span class=""><%= busline.paymethod %></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+
+        <div ms-if="!ztc_dis">
+            <div class="title_advice">
+                <span class="title_span">温馨提示：</span>
+            </div>
+            <div class="common_history">
+
+
+                <section class="m-line ztc-m-line" ms-data-on-city-code="el.start_city_code" ms-data-on-area-id="el.start_area_id" ms-data-off-city-code="el.end_city_code" ms-data-off-area-id="el.end_area_id" ms-repeat-el="ztc_data" ms-click="gotoUrl(el.line_type)">
+                    <div class="info">
+                        <div class="place">
+                            <span class=""><%= busline.description %></span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+
+</div>
+
+</div>
+
+<% var active = [true, false, false ] ;%>
+<% include inc/footer %>
+<script src="/assets/javascripts/zepto.min.js"></script>
+<script>
+    $(function(){
+
+        var lineName =  $(".line_name");
+
+
+
+        var w1 = $("ul[class='start']").width()
+        var w2 = $("ul[class='end']").width()
+
+        var w = lineName.width();
+
+        if( w1+w2 > w ){
+
+            $("ul[class='end']").width(w2)
+
+            $("ul[class='end']").css("right", -(w1+w2-w) )
+
+
+            lineName.css("max-width", w)
+                    .height("1.90rem")
+//                .width( w1 + w2 + 10)
+                    .css("margin-top",0)
+                    .css("overflow-x","autho")
+                    .css("overflow-y","hidden")
+
+            $(".white_bg_right").css("right",-(w1+w2-w) );
+
+            lineName.children().each(function(index, item){
+                $(item).css("margin-top","0.22rem");
+            });
+
+        }
+
+
+    })
+</script>
+</body>
+</html>

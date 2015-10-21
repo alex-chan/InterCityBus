@@ -2,21 +2,49 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/~api/index.js" />
-        <item url="file://$PROJECT_DIR$/etc/config.js" />
-        <item url="file://$PROJECT_DIR$/lib/model.js" />
-        <item url="file://$PROJECT_DIR$/lib/dbconn.js" />
-        <item url="file://$PROJECT_DIR$/lib/utils.js" />
-        <item url="file://$PROJECT_DIR$/routes/index.js" />
+        <item url="file://$PROJECT_DIR$/server/routes/api.js" />
+        <item url="file://$PROJECT_DIR$/server/api/busline/index.js" />
+        <item url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.js" />
+        <item url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.controller.js" />
+        <item url="file://$PROJECT_DIR$/client/app/admin/admin.js" />
+        <item url="file://$PROJECT_DIR$/client/app/admin/admin.controller.js" />
+        <item url="file://$PROJECT_DIR$/server/config/environment/development.js" />
+        <item url="file://$PROJECT_DIR$/server/config/config.js" />
+        <item url="file://$PROJECT_DIR$/server/lib/dbconn.js" />
+        <item url="file://$PROJECT_DIR$/server/config/environment/index.js" />
+        <item url="file://$PROJECT_DIR$/server/lib/model.js" />
+        <item url="file://$PROJECT_DIR$/server/config/express.js" />
+        <item url="file://$PROJECT_DIR$/server/routes/admin.js" />
+        <item url="file://$PROJECT_DIR$/server/config/environment/production.js" />
+        <item url="file://$PROJECT_DIR$/server/api/index.js" />
+        <item url="file://$PROJECT_DIR$/server/api/busline/busline.controller.js" />
+        <item url="file://$PROJECT_DIR$/server/lib/utils.js" />
+        <item url="file://$PROJECT_DIR$/client/app/app.js" />
+        <item url="file://$PROJECT_DIR$/server/routes/index.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/~api/index.js" />
-      <root url="file://$PROJECT_DIR$/etc/config.js" />
-      <root url="file://$PROJECT_DIR$/lib/model.js" />
-      <root url="file://$PROJECT_DIR$/lib/dbconn.js" />
-      <root url="file://$PROJECT_DIR$/lib/utils.js" />
-      <root url="file://$PROJECT_DIR$/routes/index.js" />
+      <root url="file://$PROJECT_DIR$/server/api/busline.js" />
+      <root url="file://$PROJECT_DIR$/server/api/busline.js" />
+      <root url="file://$PROJECT_DIR$/server/routes/api.js" />
+      <root url="file://$PROJECT_DIR$/server/api/busline/index.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.controller.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/admin.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/admin.controller.js" />
+      <root url="file://$PROJECT_DIR$/server/config/environment/development.js" />
+      <root url="file://$PROJECT_DIR$/server/config/config.js" />
+      <root url="file://$PROJECT_DIR$/server/config/environment/index.js" />
+      <root url="file://$PROJECT_DIR$/server/lib/dbconn.js" />
+      <root url="file://$PROJECT_DIR$/server/lib/model.js" />
+      <root url="file://$PROJECT_DIR$/server/config/express.js" />
+      <root url="file://$PROJECT_DIR$/server/routes/admin.js" />
+      <root url="file://$PROJECT_DIR$/server/config/environment/production.js" />
+      <root url="file://$PROJECT_DIR$/server/api/index.js" />
+      <root url="file://$PROJECT_DIR$/server/lib/utils.js" />
+      <root url="file://$PROJECT_DIR$/server/api/busline/busline.controller.js" />
+      <root url="file://$PROJECT_DIR$/client/app/app.js" />
+      <root url="file://$PROJECT_DIR$/server/routes/index.js" />
     </CLASSES>
     <SOURCES />
   </library>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>合作加盟</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+
+    <script src="/assets/javascripts/wjs-setrem.js"></script>
+
+    <link rel='stylesheet' href='/assets/stylesheets/style.css' />
+    <link rel='stylesheet' href='/assets/stylesheets/base.css' />
+    <link rel='stylesheet' href='/assets/stylesheets/city.css' />
+    <style>
+        body { background: #eee; padding-top: 0.88rem; }
+        .wrap { padding-bottom: .9rem; background: none; }
+        .container { margin: 0 .3rem; }
+        .query { width:100%;background-color: #ff9c00; margin-top: .42rem; margin-bottom: .46rem; font-size: .36rem; text-align: center; height: .72rem; line-height: .72rem; color: #fff; border-radius: .1rem; }
+
+        .hairlines-bottom::after { bottom: 0; }
+        .title_advice .title_span { display: block; font-size: .26rem; color: #656565; margin: 0 .3rem .09rem; }
+        .elephant_pic { margin: 1.52rem auto .2rem; width: 2.95rem; height: 2.29rem; background: url(../image/icon_elephant01.png?t=20150731) 0 0 no-repeat; background-size: 2.95rem 2.29rem; }
+        .elephant_con { margin-bottom: .95rem; font-size: .3rem; text-align: center; color: #999; }
+        .dis_box { display: -webkit-box; display: -moz-box; display: -ms-box; display: -o-box; display: box; }
+        .dis_box .two { -webkit-box-flex: 1; -moz-box-flex: 1; -o-box-flex: 1; -ms-box-flex: 1; box-flex: 1; }
+        .buy_tab { background: #F8F8FA; width: 3.6rem; height: 0.6rem; margin: 0.12rem auto 0; border: solid .02rem #ff9c00; border-radius: 0.1rem; overflow: hidden; }
+        .buy_tab h3 { color: #ff9c00; height: 0.6rem; line-height: 0.6rem; text-align: center; }
+        .buy_tab h3.active { background: #ff9c00; color: #fff; }
+        a, a:link, a:visited, a:hover, a:active { color: inherit; }
+
+
+        .m-line { height: 1.0rem;  }
+        .m-line > .info { margin-top: 0.2rem ;}
+
+
+        .m-line > .subinfo button{ width: 1.2rem; height: .5rem; margin-top: .24rem; border: 1px solid #ff9c00; border-radius: .1rem; color: #ff9c00; font-size: .24rem; }
+
+    </style>
+
+
+</head>
+<body>
+<div class="wrap" id="search_section">
+    <!-- 页脚导航条 -->
+    <!--<footer id="navbar" class="hairlines-top">-->
+    <!--<a class="search ztc-search active">购票</a>-->
+    <!--<a class="wait-bus" href="wait_bus.html">乘车</a>-->
+    <!--<a class="mine" href="mine.html">我的<i class="red_point"></i></a>-->
+    <!--</footer>-->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.removeEventListener('DOMContentLoaded', arguments.callee, false); // 释放事件
+            var pathArr = location.pathname.split('/');
+            var fileName = pathArr[pathArr.length - 1].split('.')[0].replace('_', '-');
+            var $curNav = document.querySelector('#navbar > a.' + fileName);
+
+            // 设置导航条菜单状态
+            if ($curNav) {
+                $curNav.classList.add('active');
+                $curNav.removeAttribute('href');
+            }
+
+            // 强迫症红点计数器
+            if (B.user.isLogin()) {
+                ddb.get('member/get_counts', {type: 1, notCheckLogin: 1}, function(d) {
+                    if (0 === +d.ret) {
+                        var red_count = ddb.pgps('red_count');
+                        if ( $.isEmptyObject(red_count) ){
+                            red_count = { red_reward : d.data.count };
+                        }else{
+                            red_count.red_reward = d.data.count;
+                        }
+                        ddb.pgps('red_count', red_count );
+                        if ( red_count.red_reward > 0) {
+                            $('#navbar .red_point').show();
+                            $('.list>li .red_point').show();
+                        }
+                    }
+                });
+            }
+        }, false);
+    </script>
+
+    <% include inc/header %>
+
+    <div class="container">
+
+
+        <h2>合作电话:<a href="tel:110">110</a></h2>
+
+    </div>
+
+
+
+    <!-- 有内容 -->
+    <!--ms-if-->
+    <% var active = [false, false, true] ;%>
+</div>
+
+<% include inc/footer %>
+
+
+<script src="/assets/javascripts/zepto.min.js"></script>
+
+</body>
+</html>
