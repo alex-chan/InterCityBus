@@ -2,7 +2,7 @@
 (function() {
   var busline;
 
-  busline = require("./busline");
+  busline = require("./buslines");
 
   module.exports = function(router) {
     return busline(router);

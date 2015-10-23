@@ -1,4 +1,4 @@
-myapp = angular.module('InterCityBus', ["ui.router"])
+myapp = angular.module('InterCityBus', ["ui.router","ngResource","InterCityBus.services","InterCityBus.controllers"])
 myapp.config ($stateProvider, $urlRouterProvider)->
 
     # For any unmatched url, send to /route1
@@ -29,3 +29,10 @@ myapp.config ($stateProvider, $urlRouterProvider)->
             controller:  ($scope)->
                 $scope.things = ["A", "Set", "Of", "Things"]
         })
+
+
+
+angular.module('InterCityBus.services',[])
+.factory 'Busline', ($resource)->
+    return $resource '/api/buslines/:id' ,{id: '@id'}, update:
+                        method: "PUT"

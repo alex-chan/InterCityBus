@@ -1,4 +1,4 @@
-busline = require "./busline"
+busline = require "./buslines"
 
 module.exports = (router)->
 

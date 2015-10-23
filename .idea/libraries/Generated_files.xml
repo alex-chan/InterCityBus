@@ -3,7 +3,7 @@
     <properties>
       <sourceFilesUrls>
         <item url="file://$PROJECT_DIR$/server/routes/api.js" />
-        <item url="file://$PROJECT_DIR$/server/api/busline/index.js" />
+        <item url="file://$PROJECT_DIR$/server/api/buslines/index.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.controller.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/admin.js" />
@@ -17,7 +17,7 @@
         <item url="file://$PROJECT_DIR$/server/routes/admin.js" />
         <item url="file://$PROJECT_DIR$/server/config/environment/production.js" />
         <item url="file://$PROJECT_DIR$/server/api/index.js" />
-        <item url="file://$PROJECT_DIR$/server/api/busline/busline.controller.js" />
+        <item url="file://$PROJECT_DIR$/server/api/buslines/buslines.controller.js" />
         <item url="file://$PROJECT_DIR$/server/lib/utils.js" />
         <item url="file://$PROJECT_DIR$/client/app/app.js" />
         <item url="file://$PROJECT_DIR$/server/routes/index.js" />
@@ -27,7 +27,7 @@
       <root url="file://$PROJECT_DIR$/server/api/busline.js" />
       <root url="file://$PROJECT_DIR$/server/api/busline.js" />
       <root url="file://$PROJECT_DIR$/server/routes/api.js" />
-      <root url="file://$PROJECT_DIR$/server/api/busline/index.js" />
+      <root url="file://$PROJECT_DIR$/server/api/buslines/index.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/admin.js" />
@@ -42,7 +42,7 @@
       <root url="file://$PROJECT_DIR$/server/config/environment/production.js" />
       <root url="file://$PROJECT_DIR$/server/api/index.js" />
       <root url="file://$PROJECT_DIR$/server/lib/utils.js" />
-      <root url="file://$PROJECT_DIR$/server/api/busline/busline.controller.js" />
+      <root url="file://$PROJECT_DIR$/server/api/buslines/buslines.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/app.js" />
       <root url="file://$PROJECT_DIR$/server/routes/index.js" />
     </CLASSES>

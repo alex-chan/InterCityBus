@@ -2,7 +2,7 @@
 (function() {
   var myapp;
 
-  myapp = angular.module('InterCityBus', ["ui.router"]);
+  myapp = angular.module('InterCityBus', ["ui.router", "ngResource", "InterCityBus.services", "InterCityBus.controllers"]);
 
   myapp.config(function($stateProvider, $urlRouterProvider) {
     return $stateProvider.state('route1', {
@@ -22,6 +22,16 @@
       templateUrl: "app/admin/route2.list.html",
       controller: function($scope) {
         return $scope.things = ["A", "Set", "Of", "Things"];
+      }
+    });
+  });
+
+  angular.module('InterCityBus.services', []).factory('Busline', function($resource) {
+    return $resource('/api/buslines/:id', {
+      id: '@id'
+    }, {
+      update: {
+        method: "PUT"
       }
     });
   });

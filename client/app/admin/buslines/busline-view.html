@@ -1,4 +1,3 @@
-<h3>Buslines</h3>
 <table class="table ">
     <tr>
         <td><h3>All Buslines</h3></td>
@@ -10,7 +9,7 @@
         <td></td>
 
     </tr>
-    <tr ng-repeat="busline in buslines">
+
         <td>{{busline.name}}</td>
         <td>{{busline.price }}</td>
         <td>{{busline.paymethod }}</td>
@@ -18,9 +17,7 @@
         <td>{{busline.endCityId }}</td>
         <td>{{busline.companyId }}</td>
         <td>
-            <a class="btn btn-primary" ui-sref="viewBusline({id:busline.id})">View</a>
-            <a class="btn btn-danger"  ui-sref="editBusline({id:busline.id})">Edit</a>
-            <a class="btn btn-danger"  ng-click="deleteBusline(busline)">Delete</a>
+            <!--<a class="btn btn-primary" ui-sref="viewBusline({id:busline._id})">View</a>-->
+            <!--<a class="btn btn-danger"  ng-click="deleteBusline(busline)">Delete</a>-->
         </td>
-    </tr>
 </table>
