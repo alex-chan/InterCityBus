@@ -1,0 +1,17 @@
+<h3>Phones</h3>
+<a ui-sref="newPhone">Add Phone</a>
+<table class="table ">
+    <tr>
+        <td>电话</td>
+
+    </tr>
+    <tr ng-repeat="phone in phones">
+        <td>{{phone.phoneNumber }}</td>
+
+        <td>
+            <a class="btn btn-primary" ui-sref="viewPhone({id:phone.id})">View</a>
+            <a class="btn btn-danger"  ui-sref="editPhone({id:phone.id})">Edit</a>
+            <a class="btn btn-danger"  ng-click="deletePhone(phone)">Delete</a>
+        </td>
+    </tr>
+</table>

@@ -18,26 +18,61 @@
 </div>
 
 <div class="form-group">
-    <label for="startcityid" class="col-sm-2 control-label">始发城市</label>
+    <label for="startCity" class="col-sm-2 control-label">始发城市</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="busline.startCityId" class="form-control" id="startcityid" placeholder="始发城市"/>
+
+        <select name="startCity" id="startCity" ng-model="busline.startCityId" ng-options="city.id as city.name for city in cities "/>
+        <a ui-sref="newCity">新增城市</a>
     </div>
 </div>
 
 <div class="form-group">
-    <label for="endcityid" class="col-sm-2 control-label">终点城市</label>
+    <label for="" class="col-sm-2 control-label">始发城市站点</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="busline.endCityId" class="form-control" id="endcityid" placeholder="终点城市"/>
+        <ul>
+            <a href="">插入站点</a>
+        <li ng-repeat="station in busline.stations | filter: { cityId: busline.startCityId } " >
+            {{$index}}:{{station.name }} <a href="">删除</a> <a href="">插入站点</a>
+        </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<div class="form-group">
+    <label for="endCityId" class="col-sm-2 control-label">终点城市</label>
+    <div class="col-sm-10">
+        <select name="endCityId"  id="endCityId"   ng-model="busline.endCityId"   ng-options="city.id as city.name for city in cities "/>
     </div>
 </div>
 
 
 <div class="form-group">
-    <label for="companyid" class="col-sm-2 control-label">所属公司</label>
+    <label for="" class="col-sm-2 control-label">终点城市站点</label>
     <div class="col-sm-10">
-        <input type="text" ng-model="busline.companyId" class="form-control" id="companyid" placeholder="所属公司"/>
+        <ul>
+        <li ng-repeat="station in busline.stations | filter: { cityId: busline.endCityId } " >
+            {{$index}}:{{station.name }} <a href="">删除</a>
+        </li>
+        </ul>
     </div>
 </div>
+
+
+
+
+
+
+<div class="form-group">
+    <label for="companyId" class="col-sm-2 control-label">所属公司</label>
+    <div class="col-sm-10">
+        <select name="companyId"  id="companyId"   ng-model="busline.companyId"   ng-options="company.id as company.name for company in companies"/>
+        <a ui-sref="newCompany">新增公司</a>
+    </div>
+</div>
+
 
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

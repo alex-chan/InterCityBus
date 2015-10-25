@@ -1,22 +1,24 @@
 <h3>Buslines</h3>
+<a ui-sref="newBusline">Add busline</a>
 <table class="table ">
     <tr>
-        <td><h3>All Buslines</h3></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>线路名</td>
+        <td>票价</td>
+        <td>购票方式</td>
+        <td>始发城市</td>
+        <td>终到城市</td>
+        <td>所属公司</td>
+        <td>操作</td>
 
     </tr>
     <tr ng-repeat="busline in buslines">
         <td>{{busline.name}}</td>
         <td>{{busline.price }}</td>
         <td>{{busline.paymethod }}</td>
-        <td>{{busline.startCityId }}</td>
-        <td>{{busline.endCityId }}</td>
-        <td>{{busline.companyId }}</td>
+        <td>{{busline.startCity.name }}</td>
+        <td>{{busline.endCity.name }}</td>
+        <td>{{busline.company.name }}</td>
+
         <td>
             <a class="btn btn-primary" ui-sref="viewBusline({id:busline.id})">View</a>
             <a class="btn btn-danger"  ui-sref="editBusline({id:busline.id})">Edit</a>

@@ -387,6 +387,9 @@ module.exports.City = City
 module.exports.User = User
 module.exports.Busline = Busline
 module.exports.Hotline = Hotline
+module.exports.Station = Station
+module.exports.Company = Company
+module.exports.Phone = Phone
 
 
 

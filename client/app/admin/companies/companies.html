@@ -1,0 +1,20 @@
+<h3>Companies</h3>
+<a ui-sref="newCompany">Add Company</a>
+<table class="table ">
+    <tr>
+        <td>公司名</td>
+        <td>公司地址</td>
+        <td>操作</td>
+
+    </tr>
+    <tr ng-repeat="company in companies">
+        <td>{{company.name}}</td>
+        <td>{{company.address}}</td>
+
+        <td>
+            <a class="btn btn-primary" ui-sref="viewCompany({id:company.id})">View</a>
+            <a class="btn btn-danger"  ui-sref="editCompany({id:company.id})">Edit</a>
+            <a class="btn btn-danger"  ng-click="deleteCompany(company)">Delete</a>
+        </td>
+    </tr>
+</table>

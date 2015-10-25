@@ -1,23 +1,30 @@
-<table class="table ">
-    <tr>
-        <td><h3>All Buslines</h3></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+<ul>
+    <li>线路名 {{busline.name}}</li>
+    <li>票价 {{busline.price }}</li>
+    <li>购票方式 {{busline.paymethod }}</li>
+    <li>始发城市 {{busline.startCity.name }}</li>
+    <li>终到城市 {{busline.endCity.name }}</li>
+    <li>所属公司 {{busline.company.name }}</li>
+    <li>电话
+        <span ng-repeat="phone in busline.phones">
+            {{ phone.phoneNumber }} ,
+        </span>
+    </li>
+    <li>站台：
+        <span ng-repeat="station in busline.stations">
+            {{ station.name }} ,
+        </span>
 
-    </tr>
+    </li>
 
-        <td>{{busline.name}}</td>
-        <td>{{busline.price }}</td>
-        <td>{{busline.paymethod }}</td>
-        <td>{{busline.startCityId }}</td>
-        <td>{{busline.endCityId }}</td>
-        <td>{{busline.companyId }}</td>
-        <td>
-            <!--<a class="btn btn-primary" ui-sref="viewBusline({id:busline._id})">View</a>-->
-            <!--<a class="btn btn-danger"  ng-click="deleteBusline(busline)">Delete</a>-->
-        </td>
-</table>
+    <li>操作         <a class="btn btn-danger"  ui-sref="editBusline({id:busline.id})">Edit</a>
+        <a class="btn btn-danger"  ng-click="deleteBusline(busline)">Delete</a></li>
+</ul>
+
+
+
+
+
+
+
+

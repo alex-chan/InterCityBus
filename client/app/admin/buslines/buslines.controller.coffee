@@ -1,6 +1,7 @@
-angular.module('InterCityBus.controllers',[])
+angular.module('InterCityBus.controllers')
 .controller 'BuslineListCtrl', ($scope, $http, Busline)->
     $scope.buslines = Busline.query()
+
 
 # Use the User $resource to fetch all users
 #    $scope.users = User.query();
@@ -25,12 +26,17 @@ angular.module('InterCityBus.controllers',[])
 #        User.remove({ id: user._id });
 #        $scope.users.splice(this.$index, 1)
 
+
 .controller 'BuslineViewCtrl', ($scope, $stateParams, Busline)->
     $scope.busline = Busline.get
         id: $stateParams.id
 
 
-.controller 'BuslineCreateCtrl', ($scope, $state, $stateParams, Busline)->
+.controller 'BuslineCreateCtrl', ($scope, $state, $stateParams, Busline, City, Company, Station)->
+
+    $scope.cities = City.query()
+    $scope.companies = Company.query()
+    $scope.stations = Station.query()
 
     $scope.busline = new Busline()
     $scope.addBusline = ->
@@ -38,18 +44,22 @@ angular.module('InterCityBus.controllers',[])
             $state.go "buslines"
 
 
-.controller 'BuslineEditCtrl', ($scope, $state, $stateParams, Busline)->
+.controller 'BuslineEditCtrl', ($scope, $state, $stateParams, Busline, City, Company, Station)->
 
-    $scope.updateBusline = ->
 
-        console.log $scope.busline
-
-        $scope.busline.$update ->
-            $state.go "buslines"
-
+    $scope.cities = City.query()
+    $scope.companies = Company.query()
+    $scope.stations = Station.query()
 
     $scope.loadBusline = ->
-        $scope.busline = Busline.get
-            id: $stateParams.id
+
+            $scope.updateBusline = ->
+                $scope.busline.$update ->
+                    $state.go "buslines"
+
+            $scope.busline = Busline.get
+                id: $stateParams.id
+
+
 
     $scope.loadBusline()

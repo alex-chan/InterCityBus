@@ -1,0 +1,17 @@
+<h3>Cities</h3>
+<a ui-sref="newCity">Add City</a>
+<table class="table ">
+    <tr>
+        <td>城市名</td>
+
+    </tr>
+    <tr ng-repeat="city in cities">
+        <td>{{city.name}}</td>
+
+        <td>
+            <a class="btn btn-primary" ui-sref="viewCity({id:city.id})">View</a>
+            <a class="btn btn-danger"  ui-sref="editCity({id:city.id})">Edit</a>
+            <a class="btn btn-danger"  ng-click="deleteCity(city)">Delete</a>
+        </td>
+    </tr>
+</table>

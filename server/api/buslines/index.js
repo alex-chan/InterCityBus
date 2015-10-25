@@ -10,8 +10,10 @@
     });
     router.get("/buslines", controller.index);
     router.get("/buslines/:id", controller.show);
+    router.post("/buslines", controller.create);
     router.put("/buslines/:id", controller.update);
-    return router.patch('/buslines/:id', controller.update);
+    router.patch('/buslines/:id', controller.update);
+    return router["delete"]('/buslines/:id', controller.destroy);
   };
 
 }).call(this);
