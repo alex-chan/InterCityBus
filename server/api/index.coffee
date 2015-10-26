@@ -2,8 +2,8 @@ busline = require "./buslines"
 city = require "./cities"
 company = require "./companies"
 phone = require "./phones"
-
 station = require "./stations"
+starttimes = require "./starttimes"
 
 
 module.exports = (router)->
@@ -13,4 +13,5 @@ module.exports = (router)->
     company(router)
     phone(router)
     station(router)
+    starttimes(router)
 

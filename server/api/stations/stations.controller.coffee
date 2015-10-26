@@ -37,16 +37,18 @@ saveUpdates = (updates)->
 
 removeEntity = (res) ->
     (entity)->
-    if entity
-        entity.destroy()
-        .then ->
-            res.status(204).end()
+        if entity
+            entity.destroy()
+            .then ->
+                res.status(204).end()
 
 
 
 
 module.exports.index = (req, res)->
-    Model.Station.findAll()
+    Model.Station.findAll
+            include:
+                [ Model.City ]
         .then responseWithResult(res)
         .catch handleError(res)
 
@@ -55,6 +57,8 @@ module.exports.show = (req, res)->
     Model.Station.findOne
         where:
             id: req.params.id
+        include:
+            [ Model.City ]
 
     .then handleEntityNotFound(res)
     .then responseWithResult(res)
@@ -95,5 +99,5 @@ module.exports.destroy = (req, res)->
             id: req.params.id
 
     .then(handleEntityNotFound(res))
-    .then(removeEntity(req.body))
+    .then(removeEntity(res))
     .catch(handleError(res))

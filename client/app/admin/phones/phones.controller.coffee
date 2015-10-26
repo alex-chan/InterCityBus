@@ -1,7 +1,10 @@
 angular.module('InterCityBus.controllers')
-.controller 'PhoneListCtrl', ($scope, $http, Phone)->
+.controller 'PhoneListCtrl', ($scope, $state, $http, Phone)->
     $scope.phones = Phone.query()
 
+    $scope.deletePhone = (entity)->
+        entity.$remove ->
+            $state.go $state.current, {}, {reload: true}
 
 
 .controller 'PhoneViewCtrl', ($scope, $stateParams, Phone)->

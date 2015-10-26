@@ -5,7 +5,6 @@
   myapp = angular.module('InterCityBus', ["ui.router", "ngResource", "InterCityBus.services", "InterCityBus.controllers"]);
 
   myapp.config(function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("buslines");
     return $stateProvider.state('route1', {
       url: "/route1",
       templateUrl: "app/admin/route1.html"
@@ -61,6 +60,14 @@
     });
   }).factory('Station', function($resource) {
     return $resource('/api/stations/:id', {
+      id: '@id'
+    }, {
+      update: {
+        method: "PUT"
+      }
+    });
+  }).factory('Starttime', function($resource) {
+    return $resource('/api/starttimes/:id', {
       id: '@id'
     }, {
       update: {

@@ -44,12 +44,13 @@
   };
 
   removeEntity = function(res) {
-    (function(entity) {});
-    if (entity) {
-      return entity.destroy().then(function() {
-        return res.status(204).end();
-      });
-    }
+    return function(entity) {
+      if (entity) {
+        return entity.destroy().then(function() {
+          return res.status(204).end();
+        });
+      }
+    };
   };
 
   module.exports.index = function(req, res) {
@@ -84,7 +85,7 @@
       where: {
         id: req.params.id
       }
-    }).then(handleEntityNotFound(res)).then(removeEntity(req.body))["catch"](handleError(res));
+    }).then(handleEntityNotFound(res)).then(removeEntity(res))["catch"](handleError(res));
   };
 
 }).call(this);

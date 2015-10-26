@@ -13,6 +13,16 @@
 </div>
 
 <div class="form-group">
+    <label for="belongCity" class="col-sm-2 control-label">所属城市</label>
+    <div class="col-sm-10">
+
+        <select name="belongCity" id="belongCity" ng-model="station.cityId" ng-options="city.id as city.name for city in cities"/>
+        <a ui-sref="newCity">新增城市</a>
+    </div>
+</div>
+
+
+<div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         <input type="submit" class="btn btn-primary" value="Save"/>
     </div>

@@ -1,0 +1,19 @@
+<h3>Starttimes</h3>
+<a ui-sref="newStarttime">Add Starttime</a>
+<table class="table ">
+    <tr>
+        <td>时间</td>
+
+
+    </tr>
+    <tr ng-repeat="starttime in starttimes">
+        <td>{{starttime.time }}</td>
+
+
+        <td>
+            <a class="btn btn-primary" ui-sref="viewStarttime({id:starttime.id})">View</a>
+            <a class="btn btn-danger"  ui-sref="editStarttime({id:starttime.id})">Edit</a>
+            <a class="btn btn-danger"  href="#" ng-click="deleteStarttime(starttime)">Delete</a>
+        </td>
+    </tr>
+</table>

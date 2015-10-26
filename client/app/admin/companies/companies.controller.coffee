@@ -1,8 +1,10 @@
 angular.module('InterCityBus.controllers')
-.controller 'CompanyListCtrl', ($scope, $http, Company)->
+.controller 'CompanyListCtrl', ($scope, $state, $http, Company)->
     $scope.companies = Company.query()
 
-
+    $scope.deleteCompany = (entity)->
+        entity.$remove ->
+            $state.go $state.current, {}, {reload: true}
 
 .controller 'CompanyViewCtrl', ($scope, $stateParams, Company)->
     $scope.company = Company.get

@@ -35,10 +35,10 @@ saveUpdates = (updates)->
 
 removeEntity = (res) ->
     (entity)->
-    if entity
-        entity.destroy()
-        .then ->
-            res.status(204).end()
+        if entity
+            entity.destroy()
+            .then ->
+                res.status(204).end()
 
 
 module.exports.index = (req, res)->
@@ -89,5 +89,5 @@ module.exports.destroy = (req, res)->
             id: req.params.id
 
     .then(handleEntityNotFound(res))
-    .then(removeEntity(req.body))
+    .then(removeEntity(res))
     .catch(handleError(res))

@@ -3,7 +3,7 @@ myapp.config ($stateProvider, $urlRouterProvider)->
 
     # For any unmatched url, send to /route1
 
-    $urlRouterProvider.otherwise("buslines")
+#    $urlRouterProvider.otherwise("buslines")
 
     $stateProvider
     .state 'route1', {
@@ -50,4 +50,8 @@ angular.module('InterCityBus.services',[])
 
 .factory 'Station', ($resource)->
     return $resource '/api/stations/:id' ,{id: '@id'}, update:
+        method: "PUT"
+
+.factory 'Starttime', ($resource)->
+    return $resource '/api/starttimes/:id' ,{id: '@id'}, update:
         method: "PUT"

@@ -1,7 +1,10 @@
 angular.module('InterCityBus.controllers')
-.controller 'StationListCtrl', ($scope, $http, Station)->
+.controller 'StationListCtrl', ($scope, $state, $http, Station)->
     $scope.stations = Station.query()
 
+    $scope.deleteStation = (entity)->
+        entity.$remove ->
+            $state.go $state.current, {}, {reload: true}
 
 
 .controller 'StationViewCtrl', ($scope, $stateParams, Station)->
@@ -9,15 +12,17 @@ angular.module('InterCityBus.controllers')
         id: $stateParams.id
 
 
-.controller 'StationCreateCtrl', ($scope, $state, $stateParams, Station)->
-
+.controller 'StationCreateCtrl', ($scope, $state, $stateParams, Station, City)->
+    $scope.cities = City.query()
     $scope.station = new Station()
     $scope.addStation = ->
         $scope.station.$save ->
             $state.go "stations"
 
 
-.controller 'StationEditCtrl', ($scope, $state, $stateParams, Station)->
+.controller 'StationEditCtrl', ($scope, $state, $stateParams, Station, City)->
+
+    $scope.cities = City.query()
 
     $scope.updateStation = ->
 

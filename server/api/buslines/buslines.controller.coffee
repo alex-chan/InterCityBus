@@ -1,4 +1,6 @@
 Model = require "../../lib/model"
+Sequelize = require "../../lib/dbconn"
+
 _ = require "underscore"
 
 handleError = (res, statusCode) ->
@@ -23,92 +25,125 @@ handleEntityNotFound = (res)->
 responseWithResult = (res, statusCode) ->
     statusCode = statusCode || 200;
     return (entity) ->
-#        console.log "entity:" + entity
-#        console.log "entitystartCity:" + entity.startCity
-#        console.log "entity startCity name:" + entity.startCity.name
-        console.log  JSON.stringify(entity)
-
         if (entity)
-
             res.status(statusCode).json(entity)
+
+createOrUpdate = (entity, updates)->
+
+    ids = _.map updates.stations, (item)->item.id
+    ids2 = ids.join(",")
+    if ids2 == ""
+        ids2 = "0"
+
+    Model.Station.findAll
+        where:
+            id:
+                in: ids
+        order:
+            [ Sequelize.literal("FIELD(id, "+ids2+")") ]
+
+    .then (stations)->
+        entity.setStations []
+        return stations
+    .then (stations)->
+        entity.setStations stations
+
+    .then ->
+
+        tids = _.map updates.StartTime, (item)->item.id
+        tids2 = tids.join ","
+        if tids2 == ""
+            tids2 = "0"
+        Model.Starttime.findAll
+            where:
+                id:
+                    in: tids
+            order:
+                [ Sequelize.literal("FIELD(id, "+tids2+")") ]
+
+    .then (starttimes)->
+        entity.setStartTime []
+        return starttimes
+    .then (starttimes)->
+        entity.setStartTime starttimes
+
+    .then ->
+        pids = _.map updates.phones, (item)->item.id
+        pids2 = pids.join ","
+
+
+        if pids2 == ""
+            pids2 = "0"
+
+        Model.Phone.findAll
+            where:
+                id:
+                    in: pids
+            order:
+                [ Sequelize.literal("FIELD(id, "+pids2+")") ]
+
+    .then (phones)->
+        entity.setPhones []
+        return phones
+    .then (phones)->
+        entity.setPhones phones
+
+        return updates
+
+createRelated = (updates)->
+    (entity)->
+
+        createOrUpdate(entity, updates)
+
+#        ids = _.map updates.stations, (item)->item.id
+#        ids2 = ids.join(",")
+#
+#        Model.Station.findAll
+#            where:
+#                id:
+#                    in: ids
+#            order:
+#                [ Sequelize.literal("FIELD(id, "+ids2+")") ]
+#
+#        .then (stations)->
+#            entity.setStations stations
+#
+#        .then ->
+#
+#            tids = _.map updates.StartTime, (item)->itemd.id
+#            tids2 = tids.join ","
+#            Model.Starttime.findAll
+#                where:
+#                    id:
+#                        in: tids
+#                    order:
+#                        [ Sequelize.literal("FIELD(id, "+tids2+")") ]
+#
+#        .then (starttimes)->
+#            entity.setStartTime starttimes
+        .then ->
+            return updates
 
 saveUpdates = (updates)->
     (entity)->
-        entity.updateAttributes(updates)
+        updatedOut = 0
+        entity.update(updates)
             .then (updated)->
-                return updated
+
+                updatedOut = updated
+
+                createOrUpdate entity, updated
+
+            .then ->
+                return updatedOut
 
 
 removeEntity = (res) ->
-    (entity)->
-    if entity
-        entity.destroy()
-        .then ->
-            res.status(204).end()
-
-
-innerFulfillBusline = (busline)->
-
-    console.log "innerFulfillBusline"
-
-    gbusline = busline
-
-    busline.getStartCity()
-    .then (city)->
-        gbusline.startCity =
-            id: city.id
-            name: city.name
-            stations: []
-        gbusline.getEndCity()
-    .then (city2)->
-        gbusline.setDataValue 'endCity',
-            id: city2.id
-            name: city2.name
-            stations: []
-
-#        gbusline.save()
-
-#        console.sb("sb")
-
-#        console "endCityObject:" + gbusline.getDataValue 'endCity'
-
-#        gbusline.getCompany()
-#
-#    .then (company)->
-#        gbusline.company =
-#            id : company.id
-#            name: company.name
-
-        gbusline.getStartTime()
-
-    .then (time)->
-        gbusline.starttimes = time
-        gbusline.getStations()
-    .then (stations)->
-        gbusline.stations = stations
-
-        _.each stations, (element, index, list)->
-            console.log "element:" + element
-            if element.cityId == gbusline.startCity.id
-                gbusline.startCity.stations.push element
-#            else if element.cityId == gbusline.get('endCity').id
-#                gbusline.endCity.stations.push element
-
-        console.log "get stations:" + stations
-        console.log "gbusline startCity:" + gbusline.startCity.name
-
-        return gbusline
-
-fulfillBusline = (res)->
-    (busline)->
-
-        if Array.isArray busline
-            busline2 = _.map busline, (val,key,lst)->
-                innerFulfillBusline val
-            Promise.all busline2
-
-        else
-            innerFulfillBusline busline
+    return (entity)->
+        if entity
+            entity.destroy()
+            .then ->
+                res.status(204).end()
 
 
 module.exports.index = (req, res)->
@@ -137,7 +172,12 @@ module.exports.show = (req, res)->
                 model: Model.City
                 as: 'endCity'
             },
-            Model.Station, Model.Company, Model.Phone ]
+            Model.Station, Model.Company, Model.Phone,
+            {
+                model: Model.Starttime
+                as: 'StartTime'
+            }
+        ]
     .then handleEntityNotFound(res)
     .then responseWithResult(res)
     .catch handleError(res)
@@ -156,10 +196,16 @@ module.exports.update = (req, res)->
                 model: Model.City
                 as: 'endCity'
             },
-            Model.Station, Model.Company,  Model.Phone ]
+            Model.Station, Model.Company,  Model.Phone,
+            {
+                model: Model.Starttime
+                as: 'StartTime'
+            }
+
+        ]
 
     .then handleEntityNotFound(res)
-    .then(saveUpdates(req.body))
+    .then saveUpdates(req.body)
     .then responseWithResult(res)
     .catch handleError(res)
 
@@ -169,8 +215,8 @@ module.exports.create = (req, res)->
 
 
     Model.Busline.create(req.body)
-
-    .then(responseWithResult(res, 201))
+    .then createRelated(req.body)
+    .then (responseWithResult(res, 201))
     .catch(handleError(res))
 
 
@@ -184,6 +230,6 @@ module.exports.destroy = (req, res)->
         where:
             id: req.params.id
 
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(req.body))
-    .catch(handleError(res))
+    .then handleEntityNotFound(res)
+    .then removeEntity(res)
+    .catch handleError(res)

@@ -390,6 +390,7 @@ module.exports.Hotline = Hotline
 module.exports.Station = Station
 module.exports.Company = Company
 module.exports.Phone = Phone
+module.exports.Starttime = Stime
 
 
 

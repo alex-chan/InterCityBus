@@ -43,23 +43,27 @@
   };
 
   removeEntity = function(res) {
-    (function(entity) {});
-    if (entity) {
-      return entity.destroy().then(function() {
-        return res.status(204).end();
-      });
-    }
+    return function(entity) {
+      if (entity) {
+        return entity.destroy().then(function() {
+          return res.status(204).end();
+        });
+      }
+    };
   };
 
   module.exports.index = function(req, res) {
-    return Model.Station.findAll().then(responseWithResult(res))["catch"](handleError(res));
+    return Model.Station.findAll({
+      include: [Model.City]
+    }).then(responseWithResult(res))["catch"](handleError(res));
   };
 
   module.exports.show = function(req, res) {
     return Model.Station.findOne({
       where: {
         id: req.params.id
-      }
+      },
+      include: [Model.City]
     }).then(handleEntityNotFound(res)).then(responseWithResult(res))["catch"](handleError(res));
   };
 
@@ -83,7 +87,7 @@
       where: {
         id: req.params.id
       }
-    }).then(handleEntityNotFound(res)).then(removeEntity(req.body))["catch"](handleError(res));
+    }).then(handleEntityNotFound(res)).then(removeEntity(res))["catch"](handleError(res));
   };
 
 }).call(this);

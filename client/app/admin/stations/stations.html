@@ -2,19 +2,21 @@
 <a ui-sref="newStation">Add Station</a>
 <table class="table ">
     <tr>
-        <td>电话</td>
+        <td>站点名</td>
         <td>地址</td>
+        <td>所在城市</td>
         <td>操作</td>
 
     </tr>
     <tr ng-repeat="station in stations">
         <td>{{station.name }}</td>
         <td>{{station.address }}</td>
+        <td>{{station.city.name }}</td>
 
         <td>
             <a class="btn btn-primary" ui-sref="viewStation({id:station.id})">View</a>
             <a class="btn btn-danger"  ui-sref="editStation({id:station.id})">Edit</a>
-            <a class="btn btn-danger"  ng-click="deleteStation(phone)">Delete</a>
+            <a class="btn btn-danger"  href="#" ng-click="deleteStation(station)">Delete</a>
         </td>
     </tr>
 </table>

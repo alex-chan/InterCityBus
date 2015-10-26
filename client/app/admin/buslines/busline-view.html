@@ -17,6 +17,14 @@
 
     </li>
 
+    <li>发车时间 ：
+        <span ng-repeat="stattime in busline.StartTime">
+            {{ stattime.time }} ,
+        </span>
+
+    </li>
+
+
     <li>操作         <a class="btn btn-danger"  ui-sref="editBusline({id:busline.id})">Edit</a>
         <a class="btn btn-danger"  ng-click="deleteBusline(busline)">Delete</a></li>
 </ul>

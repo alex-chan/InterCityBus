@@ -342,6 +342,8 @@
 
   module.exports.Phone = Phone;
 
+  module.exports.Starttime = Stime;
+
 }).call(this);
 
 //# sourceMappingURL=model.js.map
