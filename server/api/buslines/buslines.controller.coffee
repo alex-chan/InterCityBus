@@ -28,75 +28,20 @@ responseWithResult = (res, statusCode) ->
         if (entity)
             res.status(statusCode).json(entity)
 
-createOrUpdate = (entity, updates)->
-
-    ids = _.map updates.stations, (item)->item.id
-    ids2 = ids.join(",")
-    if ids2 == ""
-        ids2 = "0"
-
-    Model.Station.findAll
-        where:
-            id:
-                in: ids
-        order:
-            [ Sequelize.literal("FIELD(id, "+ids2+")") ]
-
-    .then (stations)->
-        entity.setStations []
-        return stations
-    .then (stations)->
-        entity.setStations stations
-
-    .then ->
-
-        tids = _.map updates.StartTime, (item)->item.id
-        tids2 = tids.join ","
-        if tids2 == ""
-            tids2 = "0"
-        Model.Starttime.findAll
-            where:
-                id:
-                    in: tids
-            order:
-                [ Sequelize.literal("FIELD(id, "+tids2+")") ]
-
-    .then (starttimes)->
-        entity.setStartTime []
-        return starttimes
-    .then (starttimes)->
-        entity.setStartTime starttimes
-
-    .then ->
-        pids = _.map updates.phones, (item)->item.id
-        pids2 = pids.join ","
-
-
-        if pids2 == ""
-            pids2 = "0"
-
-        Model.Phone.findAll
-            where:
-                id:
-                    in: pids
-            order:
-                [ Sequelize.literal("FIELD(id, "+pids2+")") ]
-
-    .then (phones)->
-        entity.setPhones []
-        return phones
-    .then (phones)->
-        entity.setPhones phones
-
-        return updates
-
-createRelated = (updates)->
-    (entity)->
-
-        createOrUpdate(entity, updates)
-
+#createOrUpdate = (entity, updates)->
+#
+#    .then ->
+#        entity.setStations []
+#    .then ->
+#        entity.setStartTime []
+#    .then ->
+#        entity.setPhones []
+#
+#    .then ->
+#
 #        ids = _.map updates.stations, (item)->item.id
 #        ids2 = ids.join(",")
+#        ids2 = "0" if ids2 == ""
 #
 #        Model.Station.findAll
 #            where:
@@ -105,22 +50,100 @@ createRelated = (updates)->
 #            order:
 #                [ Sequelize.literal("FIELD(id, "+ids2+")") ]
 #
-#        .then (stations)->
-#            entity.setStations stations
+#    .then (stations)->
+#        console.log "stations length:"+stations.length
+#        entity.setStations stations
+#
+#    .then ->
+#
+#        tids = _.map updates.StartTime, (item)->item.id
+#        tids2 = tids.join ","
+#        tids2 = "0" if tids2 == ""
+#
+#        Model.Starttime.findAll
+#            where:
+#                id:
+#                    in: tids
+#            order:
+#                [ Sequelize.literal("FIELD(id, "+tids2+")") ]
+#
+#    .then (starttimes)->
+#        entity.setStartTime starttimes
 #
 #        .then ->
+#        pids = _.map updates.phones, (item)->item.id
+#        pids2 = pids.join ","
+#        pids2 = "0" if pids2 == ""
 #
-#            tids = _.map updates.StartTime, (item)->itemd.id
-#            tids2 = tids.join ","
-#            Model.Starttime.findAll
-#                where:
-#                    id:
-#                        in: tids
-#                    order:
-#                        [ Sequelize.literal("FIELD(id, "+tids2+")") ]
+#        Model.Phone.findAll
+#            where:
+#                id:
+#                    in: pids
+#            order:
+#                [ Sequelize.literal("FIELD(id, "+pids2+")") ]
 #
-#        .then (starttimes)->
-#            entity.setStartTime starttimes
+#    .then (phones)->
+#        entity.setPhones phones
+#    .then ()->
+#        entity.save()
+
+createRelated = (updates)->
+    (entity)->
+        entity.setStations []
+        .then ->
+            entity.setStartTime []
+        .then ->
+            entity.setPhones []
+
+        .then ->
+
+            ids = _.map updates.stations, (item)->item.id
+            ids2 = ids.join(",")
+            ids2 = "0" if ids2 == ""
+
+            Model.Station.findAll
+                where:
+                    id:
+                        in: ids
+                order:
+                    [ Sequelize.literal("FIELD(id, "+ids2+")") ]
+
+        .then (stations)->
+            console.log "stations length:"+stations.length
+            entity.setStations stations
+
+        .then ->
+
+            tids = _.map updates.StartTime, (item)->item.id
+            tids2 = tids.join ","
+            tids2 = "0" if tids2 == ""
+
+            Model.Starttime.findAll
+                where:
+                    id:
+                        in: tids
+                order:
+                    [ Sequelize.literal("FIELD(id, "+tids2+")") ]
+
+        .then (starttimes)->
+            entity.setStartTime starttimes
+
+        .then ->
+            pids = _.map updates.phones, (item)->item.id
+            pids2 = pids.join ","
+            pids2 = "0" if pids2 == ""
+
+            Model.Phone.findAll
+                where:
+                    id:
+                        in: pids
+                order:
+                    [ Sequelize.literal("FIELD(id, "+pids2+")") ]
+
+        .then (phones)->
+            entity.setPhones phones
+        .then ()->
+            entity.save()
         .then ->
             return updates
 
@@ -132,8 +155,62 @@ saveUpdates = (updates)->
 
                 updatedOut = updated
 
-                createOrUpdate entity, updated
+            .then ->
+                entity.setStations []
+            .then ->
+                entity.setStartTime []
+            .then ->
+                entity.setPhones []
 
+            .then ->
+
+                ids = _.map updates.stations, (item)->item.id
+                ids2 = ids.join(",")
+                ids2 = "0" if ids2 == ""
+
+                Model.Station.findAll
+                    where:
+                        id:
+                            in: ids
+                    order:
+                        [ Sequelize.literal("FIELD(id, "+ids2+")") ]
+
+            .then (stations)->
+                console.log "stations length:"+stations.length
+                entity.setStations stations
+
+            .then ->
+
+                tids = _.map updates.StartTime, (item)->item.id
+                tids2 = tids.join ","
+                tids2 = "0" if tids2 == ""
+
+                Model.Starttime.findAll
+                    where:
+                        id:
+                            in: tids
+                    order:
+                        [ Sequelize.literal("FIELD(id, "+tids2+")") ]
+
+            .then (starttimes)->
+                entity.setStartTime starttimes
+
+            .then ->
+                pids = _.map updates.phones, (item)->item.id
+                pids2 = pids.join ","
+                pids2 = "0" if pids2 == ""
+
+                Model.Phone.findAll
+                    where:
+                        id:
+                            in: pids
+                    order:
+                        [ Sequelize.literal("FIELD(id, "+pids2+")") ]
+
+            .then (phones)->
+                entity.setPhones phones
+            .then ()->
+                entity.save()
             .then ->
                 return updatedOut
 
@@ -147,17 +224,26 @@ removeEntity = (res) ->
 
 
 module.exports.index = (req, res)->
-    Model.Busline.findAll include: [
-        {
-            model: Model.City
-            as: 'startCity',
-        }, {
-            model: Model.City
-            as: 'endCity'
-        },
-            Model.Station, Model.Company ]
-        .then responseWithResult(res)
-        .catch handleError(res)
+    Model.Busline.findAll
+        include: [
+            {
+                model: Model.City
+                as: 'startCity'
+            }, {
+                model: Model.City
+                as: 'endCity'
+            },{
+                model: Model.Station
+
+
+            },
+            Model.Company
+        ],
+        order: [
+            [ Model.Station, Model.BusLineStation, 'id', 'ASC'],
+        ]
+    .then responseWithResult(res)
+    .catch handleError(res)
 
 
 module.exports.show = (req, res)->
@@ -171,12 +257,19 @@ module.exports.show = (req, res)->
             }, {
                 model: Model.City
                 as: 'endCity'
+            },{
+                model: Model.Station
             },
-            Model.Station, Model.Company, Model.Phone,
+             Model.Company, Model.Phone,
             {
                 model: Model.Starttime
                 as: 'StartTime'
             }
+        ],
+        order: [
+            [ Model.Station, Model.BusLineStation, 'id', 'ASC'],
+            [ { model: Model.Starttime, as: 'StartTime'} , Model.BusLineStartTime, 'id', 'ASC'],
+
         ]
     .then handleEntityNotFound(res)
     .then responseWithResult(res)

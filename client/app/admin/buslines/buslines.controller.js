@@ -29,15 +29,19 @@
       if (!$scope.busline.phones) {
         $scope.busline.phones = [];
       }
-      return $scope.busline.phones.splice(index, 0, this.phoneToAdd[index]);
+      if ($scope.busline.phones.indexOf(this.phoneToAdd[index]) === -1) {
+        return $scope.busline.phones.splice(index, 0, this.phoneToAdd[index]);
+      }
     };
     $scope.addStarttime = function(index) {
       if (!$scope.busline.StartTime) {
         $scope.busline.StartTime = [];
       }
-      return $scope.busline.StartTime.splice(index, 0, this.starttimeToAdd[index]);
+      if ($scope.busline.StartTime.indexOf(this.starttimeToAdd[index]) === -1) {
+        return $scope.busline.StartTime.splice(index, 0, this.starttimeToAdd[index]);
+      }
     };
-    return $scope.addStation = function(index, isEndCity) {
+    $scope.addStation = function(index, isEndCity) {
       var startStations, toAddStation, toInsertPos;
       toInsertPos = index;
       if (isEndCity) {
@@ -56,7 +60,30 @@
       if (!$scope.busline.stations) {
         $scope.busline.stations = [];
       }
-      return $scope.busline.stations.splice(toInsertPos, 0, toAddStation);
+      if ($scope.busline.stations.indexOf(toAddStation) === -1) {
+        return $scope.busline.stations.splice(toInsertPos, 0, toAddStation);
+      }
+    };
+    $scope.delPhone = function(index) {
+      return $scope.busline.phones.splice(index, 1);
+    };
+    $scope.delStarttime = function(index) {
+      return $scope.busline.StartTime.splice(index, 1);
+    };
+    return $scope.delStation = function(index, isEndCity) {
+      var startStations, toInsertPos;
+      toInsertPos = index;
+      if (isEndCity) {
+        startStations = $scope.busline.stations.filter(function(item) {
+          if (item.cityId === $scope.busline.startCityId) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        toInsertPos += startStations.length;
+      }
+      $scope.busline.stations.splice(toInsertPos, 1);
     };
   }).controller('BuslineEditCtrl', function($scope, $state, $stateParams, Busline, City, Company, Station, Starttime, Phone) {
     $scope.cities = City.query();
@@ -68,13 +95,23 @@
       if (!$scope.busline.phones) {
         $scope.busline.phones = [];
       }
-      return $scope.busline.phones.splice(index, 0, this.phoneToAdd[index]);
+      if ($scope.busline.phones.indexOf(this.phoneToAdd[index]) === -1) {
+        return $scope.busline.phones.splice(index, 0, this.phoneToAdd[index]);
+      }
+    };
+    $scope.delPhone = function(index) {
+      return $scope.busline.phones.splice(index, 1);
     };
     $scope.addStarttime = function(index) {
       if (!$scope.busline.StartTime) {
         $scope.busline.StartTime = [];
       }
-      return $scope.busline.StartTime.splice(index, 0, this.starttimeToAdd[index]);
+      if ($scope.busline.StartTime.indexOf(this.starttimeToAdd[index]) === -1) {
+        return $scope.busline.StartTime.splice(index, 0, this.starttimeToAdd[index]);
+      }
+    };
+    $scope.delStarttime = function(index) {
+      return $scope.busline.StartTime.splice(index, 1);
     };
     $scope.addStation = function(index, isEndCity) {
       var startStations, toAddStation, toInsertPos;
@@ -92,7 +129,24 @@
       } else {
         toAddStation = this.stationToAdd[index];
       }
-      $scope.busline.stations.splice(toInsertPos, 0, toAddStation);
+      if ($scope.busline.stations.indexOf(toAddStation) === -1) {
+        return $scope.busline.stations.splice(toInsertPos, 0, toAddStation);
+      }
+    };
+    $scope.delStation = function(index, isEndCity) {
+      var startStations, toInsertPos;
+      toInsertPos = index;
+      if (isEndCity) {
+        startStations = $scope.busline.stations.filter(function(item) {
+          if (item.cityId === $scope.busline.startCityId) {
+            return true;
+          } else {
+            return false;
+          }
+        });
+        toInsertPos += startStations.length;
+      }
+      $scope.busline.stations.splice(toInsertPos, 1);
     };
     $scope.loadBusline = function() {
       $scope.updateBusline = function() {

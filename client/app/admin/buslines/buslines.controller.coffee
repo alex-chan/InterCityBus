@@ -15,6 +15,8 @@ angular.module('InterCityBus.controllers')
 
 .controller 'BuslineCreateCtrl', ($scope, $state, $stateParams, Busline, City, Company, Station, Starttime, Phone)->
 
+    # TODO: merge Create and Edit common functions
+
     $scope.cities = City.query()
     $scope.companies = Company.query()
     $scope.stations = Station.query()
@@ -29,15 +31,17 @@ angular.module('InterCityBus.controllers')
             $state.go "buslines"
 
     $scope.addPhone = (index)->
-        if !$scope.busline.phones
-            $scope.busline.phones = []
-        $scope.busline.phones.splice index, 0, this.phoneToAdd[index]
+        $scope.busline.phones = [] if !$scope.busline.phones
+        if $scope.busline.phones.indexOf(this.phoneToAdd[index]) == -1
+            $scope.busline.phones.splice index, 0, this.phoneToAdd[index]
+
 
     $scope.addStarttime = (index)->
         if !$scope.busline.StartTime
             $scope.busline.StartTime = []
 
-        $scope.busline.StartTime.splice index, 0, this.starttimeToAdd[index]
+        if $scope.busline.StartTime.indexOf(this.starttimeToAdd[index]) == -1
+            $scope.busline.StartTime.splice index, 0, this.starttimeToAdd[index]
 
 
     $scope.addStation = (index, isEndCity)->
@@ -59,7 +63,28 @@ angular.module('InterCityBus.controllers')
         if !$scope.busline.stations
             $scope.busline.stations = []
 
-        $scope.busline.stations.splice toInsertPos, 0, toAddStation
+        if $scope.busline.stations.indexOf(toAddStation) == -1
+            $scope.busline.stations.splice toInsertPos, 0, toAddStation
+
+    $scope.delPhone = (index)->
+        $scope.busline.phones.splice index, 1
+    $scope.delStarttime = (index)->
+        $scope.busline.StartTime.splice index, 1
+    $scope.delStation = (index, isEndCity)->
+        toInsertPos = index
+
+        if isEndCity
+            startStations = $scope.busline.stations.filter (item)->
+                if item.cityId == $scope.busline.startCityId
+                    return true
+                else
+                    return false
+
+            toInsertPos +=  startStations.length
+
+
+        $scope.busline.stations.splice toInsertPos, 1
+        return
 
 .controller 'BuslineEditCtrl', ($scope, $state, $stateParams, Busline, City, Company, Station, Starttime, Phone)->
 
@@ -73,14 +98,24 @@ angular.module('InterCityBus.controllers')
     $scope.addPhone = (index)->
         if !$scope.busline.phones
             $scope.busline.phones = []
-        $scope.busline.phones.splice index, 0, this.phoneToAdd[index]
 
+        if $scope.busline.phones.indexOf(this.phoneToAdd[index]) == -1
+            $scope.busline.phones.splice index, 0, this.phoneToAdd[index]
+
+
+    $scope.delPhone = (index)->
+        $scope.busline.phones.splice index, 1
 
     $scope.addStarttime = (index)->
         if !$scope.busline.StartTime
             $scope.busline.StartTime = []
 
-        $scope.busline.StartTime.splice index, 0, this.starttimeToAdd[index]
+        if $scope.busline.StartTime.indexOf(this.starttimeToAdd[index]) == -1
+            $scope.busline.StartTime.splice index, 0, this.starttimeToAdd[index]
+
+    $scope.delStarttime = (index)->
+        $scope.busline.StartTime.splice index, 1
+
 
     $scope.addStation = (index, isEndCity)->
         toInsertPos = index
@@ -98,7 +133,24 @@ angular.module('InterCityBus.controllers')
         else
             toAddStation = this.stationToAdd[index]
 
-        $scope.busline.stations.splice toInsertPos, 0, toAddStation
+        if $scope.busline.stations.indexOf(toAddStation) == -1
+            $scope.busline.stations.splice toInsertPos, 0, toAddStation
+
+
+    $scope.delStation = (index, isEndCity)->
+        toInsertPos = index
+
+        if isEndCity
+            startStations = $scope.busline.stations.filter (item)->
+                if item.cityId == $scope.busline.startCityId
+                    return true
+                else
+                    return false
+
+            toInsertPos +=  startStations.length
+
+
+        $scope.busline.stations.splice toInsertPos, 1
         return
 
 

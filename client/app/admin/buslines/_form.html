@@ -30,16 +30,17 @@
     <label for="" class="col-sm-2 control-label">始发城市站点</label>
     <div class="col-sm-10">
         <ul>
+            先选择好出发和终点城市，再添加站点<br/>
 
             <button type="button" ng-init="insert[0]=false" ng-click="insert[0]=!insert[0]">插入站点</button>
-            <select ng-show="insert[0]" ng-model="stationToAdd[0]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId }"/>
+            <select ng-show="insert[0]" ng-model="stationToAdd[0]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId } track by station.id"/>
             <button ng-show="insert[0]" type="button" ng-click="addStation(0)">Add</button>
 
             <li ng-repeat="station in busline.stations | filter: { cityId: busline.startCityId } " >
-            {{$index+1}}:{{station.name }} <a href="">删除</a>
+            {{$index+1}}:{{station.name }} <button type="button" ng-click="delStation($index,0)">删除</button>
 
                 <button type="button" ng-init="insert[$index+1]=false" ng-click="insert[$index+1]=!insert[$index+1]">插入站点</button>
-                <select ng-show="insert[$index+1]" ng-model="stationToAdd[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId }"/>
+                <select ng-show="insert[$index+1]" ng-model="stationToAdd[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId } track by station.id"/>
                 <button ng-show="insert[$index+1]" type="button" ng-click="addStation($index+1)">Add</button>
 
         </li>
@@ -63,14 +64,14 @@
     <div class="col-sm-10">
         <ul>
             <button type="button" ng-init="insert2[0]=false" ng-click="insert2[0]=!insert2[0]">插入站点</button>
-            <select ng-show="insert2[0]" ng-model="stationToAdd2[0]" ng-options="station.name for station in stations | filter: { cityId: busline.endCityId }"/>
+            <select ng-show="insert2[0]" ng-model="stationToAdd2[0]" ng-options="station.name for station in stations | filter: { cityId: busline.endCityId } track by station.id"/>
             <button ng-show="insert2[0]" type="button" ng-click="addStation(0,1)">Add</button>
 
             <li ng-repeat="station in busline.stations | filter: { cityId: busline.endCityId } " >
-                {{$index+1}}:{{station.name }} <a href="">删除</a>
+                {{$index+1}}:{{station.name }} <button type="button" ng-click="delStation($index,1)">删除</button>
 
                 <button type="button" ng-init="insert2[$index+1]=false" ng-click="insert2[$index+1]=!insert2[$index+1]">插入站点</button>
-                <select ng-show="insert2[$index+1]" ng-model="stationToAdd2[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.endCityId }"/>
+                <select ng-show="insert2[$index+1]" ng-model="stationToAdd2[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.endCityId } track by station.id"/>
                 <button ng-show="insert2[$index+1]" type="button" ng-click="addStation($index+1,1)">Add</button>
         </ul>
     </div>
@@ -87,7 +88,7 @@
             <button ng-show="starttimeinsert[0]" type="button" ng-click="addStarttime(0)">Add</button>
 
             <li ng-repeat="starttime in busline.StartTime  " >
-                {{$index+1}}:{{starttime.time }} <a href="">删除</a>
+                {{$index+1}}:{{starttime.time }} <button type="button" ng-click="delStarttime($index)">删除</button>
 
                 <button type="button" ng-init="starttimeinsert[$index+1]=false" ng-click="starttimeinsert[$index+1]=!starttimeinsert[$index+1]">插入时间</button>
                 <select ng-show="starttimeinsert[$index+1]" ng-model="starttimeToAdd[$index+1]" ng-options="starttime.time for starttime in starttimes "/>
@@ -101,14 +102,16 @@
     <label for="" class="col-sm-2 control-label">电话号码</label>
     <div class="col-sm-10">
         <ul>
-            <button type="button" ng-init="phoneinsert[0]=false" ng-click="phoneinsert[0]=!phoneinsert[0]">插入电话</button>
+            注意：电话号码显示按数据库先后的顺序来，因此没提供插入功能。
+
+            <button type="button" ng-init="phoneinsert[0]=false" ng-click="phoneinsert[0]=!phoneinsert[0]">增加电话</button>
             <select ng-show="phoneinsert[0]" ng-model="phoneToAdd[0]" ng-options="phone.phoneNumber for phone in phones "/>
             <button ng-show="phoneinsert[0]" type="button" ng-click="addPhone(0)">Add</button>
 
             <li ng-repeat="phone in busline.phones  " >
-                {{$index+1}}:{{phone.phoneNumber }} <a href="">删除</a>
+                {{$index+1}}:{{phone.phoneNumber }} <button type="button" ng-click="delPhone($index)">删除</button>
 
-                <button type="button" ng-init="phoneinsert[$index+1]=false" ng-click="phoneinsert[$index+1]=!phoneinsert[$index+1]">插入电话</button>
+                <!--<button type="button" ng-init="phoneinsert[$index+1]=false" ng-click="phoneinsert[$index+1]=!phoneinsert[$index+1]">插入电话</button>-->
                 <select ng-show="phoneinsert[$index+1]" ng-model="phoneToAdd[$index+1]"  ng-options="phone.phoneNumber for phone in phones "/>
                 <button ng-show="phoneinsert[$index+1]" type="button" ng-click="addPhone($index+1)">Add</button>
         </ul>

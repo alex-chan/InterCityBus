@@ -344,6 +344,10 @@
 
   module.exports.Starttime = Stime;
 
+  module.exports.BusLineStation = BusLineStation;
+
+  module.exports.BusLineStartTime = BusLineStartTime;
+
 }).call(this);
 
 //# sourceMappingURL=model.js.map
