@@ -47,6 +47,7 @@ angular.module('InterCityBus.controllers')
     $scope.addStation = (index, isEndCity)->
         toInsertPos = index
 
+
         if isEndCity
             startStations = $scope.busline.stations.filter (item)->
                 if item.cityId == $scope.busline.startCityId

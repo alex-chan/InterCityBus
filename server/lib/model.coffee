@@ -6,7 +6,7 @@ squelize = require "./dbconn"
 
 Promise = require("sequelize").Promise
 
-
+User = squelize.import '../api/users/user.model'
 
 
 City = squelize.define 'city',
@@ -38,12 +38,6 @@ Busline = squelize.define 'busline',
 
 
 
-
-User = squelize.define 'user',
-    name: Sequelize.STRING
-    realName: Sequelize.STRING
-    salt: Sequelize.STRING
-    password: Sequelize.STRING
 
 
 
@@ -82,6 +76,10 @@ Hotline = squelize.define 'hotline',
     queryCount:
         type: Sequelize.INTEGER
         defaultValue: 0
+
+
+
+
 
 
 
@@ -196,6 +194,7 @@ squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
         Hotline.sync()
 #            force: true
     .then ->
+        User.sync()
 #        addRecords()
 
 
@@ -393,6 +392,7 @@ module.exports.Phone = Phone
 module.exports.Starttime = Stime
 module.exports.BusLineStation = BusLineStation
 module.exports.BusLineStartTime = BusLineStartTime
+module.exports.User = User
 
 
 

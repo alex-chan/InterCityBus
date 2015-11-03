@@ -95,6 +95,7 @@ createRelated = (updates)->
         .then ->
             entity.setPhones []
 
+
         .then ->
 
             ids = _.map updates.stations, (item)->item.id
@@ -267,6 +268,7 @@ module.exports.show = (req, res)->
             }
         ],
         order: [
+            #       ref:     https://github.com/sequelize/sequelize/issues/1250
             [ Model.Station, Model.BusLineStation, 'id', 'ASC'],
             [ { model: Model.Starttime, as: 'StartTime'} , Model.BusLineStartTime, 'id', 'ASC'],
 

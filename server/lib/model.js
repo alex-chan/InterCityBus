@@ -10,6 +10,8 @@
 
   Promise = require("sequelize").Promise;
 
+  User = squelize["import"]('../api/users/user.model');
+
   City = squelize.define('city', {
     name: Sequelize.STRING
   });
@@ -35,13 +37,6 @@
     description: Sequelize.STRING,
     price: Sequelize.INTEGER,
     paymethod: Sequelize.STRING
-  });
-
-  User = squelize.define('user', {
-    name: Sequelize.STRING,
-    realName: Sequelize.STRING,
-    salt: Sequelize.STRING,
-    password: Sequelize.STRING
   });
 
   BusLineStation = squelize.define('busline_station', {
@@ -162,7 +157,9 @@
       return BusLineStartTime.sync();
     }).then(function() {
       return Hotline.sync();
-    }).then(function() {});
+    }).then(function() {
+      return User.sync();
+    });
   });
 
   addStartTime = function() {
@@ -347,6 +344,8 @@
   module.exports.BusLineStation = BusLineStation;
 
   module.exports.BusLineStartTime = BusLineStartTime;
+
+  module.exports.User = User;
 
 }).call(this);
 
