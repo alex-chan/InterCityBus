@@ -30,7 +30,7 @@
     <label for="" class="col-sm-2 control-label">始发城市站点</label>
     <div class="col-sm-10">
         <ul>
-            先选择好出发和终点城市，再添加站点<br/>
+            先选择好线路出发和终点城市，插入站点<br/>
 
             <button type="button" ng-init="insert[0]=false" ng-click="insert[0]=!insert[0]">插入站点</button>
             <select ng-show="insert[0]" ng-model="stationToAdd[0]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId } track by station.id"/>
@@ -42,9 +42,17 @@
                 <button type="button" ng-init="insert[$index+1]=false" ng-click="insert[$index+1]=!insert[$index+1]">插入站点</button>
                 <select ng-show="insert[$index+1]" ng-model="stationToAdd[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId } track by station.id"/>
                 <button ng-show="insert[$index+1]" type="button" ng-click="addStation($index+1)">Add</button>
+            </li>
 
-        </li>
+            <span class="appendStation">
+                <button type="button" ng-show="busline.startCityId" ng-click="ad1=!ad1">该城市新增站点</button>
+                <input type="text" name="whatever" ng-show="ad1" ng-model="stationToAppend"/>
+                <button ng-show="ad1" type="button" ng-click="addStationToCity(busline.startCityId, stationToAppend)">Add</button>
+                <small ng-show="ad1">(详细的地址仍然需要在<a ui-sref="stations">Station</a>中填或更改)</small>
+            </span>
+
         </ul>
+
     </div>
 </div>
 
@@ -73,7 +81,18 @@
                 <button type="button" ng-init="insert2[$index+1]=false" ng-click="insert2[$index+1]=!insert2[$index+1]">插入站点</button>
                 <select ng-show="insert2[$index+1]" ng-model="stationToAdd2[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.endCityId } track by station.id"/>
                 <button ng-show="insert2[$index+1]" type="button" ng-click="addStation($index+1,1)">Add</button>
+
+
+
+            </li>
+            <span class="appendStation">
+                <button type="button" ng-show="busline.endCityId" ng-click="ad2=!ad2">该城市新增站点</button>
+                <input type="text" name="whatever" ng-show="ad2" ng-model="stationToAppend2"/>
+                <button ng-show="ad2" type="button" ng-click="addStationToCity(busline.endCityId, stationToAppend2)">Add</button>
+            </span>
+
         </ul>
+
     </div>
 </div>
 
@@ -93,6 +112,8 @@
                 <button type="button" ng-init="starttimeinsert[$index+1]=false" ng-click="starttimeinsert[$index+1]=!starttimeinsert[$index+1]">插入时间</button>
                 <select ng-show="starttimeinsert[$index+1]" ng-model="starttimeToAdd[$index+1]" ng-options="starttime.time for starttime in starttimes "/>
                 <button ng-show="starttimeinsert[$index+1]" type="button" ng-click="addStarttime($index+1)">Add</button>
+            </li>
+
         </ul>
     </div>
 </div>
@@ -114,6 +135,7 @@
                 <!--<button type="button" ng-init="phoneinsert[$index+1]=false" ng-click="phoneinsert[$index+1]=!phoneinsert[$index+1]">插入电话</button>-->
                 <select ng-show="phoneinsert[$index+1]" ng-model="phoneToAdd[$index+1]"  ng-options="phone.phoneNumber for phone in phones "/>
                 <button ng-show="phoneinsert[$index+1]" type="button" ng-click="addPhone($index+1)">Add</button>
+            </li>
         </ul>
     </div>
 </div>

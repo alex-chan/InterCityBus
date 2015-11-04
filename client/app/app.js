@@ -9,7 +9,6 @@
     return {
       request: function(config) {
         config.headers = config.headers || {};
-        console.log($cookies.get("token"));
         if ($cookies.get('token')) {
           config.headers.Authorization = 'Bearer ' + $cookies.get('token');
         }

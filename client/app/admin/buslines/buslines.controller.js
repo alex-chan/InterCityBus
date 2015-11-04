@@ -33,6 +33,26 @@
         return $scope.busline.phones.splice(index, 0, this.phoneToAdd[index]);
       }
     };
+    $scope.addStationToCity = function(cityId, stationName) {
+      var self;
+      if (!stationName) {
+        alert("请先填写站点名");
+        return;
+      }
+      self = this;
+      return angular.forEach($scope.cities, function(val, key) {
+        var station;
+        if (val.id === cityId) {
+          station = new Station();
+          station.name = stationName;
+          station.cityId = cityId;
+          return station.$save(function() {
+            alert("增加成功");
+            return $scope.stations = Station.query();
+          });
+        }
+      });
+    };
     $scope.addStarttime = function(index) {
       if (!$scope.busline.StartTime) {
         $scope.busline.StartTime = [];
@@ -44,6 +64,17 @@
     $scope.addStation = function(index, isEndCity) {
       var startStations, toAddStation, toInsertPos;
       toInsertPos = index;
+      if (!this.busline.endCityId || !this.busline.endCityId) {
+        alert("请先选择好出发和终点城市");
+        return;
+      }
+      if ((isEndCity && !this.stationToAdd2) || (!isEndCity && !this.stationToAdd)) {
+        alert("请先选择好站点再添加");
+        return;
+      }
+      if (!$scope.busline.stations) {
+        $scope.busline.stations = [];
+      }
       if (isEndCity) {
         startStations = $scope.busline.stations.filter(function(item) {
           if (item.cityId === $scope.busline.startCityId) {
@@ -56,9 +87,6 @@
         toAddStation = this.stationToAdd2[index];
       } else {
         toAddStation = this.stationToAdd[index];
-      }
-      if (!$scope.busline.stations) {
-        $scope.busline.stations = [];
       }
       if ($scope.busline.stations.indexOf(toAddStation) === -1) {
         return $scope.busline.stations.splice(toInsertPos, 0, toAddStation);
@@ -112,6 +140,26 @@
     };
     $scope.delStarttime = function(index) {
       return $scope.busline.StartTime.splice(index, 1);
+    };
+    $scope.addStationToCity = function(cityId, stationName) {
+      var self;
+      if (!stationName) {
+        alert("请先填写站点名");
+        return;
+      }
+      self = this;
+      return angular.forEach($scope.cities, function(val, key) {
+        var station;
+        if (val.id === cityId) {
+          station = new Station();
+          station.name = stationName;
+          station.cityId = cityId;
+          return station.$save(function() {
+            alert("增加成功");
+            return $scope.stations = Station.query();
+          });
+        }
+      });
     };
     $scope.addStation = function(index, isEndCity) {
       var startStations, toAddStation, toInsertPos;

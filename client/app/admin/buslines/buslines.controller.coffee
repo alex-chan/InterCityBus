@@ -19,7 +19,7 @@ angular.module('InterCityBus.controllers')
 
     $scope.cities = City.query()
     $scope.companies = Company.query()
-    $scope.stations = Station.query()
+    $scope.stations = Station.query() # TODO: Do not query all stations one time in the futher, but query depend on city
 
     $scope.busline = new Busline()
     $scope.starttimes = Starttime.query()
@@ -35,6 +35,28 @@ angular.module('InterCityBus.controllers')
         if $scope.busline.phones.indexOf(this.phoneToAdd[index]) == -1
             $scope.busline.phones.splice index, 0, this.phoneToAdd[index]
 
+    $scope.addStationToCity = (cityId, stationName)->
+        if !stationName
+            alert "请先填写站点名"
+            return
+
+        # TODO: check same station
+
+        self = this
+        angular.forEach $scope.cities, (val,key)->
+            if val.id == cityId
+                station = new Station()
+                station.name = stationName
+                station.cityId = cityId
+                station.$save ->
+                    alert("增加成功")
+                    $scope.stations = Station.query()
+
+
+
+
+
+
 
     $scope.addStarttime = (index)->
         if !$scope.busline.StartTime
@@ -47,6 +69,18 @@ angular.module('InterCityBus.controllers')
     $scope.addStation = (index, isEndCity)->
         toInsertPos = index
 
+        if !this.busline.endCityId ||  !this.busline.endCityId
+            alert "请先选择好出发和终点城市"
+            return
+
+        if (isEndCity and !this.stationToAdd2) || (!isEndCity and  !this.stationToAdd )
+            alert("请先选择好站点再添加")
+            return
+
+
+
+        if !$scope.busline.stations
+            $scope.busline.stations = []
 
         if isEndCity
             startStations = $scope.busline.stations.filter (item)->
@@ -61,8 +95,7 @@ angular.module('InterCityBus.controllers')
         else
             toAddStation = this.stationToAdd[index]
 
-        if !$scope.busline.stations
-            $scope.busline.stations = []
+
 
         if $scope.busline.stations.indexOf(toAddStation) == -1
             $scope.busline.stations.splice toInsertPos, 0, toAddStation
@@ -116,6 +149,24 @@ angular.module('InterCityBus.controllers')
 
     $scope.delStarttime = (index)->
         $scope.busline.StartTime.splice index, 1
+
+
+    $scope.addStationToCity = (cityId, stationName)->
+        if !stationName
+            alert "请先填写站点名"
+            return
+
+        # TODO: check same station
+
+        self = this
+        angular.forEach $scope.cities, (val,key)->
+            if val.id == cityId
+                station = new Station()
+                station.name = stationName
+                station.cityId = cityId
+                station.$save ->
+                    alert("增加成功")
+                    $scope.stations = Station.query()
 
 
     $scope.addStation = (index, isEndCity)->

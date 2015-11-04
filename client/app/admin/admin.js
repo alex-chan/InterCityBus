@@ -3,9 +3,8 @@
   angular.module('InterCityBus').config(function($stateProvider) {
     return $stateProvider.state('admin', {
       url: '/admin',
-      templateUrl: '/admin/admin.html',
-      controller: 'AdminCtrl',
-      authenticate: true
+      templateUrl: '/admin/index.html',
+      controller: 'AdminCtrl'
     });
   });
 
