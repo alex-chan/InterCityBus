@@ -39,6 +39,8 @@
             <li ng-repeat="station in busline.stations | filter: { cityId: busline.startCityId } " >
             {{$index+1}}:{{station.name }} <button type="button" ng-click="delStation($index,0)">删除</button>
 
+                <a ui-sref="viewStation({id:station.id})">修改</a>
+
                 <button type="button" ng-init="insert[$index+1]=false" ng-click="insert[$index+1]=!insert[$index+1]">插入站点</button>
                 <select ng-show="insert[$index+1]" ng-model="stationToAdd[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.startCityId } track by station.id"/>
                 <button ng-show="insert[$index+1]" type="button" ng-click="addStation($index+1)">Add</button>
@@ -77,6 +79,8 @@
 
             <li ng-repeat="station in busline.stations | filter: { cityId: busline.endCityId } " >
                 {{$index+1}}:{{station.name }} <button type="button" ng-click="delStation($index,1)">删除</button>
+
+                <a ui-sref="viewStation({id:station.id})">修改</a>
 
                 <button type="button" ng-init="insert2[$index+1]=false" ng-click="insert2[$index+1]=!insert2[$index+1]">插入站点</button>
                 <select ng-show="insert2[$index+1]" ng-model="stationToAdd2[$index+1]" ng-options="station.name for station in stations | filter: { cityId: busline.endCityId } track by station.id"/>
