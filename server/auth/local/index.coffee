@@ -11,7 +11,7 @@ router.post('/', (req, res, next)->
         return res.status(404).json({message: 'Something went wrong, please try again.'}) if !user
 
 
-        token = auth.signToken(user._id, user.role);
+        token = auth.signToken(user.id, user.role);
         res.json({ token: token })
 
     )(req, res, next)

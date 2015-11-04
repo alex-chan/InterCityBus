@@ -32,8 +32,8 @@
 
 <div class="navbar">
     <div class="navbar-inner">
-        <a class="brand" href="#">Admin</a>
-        <ul class="nav">
+        <a class="brand" href="/admin">Admin</a>
+        <ul class="nav" ng-show="isAdmin()">
             <li><a ui-sref="buslines">Buslines</a></li>
             <li><a ui-sref="cities">Cities</a></li>
             <li><a ui-sref="companies">Companies</a></li>
@@ -70,6 +70,11 @@
 <!-- build:js({.tmp,client}) app/app.js -->
 <script src="app/app.js"></script>
 <!-- injector:js -->
+<script src="app/admin/admin.js"></script>
+<script src="app/admin/admin.controller.js"></script>
+
+<script src="app/admin/account/account.js"></script>
+<script src="app/admin/account/login/login.controller.js"></script>
 
 <script src="app/admin/cities/cities.controller.js"></script>
 <script src="app/admin/cities/cities.js"></script>
@@ -84,6 +89,11 @@
 <script src="app/admin/stations/stations.js"></script>
 <script src="app/admin/starttimes/starttimes.controller.js"></script>
 <script src="app/admin/starttimes/starttimes.js"></script>
+
+<script src="components/auth/auth.service.js"></script>
+<script src="components/auth/user.service.js"></script>
+
+
 <!-- endinjector -->
 <!-- endbuild -->
 </body>

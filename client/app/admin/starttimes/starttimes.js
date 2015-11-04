@@ -2,19 +2,19 @@
 (function() {
   angular.module('InterCityBus').config(function($stateProvider) {
     return $stateProvider.state('starttimes', {
-      url: 'starttimes',
+      url: '/admin/starttimes',
       templateUrl: 'app/admin/starttimes/starttimes.html',
       controller: 'StarttimeListCtrl'
     }).state('viewStarttime', {
-      url: 'starttimes/:id/view',
+      url: '/admin/starttimes/:id/view',
       templateUrl: 'app/admin/starttimes/starttime-view.html',
       controller: 'StarttimeViewCtrl'
     }).state('newStarttime', {
-      url: 'starttimes/new',
+      url: '/admin/starttimes/new',
       templateUrl: 'app/admin/starttimes/starttime-add.html',
       controller: 'StarttimeCreateCtrl'
     }).state('editStarttime', {
-      url: 'starttimes/:id/edit',
+      url: '/admin/starttimes/:id/edit',
       templateUrl: 'app/admin/starttimes/starttime-edit.html',
       controller: 'StarttimeEditCtrl'
     });

@@ -17,8 +17,17 @@
         autoIncrement: true,
         primaryKey: true
       },
-      name: DataType.STRING,
+      name: DataType.STRING({
+        unique: {
+          msg: '这个用户名已经被使用'
+        }
+      }),
+      nickName: DataType.STRING,
       phoneNumber: DataType.STRING,
+      phoneNumberVerified: {
+        type: DataType.BOOLEAN,
+        defaultValue: false
+      },
       email: {
         type: DataType.STRING,
         unique: {
@@ -27,6 +36,13 @@
         validate: {
           isEmail: true
         }
+      },
+      emailVerified: {
+        type: DataType.BOOLEAN,
+        defaultValue: false
+      },
+      wechatOpenId: {
+        type: DataType.STRING
       },
       role: {
         type: DataType.STRING,
@@ -38,7 +54,7 @@
           notEmpty: true
         }
       },
-      provier: DataType.STRING,
+      provider: DataType.STRING,
       salt: DataType.STRING,
       regIP: DataType.STRING
     }, {
@@ -61,13 +77,15 @@
           var totalUpdated;
           totalUpdated = 0;
           return users.forEach(function(user) {
-            if (err) {
-              return fn(err);
-            }
-            totalUpdated += 1;
-            if (totalUpdated === users.length) {
-              return fn();
-            }
+            return user.updatePassword(function(err) {
+              if (err) {
+                return fn(err);
+              }
+              totalUpdated += 1;
+              if (totalUpdated === users.length) {
+                return fn();
+              }
+            });
           });
         },
         beforeCreate: function(user, fields, fn) {
@@ -161,7 +179,7 @@
           if (!callback) {
             return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength).toString('base64');
           }
-          return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, function(err, key) {
+          return crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, function(err, key) {
             if (err) {
               callback(err);
             }

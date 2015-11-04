@@ -2,26 +2,39 @@
 (function() {
   var myapp;
 
-  myapp = angular.module('InterCityBus', ["ui.router", "ngResource", "InterCityBus.services", "InterCityBus.controllers"]);
-
-  myapp.config(function($stateProvider, $urlRouterProvider) {
-    return $stateProvider.state('route1', {
-      url: "/route1",
-      templateUrl: "app/admin/route1.html"
-    }).state('route1.list', {
-      url: "list",
-      templateUrl: "app/admin/route1.list.html",
-      controller: function($scope) {
-        return $scope.items = ["A", "List", "Of", "Items"];
+  myapp = angular.module('InterCityBus', ["ui.router", "ngCookies", "ngResource", "validation.match", "InterCityBus.services", "InterCityBus.controllers"]).config(function($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    $locationProvider.html5Mode(true);
+    return $httpProvider.interceptors.push('authInterceptor');
+  }).factory('authInterceptor', function($rootScope, $q, $cookies, $injector) {
+    return {
+      request: function(config) {
+        config.headers = config.headers || {};
+        console.log($cookies.get("token"));
+        if ($cookies.get('token')) {
+          config.headers.Authorization = 'Bearer ' + $cookies.get('token');
+        }
+        return config;
+      },
+      responseError: function(response) {
+        var state;
+        if (response.status === 401) {
+          (state || (state = $injector.get('$state'))).go('login');
+          $cookies.remove('token');
+          return $q.reject(response);
+        } else {
+          return $q.reject(response);
+        }
       }
-    }).state('route2', {
-      url: "route2",
-      templateUrl: "app/admin/route2.html"
-    }).state('route2.list', {
-      url: "list",
-      templateUrl: "app/admin/route2.list.html",
-      controller: function($scope) {
-        return $scope.things = ["A", "Set", "Of", "Things"];
+    };
+  }).run(function($rootScope, $state, Auth) {
+    return $rootScope.$on('$stateChangeStart', function(event, next) {
+      if (next.url.indexOf("/admin") === 0 && next.name !== 'login') {
+        return Auth.isLoggedIn(function(loggedIn) {
+          if (!loggedIn) {
+            event.preventDefault();
+            return $state.go('login');
+          }
+        });
       }
     });
   });

@@ -9,4 +9,8 @@ conf =
     root : path.normalize __dirname + '/../..'
 
 
+    secrets:
+        session: 'whatafuckingday!!'
+
+
 module.exports = conf

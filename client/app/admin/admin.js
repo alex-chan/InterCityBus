@@ -4,7 +4,8 @@
     return $stateProvider.state('admin', {
       url: '/admin',
       templateUrl: '/admin/admin.html',
-      controller: 'AdminCtrl'
+      controller: 'AdminCtrl',
+      authenticate: true
     });
   });
 

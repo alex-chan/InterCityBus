@@ -6,6 +6,7 @@ validatePresenceOf = (value)->
 
 module.exports = (sequelize, DataType)->
 
+
     User = sequelize.define '_user',
         id:
             type: DataType.INTEGER
@@ -14,8 +15,16 @@ module.exports = (sequelize, DataType)->
             primaryKey: true
 
         name: DataType.STRING
+            unique:
+                msg: '这个用户名已经被使用'
+
+        nickName: DataType.STRING
 
         phoneNumber: DataType.STRING
+
+        phoneNumberVerified:
+            type: DataType.BOOLEAN
+            defaultValue: false
 
         email:
             type: DataType.STRING
@@ -23,6 +32,13 @@ module.exports = (sequelize, DataType)->
                 msg: '这个email已经被使用'
             validate:
                 isEmail: true
+
+        emailVerified:
+            type: DataType.BOOLEAN
+            defaultValue: false
+
+        wechatOpenId:
+            type: DataType.STRING
 
         role:
             type:   DataType.STRING
@@ -33,7 +49,7 @@ module.exports = (sequelize, DataType)->
             validate:
                 notEmpty: true
 
-        provier:    DataType.STRING
+        provider:    DataType.STRING
         salt:   DataType.STRING
 
         regIP:  DataType.STRING
@@ -53,9 +69,10 @@ module.exports = (sequelize, DataType)->
             beforeBulkCreate: (users, fields, fn)->
                 totalUpdated = 0
                 users.forEach (user)->
-                    return fn(err) if err
-                    totalUpdated += 1
-                    return fn() if totalUpdated == users.length
+                    user.updatePassword (err)->
+                        return fn(err) if err
+                        totalUpdated += 1
+                        return fn() if totalUpdated == users.length
 
             beforeCreate: (user, fields, fn )->
                 user.updatePassword fn
@@ -125,9 +142,13 @@ module.exports = (sequelize, DataType)->
                 defaultKeyLength = 64
                 salt = new Buffer(this.salt, 'base64')
 
+
                 return crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength).toString('base64') if !callback
 
-                crypto.pbkdf2Sync(password, salt, defaultIterations, defaultKeyLength, (err,key)->
+
+
+                crypto.pbkdf2(password, salt, defaultIterations, defaultKeyLength, (err,key)->
+
                     callback err if err
                     callback null, key.toString('base64')
                 )
@@ -147,16 +168,19 @@ module.exports = (sequelize, DataType)->
                     return fn( new Error('Invalid password') ) if !validatePresenceOf(this.password)
 
 
+
                     # Make salt with a callback
                     self = this
                     this.makeSalt (saltErr, salt)->
-                        #TODO: I feel I should return fn(saltErr) if saltErr
+
                         return fn(saltErr) if saltErr
 
                         self.salt = salt
                         self.encryptPassword self.password, (encryptErr, hashedPassword)->
+
                             return fn encryptErr if encryptErr
                             self.password = hashedPassword
+
                             fn null
 
                 else

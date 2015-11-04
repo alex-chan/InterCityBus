@@ -2,19 +2,19 @@
 (function() {
   angular.module('InterCityBus').config(function($stateProvider) {
     return $stateProvider.state('companies', {
-      url: 'companies',
+      url: '/admin/companies',
       templateUrl: 'app/admin/companies/companies.html',
       controller: 'CompanyListCtrl'
     }).state('viewCompany', {
-      url: 'companies/:id/view',
+      url: '/admin/companies/:id/view',
       templateUrl: 'app/admin/companies/company-view.html',
       controller: 'CompanyViewCtrl'
     }).state('newCompany', {
-      url: 'companies/new',
+      url: '/admin/companies/new',
       templateUrl: 'app/admin/companies/company-add.html',
       controller: 'CompanyCreateCtrl'
     }).state('editCompany', {
-      url: 'companies/:id/edit',
+      url: '/admin/companies/:id/edit',
       templateUrl: 'app/admin/companies/company-edit.html',
       controller: 'CompanyEditCtrl'
     });

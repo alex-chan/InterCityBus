@@ -159,6 +159,25 @@
       return Hotline.sync();
     }).then(function() {
       return User.sync();
+    }).then(function() {
+      return User.findOne({
+        where: {
+          name: 'root'
+        }
+      });
+    }).then(function(root) {
+      if (!root) {
+        console.log('create new root user');
+        return User.create({
+          provider: 'local',
+          name: 'root',
+          role: 'admin',
+          nickName: '系统管理员',
+          password: 'roothehebus123'
+        });
+      }
+    }).then(function(root) {
+      return console.log('root exists or created');
     });
   });
 

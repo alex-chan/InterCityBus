@@ -2,11 +2,10 @@ jwt  = require 'jsonwebtoken';
 expressJwt = require 'express-jwt'
 compose = require 'composable-middleware';
 User = require('../lib/model').User
-
-secret = 'dsafsafas'
+config = require "../config/config"
 
 validateJwt = expressJwt
-    secret: secret #config.secrets.session
+    secret: config.secrets.session
 
 
 
@@ -15,17 +14,22 @@ isAuthenticated = ->
         # Validate jwt
         .use( (req, res, next)->
                 # allow access_token to be passed through query parameter as well
+            console.log '1'+req.user
             if (req.query && req.query.hasOwnProperty('access_token'))
                 req.headers.authorization = 'Bearer ' + req.query.access_token
 
+            console.log '2'+req.user
             validateJwt(req, res, next);
         )
         # Attach user to request
         .use (req, res, next)->
+            console.log '3'+req.user
             User.find
                 where:
                     id: req.user.id
             .then (user)->
+                console.log req.user.id
+                console.log 'user:'+user
                 return res.status(401).end() if (!user)
                 req.user = user
                 next()
@@ -55,8 +59,8 @@ hasRole = (roleRequired)->
  * Returns a jwt token signed by the app secret
 ###
 signToken = (id, role)->
-    return jwt.sign { id: id, role: role }, secret, #config.secrets.session,
-        expiresInMinutes: 60 * 5
+    return jwt.sign { id: id, role: role }, config.secrets.session,
+        expiresIn: 60 * 60 * 2
 
 
 ###

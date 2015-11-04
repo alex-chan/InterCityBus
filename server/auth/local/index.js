@@ -22,7 +22,7 @@
           message: 'Something went wrong, please try again.'
         });
       }
-      token = auth.signToken(user._id, user.role);
+      token = auth.signToken(user.id, user.role);
       return res.json({
         token: token
       });

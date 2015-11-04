@@ -9,7 +9,7 @@ localAuthenticate = (User, name, password, done)->
     .then (user)->
         if (!user)
             return done(null, false, {
-                message: 'This email is not registered.'
+                message: 'Username does not exists or username/password mismatch'
             });
 
         user.authenticate password, (authError, authenticated)->
@@ -18,7 +18,7 @@ localAuthenticate = (User, name, password, done)->
 
             if !authenticated
                 return done null, false,
-                    message: 'This password is not correct.'
+                    message: 'Username does not exists or username/password mismatch'
             else
                 return done(null, user)
 

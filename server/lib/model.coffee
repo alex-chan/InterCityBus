@@ -195,6 +195,29 @@ squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
 #            force: true
     .then ->
         User.sync()
+    .then ->
+        User.findOne
+            where:
+                name: 'root'
+
+    .then (root)->
+        if !root
+            console.log 'create new root user'
+
+            User.create
+                provider: 'local'
+                name: 'root'
+                role: 'admin'
+                nickName: '系统管理员'
+                password: 'roothehebus123'
+
+
+    .then (root)->
+        console.log 'root exists or created'
+
+#    .catch (err)->
+#        console.log 'error: ' + err
+
 #        addRecords()
 
 

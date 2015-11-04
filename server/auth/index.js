@@ -12,7 +12,7 @@
 
   require('./local/passport').setup(model.User, config);
 
-  router.use('local', require('./local'));
+  router.use('/local', require('./local'));
 
   module.exports = router;
 
