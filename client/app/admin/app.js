@@ -34,8 +34,6 @@
             return $state.go('login');
           }
         });
-      } else if (next.url.indexOf("/admin") !== 0) {
-        return $state.go("search");
       }
     });
   });

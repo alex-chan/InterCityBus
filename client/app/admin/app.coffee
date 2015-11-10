@@ -49,8 +49,7 @@ myapp = angular.module('InterCityBus',
                     if (!loggedIn)
                         event.preventDefault()
                         $state.go('login')
-            else if next.url.indexOf("/admin") != 0
-                $state.go "search"
+
 
 #            if (next.authenticate)
 #                Auth.isLoggedIn (loggedIn)->
@@ -84,7 +83,6 @@ myapp = angular.module('InterCityBus',
 #            controller:  ($scope)->
 #                $scope.things = ["A", "Set", "Of", "Things"]
 #        })
-
 
 angular.module('InterCityBus.services',[])
 .factory 'City', ($resource)->

@@ -36,11 +36,11 @@
     app.use(cookieParser());
     app.use(require('less-middleware')(path.join(app.get("appRoot"), 'client')));
     app.use(express["static"](path.join(app.get("appRoot"), 'client')));
-    app.use('/', routes);
     app.use('/users', users);
     app.use('/admin', admin);
     app.use('/api', require("../routes/api"));
     app.use('/auth', require("../auth"));
+    app.use('/', routes);
     app.use(function(req, res, next) {
       var err;
       err = new Error('Not Found');
