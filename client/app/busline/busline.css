@@ -1,0 +1,43 @@
+.line-details .line-headers,
+.line-details .line-content {
+  background-color: #FFFFFF;
+}
+.line-details .line-headers {
+  padding: 1.1rem 0 0.6rem 0;
+  margin-bottom: 0.2rem;
+}
+.line-details figure.line-content {
+  height: 14rem;
+}
+.line-details .phones-section {
+  margin-top: 1rem;
+  padding: 0 1rem;
+}
+.line-details .phones-section .phone {
+  background: #FFFFFF;
+  margin: 0.4rem -1rem;
+  height: 5rem;
+  line-height: 5rem;
+}
+.line-details .phones-section .phone .inner-phone {
+  margin: 0 1rem;
+  position: relative;
+}
+.line-details .phones-section .phone .inner-phone button {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+}
+.line-details .hints-section {
+  margin: 1rem 0;
+  padding: 0 1rem;
+}
+footer.footer {
+  background: #FFFFFF;
+  text-align: center;
+  padding: 1rem ;
+}
+footer.footer .contactphone {
+  font-size: 1.6rem;
+  color: #67a1d7;
+}

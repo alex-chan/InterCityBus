@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "busline.controller.js",
+  "sourceRoot": "",
+  "sources": [
+    "busline.controller.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,OAAO,CAAC,MAAR,CAAe,cAAf,CACA,CAAC,UADD,CACY,mBADZ,EACiC,SAAC,MAAD,EAAS,KAAT,GAAA,CADjC;AAAA"
+}

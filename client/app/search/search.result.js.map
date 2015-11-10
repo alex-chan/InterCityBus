@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "search.result.js",
+  "sourceRoot": "",
+  "sources": [
+    "search.result.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,OAAO,CAAC,MAAR,CAAe,cAAf,CACA,CAAC,MADD,CACQ,SAAC,cAAD;WACJ,cACA,CAAC,KADD,CACO,QADP,EACiB;MACT,GAAA,EAAK,SADI;MAET,WAAA,EAAa,qCAFJ;MAGT,UAAA,EAAY,wBAHH;KADjB;EADI,CADR;AAAA"
+}

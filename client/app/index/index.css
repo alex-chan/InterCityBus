@@ -1,0 +1,84 @@
+.banner img {
+  width: 32rem;
+}
+.search-box {
+  margin: 3rem 1rem 0 1rem;
+}
+.search-box .search-form .search-input {
+  background-color: white;
+  border-radius: 0.4rem;
+  border: 0.1rem solid #CFCFCF;
+  position: relative;
+  padding: 0.2rem 0 0.2rem 2.7rem;
+}
+.search-box .search-form .search-input hr {
+  border-top: 0.1rem solid #CFCFCF;
+  border-bottom: none;
+  margin-right: 5rem;
+}
+.search-box .search-form .search-input .form-group img[class="img-loc"] {
+  vertical-align: middle;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.search-box .search-form .search-input .form-group select[class="form-control"] {
+  width: 20rem;
+}
+.search-box .search-form .search-input .form-group label {
+  vertical-align: middle;
+  font-size: 1.8rem;
+  margin-left: 1.2rem;
+}
+.search-box .search-form .search-input .form-group .start {
+  color: #08a633;
+}
+.search-box .search-form .search-input .form-group .end {
+  color: #f14c27;
+}
+.search-box .search-form .search-input img[class="swap"] {
+  position: absolute;
+  width: 2.4rem;
+  height: 2.1rem;
+  right: 2rem;
+  top: 3.4rem;
+}
+.search-box .search-form button {
+  margin-top: 2rem;
+  width: 100%;
+}
+.hotline-section {
+  margin: 2.7rem 1rem 0 1rem;
+  font-size: 1.8rem;
+  color: #666666;
+}
+.hotline-section .hotline-title {
+  font-size: 2.0rem;
+}
+.hotline-section hr {
+  border-top: 0.1rem solid #CFCFCF;
+  border-bottom: none;
+}
+.hotline-section hr[class="hothr"] {
+  margin: 1.1rem -1rem 0 -1rem;
+}
+.hotline-section .hotlines .hotline {
+  height: 6rem;
+  vertical-align: middle;
+  display: table-cell;
+  position: relative;
+  width: 32rem;
+}
+.hotline-section .hotlines .hotline img {
+  vertical-align: middle;
+  width: 2rem;
+  height: 2rem;
+}
+.hotline-section .hotlines .hotline label {
+  vertical-align: middle;
+}
+.hotline-section .hotlines .hotline button {
+  /* Reset */
+  position: absolute;
+  right: 0rem;
+  top: 1.6rem;
+}
