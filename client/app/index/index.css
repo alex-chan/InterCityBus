@@ -16,18 +16,27 @@
   border-bottom: none;
   margin-right: 5rem;
 }
-.search-box .search-form .search-input .form-group img[class="img-loc"] {
+.search-box .search-form .search-input .form-group i.img-loc {
   vertical-align: middle;
   width: 2.4rem;
   height: 2.4rem;
 }
-.search-box .search-form .search-input .form-group select[class="form-control"] {
-  width: 20rem;
+.search-box .search-form .search-input .form-group select {
+  background: transparent;
+  -webkit-appearance: none;
+  border: 0;
+  border-radius: 0;
+  line-height: 1;
+  height: 1.8rem;
+  width: 16rem;
+  margin-left: -100rem;
 }
 .search-box .search-form .search-input .form-group label {
   vertical-align: middle;
   font-size: 1.8rem;
   margin-left: 1.2rem;
+  display: inline-block;
+  width: 16rem;
 }
 .search-box .search-form .search-input .form-group .start {
   color: #08a633;
@@ -35,12 +44,18 @@
 .search-box .search-form .search-input .form-group .end {
   color: #f14c27;
 }
-.search-box .search-form .search-input img[class="swap"] {
+.search-box .search-form .search-input i.swap {
   position: absolute;
   width: 2.4rem;
   height: 2.1rem;
   right: 2rem;
   top: 3.4rem;
+  transition: 300ms ease all;
+  transform: rotate(0deg);
+}
+.search-box .search-form .search-input i.swap.on {
+  transition: 300ms ease all;
+  transform: rotate(360deg);
 }
 .search-box .search-form button {
   margin-top: 2rem;

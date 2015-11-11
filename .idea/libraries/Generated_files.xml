@@ -13,8 +13,8 @@
         <item url="file://$PROJECT_DIR$/client/components/auth/auth.service.js" />
         <item url="file://$PROJECT_DIR$/client/components/auth/user.service.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/account/login/login.controller.js" />
-        <item url="file://$PROJECT_DIR$/client/app/admin/account/account.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/companies/companies.js" />
+        <item url="file://$PROJECT_DIR$/client/app/admin/account/account.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/companies/companies.controller.js" />
         <item url="file://$PROJECT_DIR$/server/auth/local/passport.js" />
         <item url="file://$PROJECT_DIR$/server/auth/local/index.js" />
@@ -33,8 +33,8 @@
         <item url="file://$PROJECT_DIR$/client/app/admin/admin.controller.js" />
         <item url="file://$PROJECT_DIR$/server/config/environment/development.js" />
         <item url="file://$PROJECT_DIR$/server/config/config.js" />
-        <item url="file://$PROJECT_DIR$/server/lib/dbconn.js" />
         <item url="file://$PROJECT_DIR$/server/config/environment/index.js" />
+        <item url="file://$PROJECT_DIR$/server/lib/dbconn.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.controller.js" />
         <item url="file://$PROJECT_DIR$/server/lib/model.js" />
         <item url="file://$PROJECT_DIR$/server/config/express.js" />
@@ -49,11 +49,11 @@
         <item url="file://$PROJECT_DIR$/client/app/admin/cities/cities.js" />
         <item url="file://$PROJECT_DIR$/server/routes/index.js" />
         <item url="file://$PROJECT_DIR$/server/api/phones/phones.controller.js" />
+        <item url="file://$PROJECT_DIR$/client/app/feedback/feedback.js" />
+        <item url="file://$PROJECT_DIR$/client/app/feedback/feedback.controller.js" />
         <item url="file://$PROJECT_DIR$/server/api/phones/index.js" />
-        <item url="file://$PROJECT_DIR$/client/app/busline/search.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/phones/phones.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/phones/phones.controller.js" />
-        <item url="file://$PROJECT_DIR$/client/app/busline/search.controller.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.controller.js" />
         <item url="file://$PROJECT_DIR$/server/api/buslines/buslines.controller.js" />
@@ -85,8 +85,8 @@
       <root url="file://$PROJECT_DIR$/client/components/auth/auth.service.js" />
       <root url="file://$PROJECT_DIR$/client/components/auth/user.service.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/account/login/login.controller.js" />
-      <root url="file://$PROJECT_DIR$/client/app/admin/companies/companies.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/account/account.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/companies/companies.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/companies/companies.controller.js" />
       <root url="file://$PROJECT_DIR$/server/auth/local/passport.js" />
       <root url="file://$PROJECT_DIR$/server/auth/local/index.js" />
@@ -107,8 +107,8 @@
       <root url="file://$PROJECT_DIR$/server/config/environment/development.js" />
       <root url="file://$PROJECT_DIR$/server/config/config.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/buslines/buslines.controller.js" />
-      <root url="file://$PROJECT_DIR$/server/config/environment/index.js" />
       <root url="file://$PROJECT_DIR$/server/lib/dbconn.js" />
+      <root url="file://$PROJECT_DIR$/server/config/environment/index.js" />
       <root url="file://$PROJECT_DIR$/server/lib/model.js" />
       <root url="file://$PROJECT_DIR$/server/config/express.js" />
       <root url="file://$PROJECT_DIR$/server/routes/admin.js" />
@@ -123,9 +123,11 @@
       <root url="file://$PROJECT_DIR$/server/routes/index.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/cities/cities.js" />
       <root url="file://$PROJECT_DIR$/server/api/phones/phones.controller.js" />
+      <root url="file://$PROJECT_DIR$/client/app/feedback/feedback.js" />
+      <root url="file://$PROJECT_DIR$/client/app/feedback/feedback.controller.js" />
       <root url="file://$PROJECT_DIR$/server/api/phones/index.js" />
-      <root url="file://$PROJECT_DIR$/client/app/admin/phones/phones.js" />
       <root url="file://$PROJECT_DIR$/client/app/busline/busline.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/phones/phones.js" />
       <root url="file://$PROJECT_DIR$/client/app/busline/busline.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/phones/phones.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.js" />

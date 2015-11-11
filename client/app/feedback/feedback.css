@@ -1,0 +1,27 @@
+.feedback {
+  margin: 1rem 1.6rem 3rem 1.6rem;
+}
+.feedback form .feedback-type {
+  padding: 1.6rem ;
+}
+.feedback form .feedback-type .form-group {
+  display: block;
+  height: 3.4rem;
+}
+.feedback form .feedback-type .form-group input[type="radio"] {
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+}
+.feedback form .feedback-content textarea {
+  border: none;
+  margin-top: 1rem;
+  width: 25.6rem;
+  height: 10rem;
+  line-height: 3rem;
+  padding: 1.6rem ;
+}
+.feedback form button {
+  width: 100%;
+  margin: 3rem 0;
+}

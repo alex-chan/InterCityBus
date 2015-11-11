@@ -5,26 +5,35 @@
 
             <div class="search-input">
 
-                <div class="form-group">
-                    <img class="img-loc" src="/assets/images/iconStart.png">
-                    <label class="start">出发地</label>
+                <div class="form-group" >
+                    <!--<img class="img-loc" src="/assets/images/iconStart.png">-->
+                    <i class="ico location-start"></i>
+                    <label class="start"  for="startCity" >{{ startCity || "出发地"}}</label>
+
+
+
+                    <select class="form-control start" ng-model="startCity"  ng-options="city for city in cities "  id="startCity" name="startCity" >
+                    </select>
                     <!--<input class="form-input" type="text" placeholder="出发地"/>-->
 
                 </div>
                 <hr/>
                 <div class="form-group">
-                    <img class="img-loc"  src="/assets/images/iconEnd.png">
-                    <label class="end">目的地</label>
+                    <!--<img class="img-loc"  src="/assets/images/iconEnd.png">-->
+                    <i class="ico location-end"></i>
+                    <label class="end" for="endCity">{{ endCity || "目的地"}}</label>
                     <!--<input class="form-input" type="text" placeholder="目的地"/>-->
-
+                    <select class="form-control end" ng-model="endCity"  ng-options="city for city in cities "  id="endCity" name="endCity" >
+                    </select>
                 </div>
 
-                <img class="swap" src="/assets/images/iconSwap.png"/>
+                <!--<img class="swap" src="/assets/images/iconSwap.png"/>-->
+                <i class="ico swap rotate"  ng-class="{on:onOff}" ng-click="onOff=!onOff;swapCity()" ></i>
 
             </div>
 
 
-            <button class="btn btn-primary search" type="submit">立即订票</button>
+            <button class="btn btn-primary search" type="submit" >立即订票</button>
 
         </form>
     </div>

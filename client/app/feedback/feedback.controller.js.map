@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "feedback.controller.js",
+  "sourceRoot": "",
+  "sources": [
+    "feedback.controller.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,OAAO,CAAC,MAAR,CAAe,cAAf,CACA,CAAC,UADD,CACY,oBADZ,EACkC,SAAC,MAAD,EAAS,KAAT,GAAA,CADlC;AAAA"
+}

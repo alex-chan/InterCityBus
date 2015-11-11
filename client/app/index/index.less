@@ -4,6 +4,8 @@
     }
 }
 
+
+
 .search-box {
     margin: 3rem 1rem 0 1rem;
 
@@ -26,19 +28,32 @@
             }
 
             .form-group{
-                img[class="img-loc"] {
+                i.img-loc {
                     vertical-align: middle;
                     width: 2.4rem;
                     height: 2.4rem;
+
                 }
 
-                select[class="form-control"]{
-                    width: 20rem;
+                select{
+                    //width: 20rem;
+                    background: transparent;
+                    -webkit-appearance: none;
+                    border: 0;
+                    border-radius: 0;
+                    line-height: 1;
+                    height: 1.8rem;
+                    width: 16rem;
+
+                    margin-left: -100rem; // uncomment this to use select instead of label
+
                 }
                 label {
                     vertical-align: middle;
                     font-size: 1.8rem;
                     margin-left: 1.2rem;
+                    display:inline-block;
+                    width: 16rem;
                 }
 
                 .start{
@@ -50,15 +65,25 @@
 
 
 
-
             }
 
-            img[class="swap"] {
+            i.swap {
                 position: absolute;
                 width: 2.4rem;
                 height: 2.1rem;
                 right: 2rem;
                 top: 3.4rem;
+
+                //margin: 1rem;
+                transition: 300ms ease all;
+                transform: rotate(0deg);
+
+
+            }
+
+            i.swap.on {
+                transition: 300ms ease all;
+                transform: rotate(360deg);
             }
 
 
@@ -122,6 +147,7 @@
             }
             label {
                 vertical-align: middle;
+
             }
 
 
