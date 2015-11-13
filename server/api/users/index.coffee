@@ -12,4 +12,4 @@ module.exports = (router)->
     router.get "/users/me", auth.isAuthenticated(), controller.me
     router.put('/users/:id/password', auth.isAuthenticated(), controller.changePassword);
     router.get('/users/:id', auth.isAuthenticated(), controller.show);
-    router.post('/users', controller.create);
+    router.post('/users', auth.hasRole('admin'), controller.create);

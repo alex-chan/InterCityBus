@@ -196,8 +196,32 @@
     };
   };
 
+  module.exports.hotlines = function(req, res) {
+    return Model.Hotline.findAll({
+      include: [
+        {
+          model: Model.City,
+          as: 'startCity'
+        }, {
+          model: Model.City,
+          as: 'endCity'
+        }
+      ],
+      order: [['queryCount', 'DESC']]
+    }).then(responseWithResult(res))["catch"](handleError(res));
+  };
+
   module.exports.index = function(req, res) {
+    var where;
+    where = {};
+    if (req.query && req.query.start && req.query.end) {
+      where = {
+        startCityId: req.query.start,
+        endCityId: req.query.end
+      };
+    }
     return Model.Busline.findAll({
+      where: where,
       include: [
         {
           model: Model.City,
@@ -207,7 +231,10 @@
           as: 'endCity'
         }, {
           model: Model.Station
-        }, Model.Company
+        }, Model.Company, {
+          model: Model.Starttime,
+          as: 'StartTime'
+        }
       ],
       order: [[Model.Station, Model.BusLineStation, 'id', 'ASC']]
     }).then(responseWithResult(res))["catch"](handleError(res));

@@ -2,9 +2,19 @@
 (function() {
   angular.module('InterCityBus').config(function($stateProvider) {
     return $stateProvider.state('busline', {
-      url: '/busline',
+      url: '/busline/:id',
       templateUrl: 'app/busline/busline.html',
       controller: 'BuslineController'
+    });
+  });
+
+  angular.module('InterCityBus.services').factory('Busline', function($resource) {
+    return $resource('/api/buslines/:id', {
+      id: '@id'
+    }, {
+      update: {
+        method: "PUT"
+      }
     });
   });
 

@@ -1,4 +1,6 @@
 controller = require "./phones.controller"
+auth = require '../../auth/auth.service'
+
 
 
 module.exports = (router)->
@@ -7,9 +9,9 @@ module.exports = (router)->
 
 
 
-    router.get "/phones", controller.index
-    router.get "/phones/:id", controller.show
-    router.post "/phones", controller.create
-    router.put "/phones/:id", controller.update
-    router.patch '/phones/:id', controller.update
-    router.delete '/phones/:id', controller.destroy
+    router.get "/phones", auth.hasRole('admin'), controller.index
+    router.get "/phones/:id", auth.hasRole('admin'), controller.show
+    router.post "/phones", auth.hasRole('admin'), controller.create
+    router.put "/phones/:id", auth.hasRole('admin'), controller.update
+    router.patch '/phones/:id', auth.hasRole('admin'), controller.update
+    router.delete '/phones/:id', auth.hasRole('admin'), controller.destroy

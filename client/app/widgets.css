@@ -5,6 +5,7 @@
   padding: 0.2rem 0.6rem;
   height: 4.4rem;
   vertical-align: middle;
+  background-color: inherit;
 }
 .btn-sm {
   height: 2.8rem;
@@ -16,6 +17,10 @@
 .btn-primary {
   color: #FFFFFF;
   background-color: #f39624;
+}
+.btn-blue {
+  color: #FFFFFF;
+  background-color: #67a1d7;
 }
 .btn-default {
   color: #f39624;

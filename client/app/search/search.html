@@ -1,113 +1,20 @@
 <div class="container">
     <div class="search-results">
-        <div class="search-result">
+
+        <div class="search-result" ng-repeat="busline in buslines">
             <div class="line-header">
                 <div class="basicinfo">
 
                         <span class="busline-title">
 
                             <i class="ico text-start"></i>
-                            <label>广州</label>
+                            <label>{{ busline.startCity.name }}</label>
                             --
                             <i class="ico text-end"></i>
-                            <label>深圳</label>
+                            <label>{{ busline.endCity.name }}</label>
 
                         </span>
-                    <h3 class="price">票价：￥108.8</h3>
-
-                </div>
-
-
-            </div>
-
-            <!--<hr class="splitter"/>-->
-
-            <figure class="line-content">
-                <div class="line-model">
-                    <div class="line_name">
-                    <div class="white_bg"></div>
-                    <ul class="start">
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城</span>
-                        </li>
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城2</span>
-                        </li>
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城3</span>
-                        </li>
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城4</span>
-                        </li>
-
-                    </ul>
-
-                    <div class="solid" ms-class="dotted:(line.site_list.length > 6)"></div>
-                    <ul class="end">
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城5</span>
-                        </li>
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城6</span>
-                        </li>
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城7</span>
-                        </li>
-
-                        <li>
-                            <i class="ico"></i>
-                            <span>大学城8</span>
-                        </li>
-                    </ul>
-                    <div class="white_bg_right"></div>
-                </div>
-
-                </div>
-            </figure>
-
-            <!--<hr class="splitter"/>-->
-
-            <div class="line-footer">
-                <span class="other-info">
-                    首班: 07:00
-                    末班: 12:30
-                    共6趟班次
-                </span>
-                <button class="btn btn-default btn-sm">立即购票</button>
-            </div>
-
-
-        </div>
-
-
-        <div class="search-result">
-            <div class="line-header">
-                <div class="basicinfo">
-
-                        <span class="busline-title">
-
-                            <i class="ico text-start"></i>
-                            <label>广州</label>
-                            --
-                            <i class="ico text-end"></i>
-                            <label>深圳</label>
-
-                        </span>
-                    <h3 class="price">票价：￥108.8</h3>
+                    <h3 class="price">票价：￥{{ busline.price }}</h3>
 
                 </div>
 
@@ -119,50 +26,40 @@
                         <div class="white_bg"></div>
                         <ul class="start">
 
-                            <li>
+                            <li ng-repeat="station in busline.stations | filter :  { cityId: busline.startCityId } track by station.id  ">
                                 <i class="ico"></i>
-                                <span>大学城</span>
+                                <span ng-if="station.name.length <= 5">
+                                    {{ station.name }}
+                                </span>
+
+                                <span ng-if="station.name.length > 5">
+                                    {{ station.name.substr(0, 5) }}
+                                </span>
+                                <span class="pl6" ng-if="station.name.length > 5">
+                                    {{ station.name.substr(5) }}
+                                </span>
                             </li>
 
-                            <li>
-                                <i class="ico"></i>
-                                <span>大学城2</span>
-                            </li>
 
-                            <li>
-                                <i class="ico"></i>
-                                <span>大学城3</span>
-                            </li>
-
-                            <li>
-                                <i class="ico"></i>
-                                <span>大学城4</span>
-                            </li>
 
                         </ul>
 
-                        <div class="solid" ms-class="dotted:(line.site_list.length > 6)"></div>
+                        <div class="solid" ms-class="dotted:(busline.stations.length > 6)"></div>
                         <ul class="end">
-
-                            <li>
+                            <li ng-repeat="station in busline.stations | filter :  { cityId: busline.endCityId } track by station.id  ">
                                 <i class="ico"></i>
-                                <span>大学城5</span>
+                                <span ng-if="station.name.length <= 5">
+                                    {{ station.name }}
+                                </span>
+
+                                <span ng-if="station.name.length > 5">
+                                    {{ station.name.substr(0, 5) }}
+                                </span>
+                                <span class="pl6" ng-if="station.name.length > 5">
+                                    {{ station.name.substr(5) }}
+                                </span>
                             </li>
 
-                            <li>
-                                <i class="ico"></i>
-                                <span>大学城6</span>
-                            </li>
-
-                            <li>
-                                <i class="ico"></i>
-                                <span>大学城7</span>
-                            </li>
-
-                            <li>
-                                <i class="ico"></i>
-                                <span>大学城8</span>
-                            </li>
                         </ul>
                         <div class="white_bg_right"></div>
                     </div>
@@ -172,15 +69,55 @@
 
             <div class="line-footer">
                 <span class="other-info">
-                    首班: 07:00
-                    末班: 12:30
-                    共6趟班次
+                    首班: {{busline.StartTime[0].time | limitTo: 5: 0}}
+                    末班: {{busline.StartTime[busline.StartTime.length-1].time| limitTo: 5: 0}}
+                    共{{busline.StartTime.length}}趟班次
                 </span>
-                <button class="btn btn-default btn-sm">立即购票</button>
+                <button class="btn btn-default btn-sm " ng-click="viewDetailBusline(busline.id)">立即购票</button>
             </div>
 
 
         </div>
 
+        <div class="search-no-result search-result" ng-if="buslines.length == 0">
+            <div class="line-header">
+                <div class="basicinfo">
+
+                        <span class="busline-title">
+
+                            <i class="ico text-start"></i>
+                            <label>{{ cities[startCityId].name }}</label>
+                            --
+                            <i class="ico text-end"></i>
+                            <label>{{ cities[endCityId].name }}</label>
+
+                        </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="no-result">
+                <div class="ufo">
+
+                </div>
+                <label>
+                    没找到大巴？!
+                </label>
+
+                <div class=" no-result-action">
+                    <button class="btn btn-blue" ng-click="research()">重新搜索</button>
+                    <button class="btn btn-primary" ng-click="requestNewLine()">私人订制</button>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>
+
+<script>
+
+
+</script>

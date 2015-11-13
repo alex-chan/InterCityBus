@@ -26,10 +26,11 @@
   -webkit-appearance: none;
   border: 0;
   border-radius: 0;
-  line-height: 1;
+  line-height: 1.8rem;
   height: 1.8rem;
-  width: 16rem;
-  margin-left: -100rem;
+  width: 14rem;
+  font-size: 1.8rem;
+  vertical-align: middle;
 }
 .search-box .search-form .search-input .form-group label {
   vertical-align: middle;
@@ -78,15 +79,9 @@
 }
 .hotline-section .hotlines .hotline {
   height: 6rem;
+  line-height: 6rem;
   vertical-align: middle;
-  display: table-cell;
   position: relative;
-  width: 32rem;
-}
-.hotline-section .hotlines .hotline img {
-  vertical-align: middle;
-  width: 2rem;
-  height: 2rem;
 }
 .hotline-section .hotlines .hotline label {
   vertical-align: middle;

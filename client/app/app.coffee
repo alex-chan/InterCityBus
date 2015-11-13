@@ -81,10 +81,7 @@ angular.module('InterCityBus.services',[])
 angular.module('InterCityBus.controllers',[])
 
 
-#angular.module('InterCityBus.services',[])
-#.factory 'City', ($resource)->
-#    return $resource '/api/cities/:id' ,{id: '@id'}, update:
-#        method: "PUT"
+
 #
 #.factory 'Busline', ($resource)->
 #    return $resource '/api/buslines/:id' ,{id: '@id'}, update:

@@ -1,18 +1,18 @@
 <div class="container">
     <div class="banner"><img src="/assets/images/banner.png"> </div>
     <div class="search-box">
-        <form class="search-form">
+        <form class="search-form" ng-submit="searchBusline()">
 
             <div class="search-input">
 
                 <div class="form-group" >
                     <!--<img class="img-loc" src="/assets/images/iconStart.png">-->
                     <i class="ico location-start"></i>
-                    <label class="start"  for="startCity" >{{ startCity || "出发地"}}</label>
+                    <!--<label class="start"  for="startCity" >{{ startCity.name || "出发地"}}</label>-->
 
 
-
-                    <select class="form-control start" ng-model="startCity"  ng-options="city for city in cities "  id="startCity" name="startCity" >
+                    <select class="form-control start" ng-model="startCity"  ng-options="city.name for city in cities track by city.id"  id="startCity" name="startCity" >
+                        <option value="" disabled selected>出发地</option>
                     </select>
                     <!--<input class="form-input" type="text" placeholder="出发地"/>-->
 
@@ -21,9 +21,10 @@
                 <div class="form-group">
                     <!--<img class="img-loc"  src="/assets/images/iconEnd.png">-->
                     <i class="ico location-end"></i>
-                    <label class="end" for="endCity">{{ endCity || "目的地"}}</label>
+                    <!--<label class="end" for="endCity">{{ endCity.name || "目的地"}}</label>-->
                     <!--<input class="form-input" type="text" placeholder="目的地"/>-->
-                    <select class="form-control end" ng-model="endCity"  ng-options="city for city in cities "  id="endCity" name="endCity" >
+                    <select class="form-control end" ng-model="endCity"  ng-options="city.name for city in cities track by city.id"  id="endCity" name="endCity" >
+                        <option value="" disabled selected>目的地</option>
                     </select>
                 </div>
 
@@ -43,42 +44,21 @@
         <hr class="hothr"/>
 
         <div class="hotlines">
-            <div class="hotline">
-                <img src="/assets/images/textStart.png">
-                <label>广州</label>
+            <div class="hotline" ng-repeat="hotline in hotlines">
+
+                <i class="ico text-start"></i>
+                <label>{{ hotline.startCity.name }}</label>
                 --
-                <img src="/assets/images/textEnd.png">
-                <label>深圳</label>
+                <i class="ico text-end"></i>
+                <label>{{ hotline.endCity.name }}</label>
 
 
-                <button class="btn btn-default btn-sm">搜索</button>
+                <button class="btn btn-default btn-sm" ng-click="search(hotline.startCity.id, hotline.endCity.id)">搜索</button>
 
+                <hr/>
             </div>
-            <hr/>
 
-            <div class="hotline">
-                <img src="/assets/images/textStart.jpg">
-                <label>广州</label>
-                --
-                <img src="/assets/images/textEnd.jpg">
-                <label>珠海</label>
 
-                <button class="btn btn-default btn-sm">搜索</button>
-
-            </div>
-            <hr/>
-
-            <div class="hotline">
-                <img src="/assets/images/textStart.jpg">
-                <label>广州</label>
-                --
-                <img src="/assets/images/textEnd.jpg">
-                <label>珠海</label>
-
-                <button class="btn btn-default btn-sm">搜索</button>
-
-            </div>
-            <hr/>
 
         </div>
 

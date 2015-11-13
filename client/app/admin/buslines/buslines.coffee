@@ -21,3 +21,5 @@ angular.module('InterCityBus')
         url: '/admin/buslines/:id/edit'
         templateUrl: 'app/admin/buslines/busline-edit.html'
         controller: 'BuslineEditCtrl'
+
+

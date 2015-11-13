@@ -1,16 +1,17 @@
 controller = require "./buslines.controller"
-
+auth = require '../../auth/auth.service'
 
 module.exports = (router)->
 
-    router.get "/test", (req, res, next)->
-        res.send("test ok")
 
 
 
     router.get "/buslines", controller.index
     router.get "/buslines/:id", controller.show
-    router.post "/buslines", controller.create
-    router.put "/buslines/:id", controller.update
-    router.patch '/buslines/:id', controller.update
-    router.delete '/buslines/:id', controller.destroy
+    router.post "/buslines", auth.hasRole('admin'), controller.create
+    router.put "/buslines/:id", auth.hasRole('admin'), controller.update
+    router.patch '/buslines/:id',auth.hasRole('admin'),  controller.update
+    router.delete '/buslines/:id', auth.hasRole('admin'), controller.destroy
+
+
+    router.get "/hotlines", controller.hotlines

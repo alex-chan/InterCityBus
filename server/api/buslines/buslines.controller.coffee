@@ -224,8 +224,35 @@ removeEntity = (res) ->
                 res.status(204).end()
 
 
+module.exports.hotlines = (req, res)->
+    Model.Hotline.findAll
+        include: [
+            {
+                model: Model.City
+                as: 'startCity'
+            }, {
+                model: Model.City
+                as: 'endCity'
+            }
+
+        ],
+        order: [
+            [ 'queryCount', 'DESC'],
+        ]
+    .then responseWithResult(res)
+    .catch handleError(res)
+
 module.exports.index = (req, res)->
+
+    where = {}
+    if req.query and req.query.start and req.query.end
+        where =
+            startCityId: req.query.start
+            endCityId: req.query.end
+
+
     Model.Busline.findAll
+        where: where
         include: [
             {
                 model: Model.City
@@ -235,10 +262,13 @@ module.exports.index = (req, res)->
                 as: 'endCity'
             },{
                 model: Model.Station
-
-
             },
-            Model.Company
+            Model.Company,
+            {
+                model: Model.Starttime
+                as: 'StartTime'
+            }
+
         ],
         order: [
             [ Model.Station, Model.BusLineStation, 'id', 'ASC'],

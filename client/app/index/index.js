@@ -8,6 +8,20 @@
     });
   });
 
+  angular.module('InterCityBus.services').factory('City', function($resource) {
+    return $resource('/api/cities/:id', {
+      id: '@id'
+    }, {
+      update: {
+        method: "PUT"
+      }
+    });
+  }).factory('Hotline', function($resource) {
+    return $resource('/api/hotlines/:id', {
+      id: '@id'
+    });
+  });
+
 }).call(this);
 
 //# sourceMappingURL=index.js.map
