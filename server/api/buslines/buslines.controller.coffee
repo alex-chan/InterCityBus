@@ -1,4 +1,5 @@
 Model = require "../../lib/model"
+config = require "../../config/config"
 Sequelize = require "../../lib/dbconn"
 
 _ = require "underscore"
@@ -226,6 +227,7 @@ removeEntity = (res) ->
 
 module.exports.hotlines = (req, res)->
     Model.Hotline.findAll
+        limit: config.maxHotlines
         include: [
             {
                 model: Model.City
@@ -250,6 +252,15 @@ module.exports.index = (req, res)->
             startCityId: req.query.start
             endCityId: req.query.end
 
+
+        Model.Hotline.findOrCreate
+            where:
+                startCityId: req.query.start
+                endCityId: req.query.end
+        .spread( (hotline, created)->
+            hotline.queryCount += 1
+            hotline.save()
+        )
 
     Model.Busline.findAll
         where: where

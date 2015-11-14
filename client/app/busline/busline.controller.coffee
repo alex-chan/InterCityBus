@@ -3,7 +3,7 @@ angular.module('InterCityBus')
 
 #    $document[0].onoffline = ->
 #        alert 'onoffline'
-    $scope.finishBook = true
+#    $scope.finishBook = true
 
     $scope.dial = (phone)->
 
@@ -14,7 +14,7 @@ angular.module('InterCityBus')
 
 
 #        console.log 'phone:' + phone
-#        handler = $window.open("tel:"+phone, "_blank")
+        handler = $window.open("tel:"+phone, "_blank")
 #        $scope.xx =  handler
 #        handler.onbeforeunload = (event)->
 #            $scope.xx =  'sb'
