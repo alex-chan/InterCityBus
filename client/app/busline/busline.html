@@ -86,7 +86,6 @@
         <div class="phones-section">
             <h3>
                 <i class="ico telphone"></i><label>订票热线</label>
-                {{ xx }}
             </h3>
             <div class="phone" ng-repeat="phone in busline.phones">
                 <div class="inner-phone">
@@ -122,3 +121,14 @@
 </div>
 
 
+<div class="popup" ng-show="finishBook">
+    <div class="close" ng-click="closeit()">
+
+    </div>
+
+    <div class="buttons">
+        <button class="btn btn-primary">任性分享</button>
+        <button class="btn btn-blue" ui-sref="feedback()">残忍吐槽</button>
+    </div>
+
+</div>

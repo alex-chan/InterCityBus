@@ -30,7 +30,11 @@
 }
 .line-details .hints-section {
   margin: 1rem 0;
-  padding: 0 1rem;
+  padding: 0 1rem 1rem 1rem;
+}
+.line-details .hints-section div {
+  font-size: 1.4rem;
+  color: #e86161;
 }
 footer.footer {
   background: #FFFFFF;
@@ -40,4 +44,36 @@ footer.footer {
 footer.footer .contactphone {
   font-size: 1.6rem;
   color: #67a1d7;
+  text-decoration: none;
+  vertical-align: middle;
+}
+.popup {
+  width: 24rem;
+  height: 28rem;
+  background: url(/assets/images/buyed.png) no-repeat center;
+  -webkit-background-size: 100%;
+  background-size: 100%;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-top: -12rem;
+  margin-left: -12rem;
+  text-align: center;
+}
+.popup .buttons {
+  position: absolute;
+  bottom: 1rem;
+  width: 100%;
+}
+.popup .buttons button {
+  bottom: 1rem;
+}
+.popup .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 1.8rem;
+  height: 1.8rem;
+  background: url(/assets/images/close.png) no-repeat center;
+  background-size: 100%;
 }

@@ -2,27 +2,29 @@
 
         <div class="feedback">
 
-            <form name="fackback" >
+            <form name="fackback" ng-submit="submitFeedback()">
 
                 <div class="feedback-type">
                     <div class="form-group">
                         <label for="wrong-phone">空号</label>
-                        <input type="radio" id="wrong-phone" name="feedbacktype"/>
+                        <input ng-model="fbtype" type="radio" id="wrong-phone" name="feedbacktype" value="空号"/>
                     </div>
 
                     <div class="form-group">
-                        <label for="busy-phone">忙</label> <input type="radio" id="busy-phone" name="feedbacktype"/>
+                        <label for="busy-phone">忙</label>
+                        <input ng-model="fbtype" type="radio" id="busy-phone" name="feedbacktype" value="忙"/>
 
                     </div>
 
                     <div class="form-group">
-                        <label for="bad-exp">态度差</label> <input type="radio" id="bad-exp" name="feedbacktype"/>
+                        <label for="bad-exp" ng-model="abc">态度差</label>
+                        <input ng-model="fbtype" type="radio" id="bad-exp" name="feedbacktype" value="态度差"/>
                     </div>
                 </div>
 
 
                 <div class="feedback-content">
-                    <textarea class="fbcontent" placeholder="我不管，我要吐槽！"></textarea>
+                    <textarea ng-model="fbcontent" class="fbcontent" placeholder="我不管，我要吐槽！"></textarea>
                 </div>
 
 

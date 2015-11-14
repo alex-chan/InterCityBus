@@ -1,39 +1,42 @@
 angular.module('InterCityBus')
 .controller 'BuslineController', ($scope, $window, $document, $stateParams , $http, $timeout, $interval, Busline, Utils)->
 
-    $document[0].onoffline = ->
-        alert 'onoffline'
+#    $document[0].onoffline = ->
+#        alert 'onoffline'
+    $scope.finishBook = true
 
     $scope.dial = (phone)->
-        console.log 'phone:' + phone
-        handler = $window.open("tel:"+phone, "_blank")
-        $scope.xx =  handler
-        handler.onbeforeunload = (event)->
-            $scope.xx =  'sb'
-            alert "onbeforeunload"
 
-        handler.addEventListener "close", (event)->
-            $scope.xx =  'sb2'
-            alert "close"
+        $timeout ->
+            $scope.finishBook = true
+        , 5000
 
-        handler.addEventListener 'loadstart', ->
-             alert('start: ')
 
-        handler.addEventListener 'loadstop', ->
-                alert('stop: ');
 
-        handler.addEventListener 'exit', ->
-            alert("sb5")
+#        console.log 'phone:' + phone
+#        handler = $window.open("tel:"+phone, "_blank")
+#        $scope.xx =  handler
+#        handler.onbeforeunload = (event)->
+#            $scope.xx =  'sb'
+#            alert "onbeforeunload"
+#
+#        handler.addEventListener "close", (event)->
+#            $scope.xx =  'sb2'
+#            alert "close"
+#
+#        handler.addEventListener 'loadstart', ->
+#             alert('start: ')
+#
+#        handler.addEventListener 'loadstop', ->
+#                alert('stop: ');
+#
+#        handler.addEventListener 'exit', ->
+#            alert("sb5")
 
 
         return false
 
 
-
-
-
-
-    $scope.xx = 1
 
 #    lastFired = new Date().getTime();
 #    $interval ->
@@ -46,27 +49,27 @@ angular.module('InterCityBus')
 #    , 500
 
 
-#    $document.on 'visibilitychange', (event)->
-    $document[0].addEventListener "visibilitychange", ->
-        console.log this.xx
-        console.log $scope.xx
-
-        this.xx += 100
-        $scope.xx += 100
-
-        console.log this.xx
-        console.log $scope.xx
-
-
-
-        console.log $document[0].visibilityState
-#        if $window.document.visibilityState != 'hidden'
-#            alert $window.document.visibilityState
+##    $document.on 'visibilitychange', (event)->
+#    $document[0].addEventListener "visibilitychange", ->
+#        console.log this.xx
+#        console.log $scope.xx
+#
+#        this.xx += 100
+#        $scope.xx += 100
+#
+#        console.log this.xx
+#        console.log $scope.xx
+#
+#
+#
+#        console.log $document[0].visibilityState
+##        if $window.document.visibilityState != 'hidden'
+##            alert $window.document.visibilityState
 
 
 
     $scope.purify = (str)->
-        return str.replace(/\s+/g,"") + " " + $scope.xx
+        return str.replace(/\s+/g,"")
 
     $scope.busline = Busline.get
         id: $stateParams.id
@@ -90,7 +93,8 @@ angular.module('InterCityBus')
         , 100
 
 
-
+    $scope.closeit = ->
+        $scope.finishBook = false
 
 # Use the User $resource to fetch all users
 #    $scope.users = User.query();
