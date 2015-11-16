@@ -26,6 +26,18 @@ angular.module('InterCityBus.controllers')
     $scope.phones = Phone.query()
 
 
+    $scope.addPhoneToDb = (phoneNumber)->
+        phone = new Phone()
+        phone.phoneNumber = phoneNumber
+        phone.$save ->
+            $scope.phones = Phone.query ->
+                $scope.busline.phones.push phone
+#                $scope.busline.phones.splice index, 0, this.phoneToAdd[index]
+#                $scope.addPhone $scope.phones.length-1
+
+
+
+
     $scope.addBusline = ->
         $scope.busline.$save ->
             $state.go "buslines"
@@ -128,6 +140,15 @@ angular.module('InterCityBus.controllers')
     $scope.stations = Station.query()
     $scope.starttimes = Starttime.query()
     $scope.phones = Phone.query()
+
+    $scope.addPhoneToDb = (phoneNumber)->
+        phone = new Phone()
+        phone.phoneNumber = phoneNumber
+        phone.$save ->
+            $scope.phones = Phone.query ->
+                $scope.busline.phones.push phone
+
+
 
     $scope.addPhone = (index)->
         if !$scope.busline.phones

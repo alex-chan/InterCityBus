@@ -118,6 +118,8 @@
                 <button ng-show="starttimeinsert[$index+1]" type="button" ng-click="addStarttime($index+1)">Add</button>
             </li>
 
+
+
         </ul>
     </div>
 </div>
@@ -129,7 +131,7 @@
         <ul>
             注意：电话号码显示按数据库先后的顺序来，因此没提供插入功能。
 
-            <button type="button" ng-init="phoneinsert[0]=false" ng-click="phoneinsert[0]=!phoneinsert[0]">增加电话</button>
+            <button type="button" ng-init="phoneinsert[0]=false" ng-click="phoneinsert[0]=!phoneinsert[0]">选择电话</button>
             <select ng-show="phoneinsert[0]" ng-model="phoneToAdd[0]" ng-options="phone.phoneNumber for phone in phones "/>
             <button ng-show="phoneinsert[0]" type="button" ng-click="addPhone(0)">Add</button>
 
@@ -140,6 +142,14 @@
                 <select ng-show="phoneinsert[$index+1]" ng-model="phoneToAdd[$index+1]"  ng-options="phone.phoneNumber for phone in phones "/>
                 <button ng-show="phoneinsert[$index+1]" type="button" ng-click="addPhone($index+1)">Add</button>
             </li>
+
+
+                        <span class="appendPhone">
+                <button type="button" ng-click="adphone=!adphone">新增电话</button>
+                <input type="text" name="whatever" ng-show="adphone" ng-model="phoneToAppend"/>
+                <button ng-show="adphone" type="button" ng-click="addPhoneToDb(phoneToAppend)">Add</button>
+            </span>
+
         </ul>
     </div>
 </div>

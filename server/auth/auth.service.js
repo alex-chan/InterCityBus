@@ -18,21 +18,16 @@
 
   isAuthenticated = function() {
     return compose().use(function(req, res, next) {
-      console.log('1' + req.user);
       if (req.query && req.query.hasOwnProperty('access_token')) {
         req.headers.authorization = 'Bearer ' + req.query.access_token;
       }
-      console.log('2' + req.user);
       return validateJwt(req, res, next);
     }).use(function(req, res, next) {
-      console.log('3' + req.user);
       return User.find({
         where: {
           id: req.user.id
         }
       }).then(function(user) {
-        console.log(req.user.id);
-        console.log('user:' + user);
         if (!user) {
           return res.status(401).end();
         }

@@ -54,13 +54,16 @@
         <item url="file://$PROJECT_DIR$/client/app/feedback/feedback.js" />
         <item url="file://$PROJECT_DIR$/client/app/feedback/feedback.controller.js" />
         <item url="file://$PROJECT_DIR$/server/api/phones/index.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/mug.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/phones/phones.js" />
         <item url="file://$PROJECT_DIR$/client/app/busline/busline.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/phones/phones.controller.js" />
         <item url="file://$PROJECT_DIR$/client/app/busline/busline.controller.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.controller.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/cup.js" />
         <item url="file://$PROJECT_DIR$/server/api/buslines/buslines.controller.js" />
+        <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/test/fixtures/test.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
@@ -132,11 +135,14 @@
       <root url="file://$PROJECT_DIR$/server/api/phones/index.js" />
       <root url="file://$PROJECT_DIR$/client/app/busline/busline.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/phones/phones.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/mug.js" />
       <root url="file://$PROJECT_DIR$/client/app/busline/busline.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/phones/phones.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/starttimes/starttimes.controller.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/cup.js" />
       <root url="file://$PROJECT_DIR$/server/api/buslines/buslines.controller.js" />
+      <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/test/fixtures/test.js" />
     </CLASSES>
     <SOURCES />
   </library>

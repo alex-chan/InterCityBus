@@ -20,6 +20,16 @@
     $scope.busline = new Busline();
     $scope.starttimes = Starttime.query();
     $scope.phones = Phone.query();
+    $scope.addPhoneToDb = function(phoneNumber) {
+      var phone;
+      phone = new Phone();
+      phone.phoneNumber = phoneNumber;
+      return phone.$save(function() {
+        return $scope.phones = Phone.query(function() {
+          return $scope.busline.phones.push(phone);
+        });
+      });
+    };
     $scope.addBusline = function() {
       return $scope.busline.$save(function() {
         return $state.go("buslines");
@@ -119,6 +129,16 @@
     $scope.stations = Station.query();
     $scope.starttimes = Starttime.query();
     $scope.phones = Phone.query();
+    $scope.addPhoneToDb = function(phoneNumber) {
+      var phone;
+      phone = new Phone();
+      phone.phoneNumber = phoneNumber;
+      return phone.$save(function() {
+        return $scope.phones = Phone.query(function() {
+          return $scope.busline.phones.push(phone);
+        });
+      });
+    };
     $scope.addPhone = function(index) {
       if (!$scope.busline.phones) {
         $scope.busline.phones = [];
