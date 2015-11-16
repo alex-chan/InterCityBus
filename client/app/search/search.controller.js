@@ -16,9 +16,12 @@
       });
     };
     $scope.$on('$viewContentLoaded', function(event) {
-      return $timeout(function() {
+      $timeout(function() {
         return Utils.fixTooLongIssue();
       }, 100);
+      return $timeout(function() {
+        return Utils.fixTooLongIssue();
+      }, 500);
     });
     $scope.research = function() {
       return $state.go('index');

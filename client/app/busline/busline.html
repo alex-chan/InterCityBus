@@ -1,4 +1,14 @@
 <div class="container" ng-class="{blur: finishBook}">
+
+    <div class="share-promption" ng-class="{doshare:shareIt}">
+        <div class="share-text">
+
+        </div>
+        <div class="arrow">
+
+        </div>
+    </div>
+
     <div class="line-details">
         <div class="line-headers">
             <div class="line-header">
@@ -127,7 +137,7 @@
     </div>
 
     <div class="buttons">
-        <button class="btn btn-primary">任性分享</button>
+        <button class="btn btn-primary" ng-click="closeit();shareit()">任性分享</button>
         <button class="btn btn-blue" ui-sref="feedback()" ng-click="closeit()">我要吐槽</button>
     </div>
 

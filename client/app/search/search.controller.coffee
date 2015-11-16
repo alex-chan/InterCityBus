@@ -17,9 +17,15 @@ angular.module('InterCityBus')
             id: id
 
     $scope.$on '$viewContentLoaded', (event)->
+
         $timeout ->
             Utils.fixTooLongIssue()
         , 100
+
+
+        $timeout ->
+            Utils.fixTooLongIssue()
+        , 500
 
 
     $scope.research = ->

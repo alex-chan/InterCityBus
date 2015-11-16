@@ -92,9 +92,21 @@ angular.module('InterCityBus')
             Utils.fixTooLongIssue()
         , 100
 
+        $timeout ->
+            Utils.fixTooLongIssue()
+        , 500
+
 
     $scope.closeit = ->
         $scope.finishBook = false
+
+    $scope.shareit = ->
+        $scope.shareIt = true
+        $timeout ->
+            $scope.shareIt = false
+        , 10000
+
+
 
 # Use the User $resource to fetch all users
 #    $scope.users = User.query();

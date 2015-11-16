@@ -16,12 +16,21 @@
       id: $stateParams.id
     });
     $scope.$on('$viewContentLoaded', function(event) {
-      return $timeout(function() {
+      $timeout(function() {
         return Utils.fixTooLongIssue();
       }, 100);
+      return $timeout(function() {
+        return Utils.fixTooLongIssue();
+      }, 500);
     });
-    return $scope.closeit = function() {
+    $scope.closeit = function() {
       return $scope.finishBook = false;
+    };
+    return $scope.shareit = function() {
+      $scope.shareIt = true;
+      return $timeout(function() {
+        return $scope.shareIt = false;
+      }, 10000);
     };
   });
 
