@@ -4,3 +4,4 @@ angular.module('InterCityBus')
 
 #        alert $scope.fbtype + $scope.fbcontent
         alert "您的反馈我们已经收到！"
+        

@@ -14,13 +14,13 @@
                             <label>{{ busline.endCity.name }}</label>
 
                         </span>
-                    <h3 class="price">票价：￥{{ busline.price }}</h3>
+                    <h3 class="price">票价：￥{{ busline.price }}起</h3>
 
                 </div>
 
 
             </div>
-            <figure class="line-content">
+            <figure class="line-content" ng-click="viewDetailBusline(busline.id)">
                 <div class="line-model">
                     <div class="line_name">
                         <div class="white_bg"></div>
@@ -73,13 +73,13 @@
                     末班: {{busline.StartTime[busline.StartTime.length-1].time| limitTo: 5: 0}}
                     共{{busline.StartTime.length}}趟班次
                 </span>
-                <button class="btn btn-default btn-sm " ng-click="viewDetailBusline(busline.id)">立即购票</button>
+                <button class="btn btn-default btn-sm " ng-click="viewDetailBusline(busline.id)">购票</button>
             </div>
 
 
         </div>
 
-        <div class="search-no-result search-result" ng-if="buslines.length == 0">
+        <div class="search-no-result search-result" ng-show="showNoResult">
             <div class="line-header">
                 <div class="basicinfo">
 

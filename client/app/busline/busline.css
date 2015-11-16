@@ -6,6 +6,10 @@
   padding: 1.1rem 0 0.6rem 0;
   margin-bottom: 0.2rem;
 }
+.line-details .line-headers .other-info {
+  font-size: 1.4rem;
+  margin: 0.2rem 0;
+}
 .line-details figure.line-content {
   height: 14rem;
 }
@@ -47,7 +51,12 @@ footer.footer .contactphone {
   text-decoration: none;
   vertical-align: middle;
 }
+.blur {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
 .popup {
+  z-index: 1000;
   width: 24rem;
   height: 28rem;
   background: url(/assets/images/buyed.png) no-repeat center;
@@ -55,7 +64,7 @@ footer.footer .contactphone {
   background-size: 100%;
   position: fixed;
   left: 50%;
-  top: 50%;
+  top: 40%;
   margin-top: -12rem;
   margin-left: -12rem;
   text-align: center;

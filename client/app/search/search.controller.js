@@ -7,6 +7,8 @@
     $scope.buslines = Busline.query({
       start: $stateParams.start,
       end: $stateParams.end
+    }, function() {
+      return $scope.showNoResult = $scope.buslines.length === 0;
     });
     $scope.viewDetailBusline = function(id) {
       return $state.go('busline', {

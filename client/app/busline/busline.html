@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" ng-class="{blur: finishBook}">
     <div class="line-details">
         <div class="line-headers">
             <div class="line-header">
@@ -13,7 +13,7 @@
                             <label>{{ busline.endCity.name }}</label>
 
                         </span>
-                        <h3 class="price">票价：￥{{ busline.price }}</h3>
+                        <h3 class="price">票价：￥{{ busline.price }}起</h3>
 
                     </div>
 
@@ -128,7 +128,7 @@
 
     <div class="buttons">
         <button class="btn btn-primary">任性分享</button>
-        <button class="btn btn-blue" ui-sref="feedback()" ng-click="closeit()">残忍吐槽</button>
+        <button class="btn btn-blue" ui-sref="feedback()" ng-click="closeit()">我要吐槽</button>
     </div>
 
 </div>

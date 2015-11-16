@@ -8,6 +8,8 @@ angular.module('InterCityBus')
     $scope.buslines = Busline.query
         start: $stateParams.start
         end: $stateParams.end
+    ,   ->
+        $scope.showNoResult = $scope.buslines.length == 0
 
 
     $scope.viewDetailBusline = (id)->

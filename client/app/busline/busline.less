@@ -10,6 +10,11 @@
         padding: 1.1rem 0 0.6rem 0;
         margin-bottom: 0.2rem;
 
+        .other-info {
+            font-size: 1.4rem;
+            margin: 0.2rem 0;
+        }
+
     }
 
 
@@ -75,8 +80,17 @@ footer.footer {
     }
 }
 
+.blur {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    //background-color: darkgray;
+    //-webkit-mask-image: linear-gradient(135deg, red, blue);
+
+}
+
 
 .popup {
+    z-index: 1000;
 
     width: 24rem;
     height: 28rem;
@@ -85,7 +99,7 @@ footer.footer {
     background-size: 100%;
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 40%;
     margin-top: -12rem;
     margin-left: -12rem;
 
