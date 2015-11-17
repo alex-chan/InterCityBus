@@ -6,6 +6,7 @@
         <item url="file://$PROJECT_DIR$/server/api/starttimes/index.js" />
         <item url="file://$PROJECT_DIR$/client/app/index/index.js" />
         <item url="file://$PROJECT_DIR$/server/api/starttimes/starttimes.controller.js" />
+        <item url="file://$PROJECT_DIR$/gulpfile.js" />
         <item url="file://$PROJECT_DIR$/server/api/users/user.model.js" />
         <item url="file://$PROJECT_DIR$/server/api/companies/companies.controller.js" />
         <item url="file://$PROJECT_DIR$/server/api/companies/index.js" />
@@ -85,6 +86,7 @@
       <root url="file://$PROJECT_DIR$/server/api/starttimes/index.js" />
       <root url="file://$PROJECT_DIR$/client/app/index/index.js" />
       <root url="file://$PROJECT_DIR$/server/api/starttimes/starttimes.controller.js" />
+      <root url="file://$PROJECT_DIR$/gulpfile.js" />
       <root url="file://$PROJECT_DIR$/server/api/users/user.model.js" />
       <root url="file://$PROJECT_DIR$/server/api/companies/companies.controller.js" />
       <root url="file://$PROJECT_DIR$/server/api/companies/index.js" />
