@@ -86,6 +86,14 @@
         method: "PUT"
       }
     });
+  }).factory('Hotline', function($resource) {
+    return $resource('/api/hotlines/:id', {
+      id: '@id'
+    }, {
+      update: {
+        method: "PUT"
+      }
+    });
   });
 
 }).call(this);

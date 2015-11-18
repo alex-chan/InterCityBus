@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "requestlines.js",
+  "sourceRoot": "",
+  "sources": [
+    "requestlines.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,OAAO,CAAC,MAAR,CAAe,cAAf,CACA,CAAC,MADD,CACQ,SAAC,cAAD;WACJ,cACA,CAAC,KADD,CACO,cADP,EAEI;MAAA,GAAA,EAAK,qBAAL;MACA,WAAA,EAAa,0CADb;MAEA,UAAA,EAAY,sBAFZ;KAFJ;EADI,CADR;AAAA"
+}

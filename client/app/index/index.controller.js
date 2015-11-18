@@ -16,7 +16,9 @@
       return this.endCity = tmp;
     };
     $scope.cities = City.query();
-    $scope.hotlines = Hotline.query();
+    $scope.hotlines = Hotline.query({
+      limit: 6
+    });
     $scope.search = function(start, end) {
       return $state.go('search', {
         start: start,

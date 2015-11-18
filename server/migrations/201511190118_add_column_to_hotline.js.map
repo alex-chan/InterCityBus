@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "201511190118_add_column_to_hotline.js",
+  "sourceRoot": "",
+  "sources": [
+    "201511190118_add_column_to_hotline.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;EAAA,MAAM,CAAC,OAAP,GACI;IAAA,EAAA,EAAI,SAAC,cAAD,EAAiB,SAAjB;aAGA,cAAc,CAAC,SAAf,CACI,UADJ,EAEI,cAFJ,EAGI;QACI,IAAA,EAAM,SAAS,CAAC,OADpB;QAEI,YAAA,EAAc,CAFlB;OAHJ;IAHA,CAAJ;IAaA,IAAA,EAAM,SAAC,cAAD,EAAiB,SAAjB,GAAA,CAbN;;AADJ"
+}

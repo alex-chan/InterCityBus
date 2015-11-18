@@ -32,6 +32,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-ngmin": "^0.3.0",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.1"
+    "gulp-uglify": "^1.5.1",
+    "js2coffee": "^2.1.0"
   }
 }

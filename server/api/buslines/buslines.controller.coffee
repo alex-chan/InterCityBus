@@ -226,10 +226,15 @@ removeEntity = (res) ->
 
 module.exports.requestline = (req, res)->
 
+
+
+    if !req.body.startCityId or !req.body.endCityId
+        return
+
     Model.Hotline.findOrCreate
         where:
-            startCityId: req.query.start
-            endCityId: req.query.end
+            startCityId: req.body.startCityId
+            endCityId: req.body.endCityId
     .spread( (reqestline, created)->
         reqestline.requestCount += 1
         reqestline.save()
@@ -242,8 +247,13 @@ module.exports.requestline = (req, res)->
 
 
 module.exports.hotlines = (req, res)->
+    if  req.query.limit
+        limit =  req.query.limit
+    else
+        limit = null
+
     Model.Hotline.findAll
-        limit: config.maxHotlines
+        limit: limit
         include: [
             {
                 model: Model.City

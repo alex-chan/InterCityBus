@@ -41,8 +41,8 @@
     };
     return $scope.requestNewLine = function() {
       var end, msg, requestline, start;
-      start = $scope.cities[$scope.startCityId].name;
-      end = $scope.cities[$scope.endCityId].name;
+      start = $scope.cities[$scope.startCityId - 1].name;
+      end = $scope.cities[$scope.endCityId - 1].name;
       msg = "您专属定制的" + start + "-" + end + "的路线小巴已经收到，将会尽快开通，届时将第一时间通知您！";
       requestline = new Hotline();
       requestline.startCityId = $scope.startCityId;

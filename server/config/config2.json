@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "intercitybus",
+    "password": "intercitybus123890",
+    "database": "intercitybus",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "intercitybus",
+    "password": "intercitybus123890",
+    "database": "intercitybus",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "intercitybus",
+    "password": "intercitybus123890",
+    "database": "intercitybus",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

@@ -199,10 +199,13 @@
   };
 
   module.exports.requestline = function(req, res) {
+    if (!req.body.startCityId || !req.body.endCityId) {
+      return;
+    }
     return Model.Hotline.findOrCreate({
       where: {
-        startCityId: req.query.start,
-        endCityId: req.query.end
+        startCityId: req.body.startCityId,
+        endCityId: req.body.endCityId
       }
     }).spread(function(reqestline, created) {
       reqestline.requestCount += 1;
@@ -211,8 +214,14 @@
   };
 
   module.exports.hotlines = function(req, res) {
+    var limit;
+    if (req.query.limit) {
+      limit = req.query.limit;
+    } else {
+      limit = null;
+    }
     return Model.Hotline.findAll({
-      limit: config.maxHotlines,
+      limit: limit,
       include: [
         {
           model: Model.City,

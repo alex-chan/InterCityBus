@@ -108,3 +108,7 @@ angular.module('InterCityBus.services',[])
 .factory 'Starttime', ($resource)->
     return $resource '/api/starttimes/:id' ,{id: '@id'}, update:
         method: "PUT"
+
+.factory 'Hotline', ($resource)->
+    return $resource '/api/hotlines/:id' ,{id: '@id'}, update:
+        method: "PUT"

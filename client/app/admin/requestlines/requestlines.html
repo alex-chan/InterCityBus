@@ -1,0 +1,24 @@
+<h3>Cities</h3>
+<!--<a ui-sref="newCity">Add City</a>-->
+<table class="table ">
+    <tr>
+        <th>始发城市</th>
+        <th>终点城市</th>
+        <th>请求设立次数</th>
+        <th>查询次数</th>
+
+    </tr>
+    <tr ng-repeat="line in requestlines">
+
+        <td>{{ cities[line.startCityId-1].name }}</td>
+        <td>{{ cities[line.endCityId-1].name }}</td>
+        <td>{{line.requestCount }}</td>
+        <td>{{line.queryCount }}</td>
+
+        <!--<td>-->
+            <!--<a class="btn btn-primary" ui-sref="viewCity({id:city.id})">View</a>-->
+            <!--<a class="btn btn-danger"  ui-sref="editCity({id:city.id})">Edit</a>-->
+            <!--<a href="#" class="btn btn-danger"  ng-click="deleteCity(city)">Delete</a>-->
+        <!--</td>-->
+    </tr>
+</table>

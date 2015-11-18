@@ -20,7 +20,8 @@ angular.module('InterCityBus')
 
     $scope.cities = City.query()
 
-    $scope.hotlines = Hotline.query()
+    $scope.hotlines = Hotline.query
+        limit:6
 
     $scope.search = (start, end)->
         $state.go 'search',
