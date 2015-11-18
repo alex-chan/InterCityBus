@@ -15,11 +15,16 @@
             margin: 0.2rem 0;
         }
 
+
+
     }
 
 
     figure.line-content {
-        height: 14rem;
+        height: 15rem;
+        .line-model {
+            height: 14rem;
+        }
     }
 
 
@@ -133,11 +138,16 @@ footer.footer {
     100% { margin-top: -12rem; }
 }
 
+@-webkit-keyframes sharetext {
+    0% { margin-top: -12rem; }
+    25% { margin-top: 0; }
+    75% { margin-top: 0; }
+    100% { margin-top: -12rem; }
+}
+
 .doshare {
-    animation-name: sharetext;
-    animation-duration: 4s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: 1;
+    animation: sharetext 4s ease-in-out 1;
+    -webkit-animation: sharetext 4s ease-in-out 1;
     //animation-fill-mode: forwards;
 }
 

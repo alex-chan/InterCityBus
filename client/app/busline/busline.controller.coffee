@@ -12,9 +12,8 @@ angular.module('InterCityBus')
         , 5000
 
 
-
 #        console.log 'phone:' + phone
-        handler = $window.open("tel:"+phone, "_blank")
+        handler = $window.open("tel:"+phone)
 #        $scope.xx =  handler
 #        handler.onbeforeunload = (event)->
 #            $scope.xx =  'sb'
@@ -36,6 +35,10 @@ angular.module('InterCityBus')
 
         return false
 
+#    angular.element($window).bind 'orientationchange', ->
+#        $timeout ->
+#            Utils.fixTooLongIssue()
+#        ,100
 
 
 #    lastFired = new Date().getTime();
@@ -96,6 +99,9 @@ angular.module('InterCityBus')
             Utils.fixTooLongIssue()
         , 500
 
+        $timeout ->
+            Utils.fixTooLongIssue()
+        , 2000
 
     $scope.closeit = ->
         $scope.finishBook = false

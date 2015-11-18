@@ -224,6 +224,22 @@ removeEntity = (res) ->
             .then ->
                 res.status(204).end()
 
+module.exports.requestline = (req, res)->
+
+    Model.Hotline.findOrCreate
+        where:
+            startCityId: req.query.start
+            endCityId: req.query.end
+    .spread( (reqestline, created)->
+        reqestline.requestCount += 1
+        reqestline.save()
+    )
+    .then responseWithResult(res)
+    .catch handleError(res)
+
+
+
+
 
 module.exports.hotlines = (req, res)->
     Model.Hotline.findAll

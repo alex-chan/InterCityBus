@@ -1,5 +1,16 @@
 angular.module('InterCityBus')
-.controller 'IndexController', ($state, $scope, $http, City, Hotline)->
+.controller 'IndexController', ($state, $rootScope, $scope, $timeout, $http, City, Hotline)->
+
+    $scope.$on '$stateChangeSuccess',  (ev, to, toParams, from, fromParams)->
+
+        if to.name == 'index' and fromParams.start and fromParams.end
+
+            $scope.cities.$promise.then ->
+                $scope.startCity = $scope.cities[ fromParams.start - 1]
+                $scope.endCity =  $scope.cities[  fromParams.end - 1]
+
+
+
 
     $scope.swapCity = ()->
         tmp = this.startCity

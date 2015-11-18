@@ -13,7 +13,8 @@
     router.put("/buslines/:id", auth.hasRole('admin'), controller.update);
     router.patch('/buslines/:id', auth.hasRole('admin'), controller.update);
     router["delete"]('/buslines/:id', auth.hasRole('admin'), controller.destroy);
-    return router.get("/hotlines", controller.hotlines);
+    router.get("/hotlines", controller.hotlines);
+    return router.post("/hotlines", controller.requestline);
   };
 
 }).call(this);

@@ -198,6 +198,18 @@
     };
   };
 
+  module.exports.requestline = function(req, res) {
+    return Model.Hotline.findOrCreate({
+      where: {
+        startCityId: req.query.start,
+        endCityId: req.query.end
+      }
+    }).spread(function(reqestline, created) {
+      reqestline.requestCount += 1;
+      return reqestline.save();
+    }).then(responseWithResult(res))["catch"](handleError(res));
+  };
+
   module.exports.hotlines = function(req, res) {
     return Model.Hotline.findAll({
       limit: config.maxHotlines,

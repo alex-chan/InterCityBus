@@ -15,3 +15,4 @@ module.exports = (router)->
 
 
     router.get "/hotlines", controller.hotlines
+    router.post "/hotlines", controller.requestline

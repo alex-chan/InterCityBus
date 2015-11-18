@@ -1,9 +1,11 @@
 angular.module('InterCityBus')
-.controller 'SearchController', ($state, $scope, $window, $stateParams, $http, $timeout, City, Busline, Utils)->
+.controller 'SearchController', ($state, $scope, $window, $stateParams, $http, $timeout, City, Hotline, Busline, Utils)->
 
     $scope.cities = City.query()
     $scope.startCityId = $stateParams.start
     $scope.endCityId = $stateParams.end
+
+
 
     $scope.buslines = Busline.query
         start: $stateParams.start
@@ -16,17 +18,29 @@ angular.module('InterCityBus')
         $state.go 'busline',
             id: id
 
+    angular.element($window).bind 'orientationchange', ->
+        $timeout ->
+            Utils.fixTooLongIssue()
+        ,500
+
+    angular.element($window).bind 'resize', ->
+        $timeout ->
+            Utils.fixTooLongIssue()
+        ,500
+
     $scope.$on '$viewContentLoaded', (event)->
 
         $timeout ->
             Utils.fixTooLongIssue()
         , 100
 
-
         $timeout ->
             Utils.fixTooLongIssue()
         , 500
 
+        $timeout ->
+            Utils.fixTooLongIssue()
+        , 2000
 
     $scope.research = ->
         $state.go 'index'
@@ -35,7 +49,19 @@ angular.module('InterCityBus')
         start = $scope.cities[$scope.startCityId].name
         end = $scope.cities[$scope.endCityId].name
         msg = "您专属定制的#{start}-#{end}的路线小巴已经收到，将会尽快开通，届时将第一时间通知您！"
-        alert(msg)
+
+
+
+
+        requestline = new Hotline()
+        requestline.startCityId = $scope.startCityId
+        requestline.endCityId = $scope.endCityId
+
+        console.log $scope.startCityId
+
+        requestline.$save ->
+            alert(msg)
+
         $state.go 'index'
 
 

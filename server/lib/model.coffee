@@ -76,11 +76,31 @@ Hotline = squelize.define 'hotline',
     queryCount:
         type: Sequelize.INTEGER
         defaultValue: 0
+        comments: 'the count user query'
+
+
+    requestCount:
+        type: Sequelize.INTEGER
+        defaultValue: 0
+        comments: 'the count user request to set this line'
 
 
 
 
 
+
+
+Feedback = squelize.define 'feedback',
+    id:
+        type: Sequelize.INTEGER
+        autoIncrement: true
+        primaryKey: true
+
+    predefinedContent:
+        type: Sequelize.STRING
+
+    userContent:
+        type: Sequelize.STRING
 
 
 Hotline.belongsTo City,
@@ -167,7 +187,10 @@ getDate = (timeString)->
 
 squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
 
-    Stime.sync()
+    Feedback.sync()
+
+    .then ->
+        Stime.sync()
 #        force: true
     .then ->
         Company.sync()
@@ -195,6 +218,9 @@ squelize.query('SET FOREIGN_KEY_CHECKS = 0').spread (results,metadta)->
 #            force: true
     .then ->
         User.sync()
+
+
+
     .then ->
         User.findOne
             where:

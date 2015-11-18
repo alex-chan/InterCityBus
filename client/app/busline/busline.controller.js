@@ -6,7 +6,7 @@
       $timeout(function() {
         return $scope.finishBook = true;
       }, 5000);
-      handler = $window.open("tel:" + phone, "_blank");
+      handler = $window.open("tel:" + phone);
       return false;
     };
     $scope.purify = function(str) {
@@ -19,9 +19,12 @@
       $timeout(function() {
         return Utils.fixTooLongIssue();
       }, 100);
-      return $timeout(function() {
+      $timeout(function() {
         return Utils.fixTooLongIssue();
       }, 500);
+      return $timeout(function() {
+        return Utils.fixTooLongIssue();
+      }, 2000);
     });
     $scope.closeit = function() {
       return $scope.finishBook = false;

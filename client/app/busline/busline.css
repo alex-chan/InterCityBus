@@ -11,6 +11,9 @@
   margin: 0.2rem 0;
 }
 .line-details figure.line-content {
+  height: 15rem;
+}
+.line-details figure.line-content .line-model {
   height: 14rem;
 }
 .line-details .phones-section {
@@ -100,11 +103,23 @@ footer.footer .contactphone {
     margin-top: -12rem;
   }
 }
+@-webkit-keyframes sharetext {
+  0% {
+    margin-top: -12rem;
+  }
+  25% {
+    margin-top: 0;
+  }
+  75% {
+    margin-top: 0;
+  }
+  100% {
+    margin-top: -12rem;
+  }
+}
 .doshare {
-  animation-name: sharetext;
-  animation-duration: 4s;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: 1;
+  animation: sharetext 4s ease-in-out 1;
+  -webkit-animation: sharetext 4s ease-in-out 1;
 }
 .share-promption {
   height: 12rem;
