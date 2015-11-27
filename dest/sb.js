@@ -78,7 +78,7 @@
         $timeout(function () {
           return $scope.finishBook = true;
         }, 5000);
-        handler = $window.open('tel:' + phone, '_blank');
+        handler = $window.open('tel:' + phone);
         return false;
       };
       $scope.purify = function (str) {
@@ -89,9 +89,12 @@
         $timeout(function () {
           return Utils.fixTooLongIssue();
         }, 100);
-        return $timeout(function () {
+        $timeout(function () {
           return Utils.fixTooLongIssue();
         }, 500);
+        return $timeout(function () {
+          return Utils.fixTooLongIssue();
+        }, 2000);
       });
       $scope.closeit = function () {
         return $scope.finishBook = false;
@@ -157,11 +160,21 @@
 (function () {
   angular.module('InterCityBus').controller('IndexController', [
     '$state',
+    '$rootScope',
     '$scope',
+    '$timeout',
     '$http',
     'City',
     'Hotline',
-    function ($state, $scope, $http, City, Hotline) {
+    function ($state, $rootScope, $scope, $timeout, $http, City, Hotline) {
+      $scope.$on('$stateChangeSuccess', function (ev, to, toParams, from, fromParams) {
+        if (to.name === 'index' && fromParams.start && fromParams.end) {
+          return $scope.cities.$promise.then(function () {
+            $scope.startCity = $scope.cities[fromParams.start - 1];
+            return $scope.endCity = $scope.cities[fromParams.end - 1];
+          });
+        }
+      });
       $scope.swapCity = function () {
         var tmp;
         tmp = this.startCity;
@@ -169,7 +182,7 @@
         return this.endCity = tmp;
       };
       $scope.cities = City.query();
-      $scope.hotlines = Hotline.query();
+      $scope.hotlines = Hotline.query({ limit: 6 });
       $scope.search = function (start, end) {
         return $state.go('search', {
           start: start,
@@ -229,9 +242,10 @@
     '$http',
     '$timeout',
     'City',
+    'Hotline',
     'Busline',
     'Utils',
-    function ($state, $scope, $window, $stateParams, $http, $timeout, City, Busline, Utils) {
+    function ($state, $scope, $window, $stateParams, $http, $timeout, City, Hotline, Busline, Utils) {
       $scope.cities = City.query();
       $scope.startCityId = $stateParams.start;
       $scope.endCityId = $stateParams.end;
@@ -244,23 +258,42 @@
       $scope.viewDetailBusline = function (id) {
         return $state.go('busline', { id: id });
       };
+      angular.element($window).bind('orientationchange', function () {
+        return $timeout(function () {
+          return Utils.fixTooLongIssue();
+        }, 500);
+      });
+      angular.element($window).bind('resize', function () {
+        return $timeout(function () {
+          return Utils.fixTooLongIssue();
+        }, 500);
+      });
       $scope.$on('$viewContentLoaded', function (event) {
         $timeout(function () {
           return Utils.fixTooLongIssue();
         }, 100);
-        return $timeout(function () {
+        $timeout(function () {
           return Utils.fixTooLongIssue();
         }, 500);
+        return $timeout(function () {
+          return Utils.fixTooLongIssue();
+        }, 2000);
       });
       $scope.research = function () {
         return $state.go('index');
       };
       return $scope.requestNewLine = function () {
-        var end, msg, start;
-        start = $scope.cities[$scope.startCityId].name;
-        end = $scope.cities[$scope.endCityId].name;
+        var end, msg, requestline, start;
+        start = $scope.cities[$scope.startCityId - 1].name;
+        end = $scope.cities[$scope.endCityId - 1].name;
         msg = '\u60a8\u4e13\u5c5e\u5b9a\u5236\u7684' + start + '-' + end + '\u7684\u8def\u7ebf\u5c0f\u5df4\u5df2\u7ecf\u6536\u5230\uff0c\u5c06\u4f1a\u5c3d\u5feb\u5f00\u901a\uff0c\u5c4a\u65f6\u5c06\u7b2c\u4e00\u65f6\u95f4\u901a\u77e5\u60a8\uff01';
-        alert(msg);
+        requestline = new Hotline();
+        requestline.startCityId = $scope.startCityId;
+        requestline.endCityId = $scope.endCityId;
+        console.log($scope.startCityId);
+        requestline.$save(function () {
+          return alert(msg);
+        });
         return $state.go('index');
       };
     }
@@ -282,19 +315,29 @@
   angular.module('InterCityBus.services').factory('Utils', function () {
     return {
       fixTooLongIssue: function () {
-        var lineName, w, w1, w2;
+        var lineName, w;
         lineName = $('.line_name');
-        w1 = $('ul[class=\'start\']').width();
-        w2 = $('ul[class=\'end\']').width();
+        angular.forEach(lineName, function (item, key) {
+          var w1, w2;
+          w1 = $(item).find('ul[class=\'start\']').width();
+          w2 = $(item).find('ul[class=\'end\']').width();
+          return $(item).css('min-width', w1 + w2);
+        });
+        return;
         w = lineName.width();
         if (w1 + w2 > w) {
-          console.log('ok fix it');
-          $('ul[class=\'end\']').width(w2);
-          $('ul[class=\'end\']').css('right', -(w1 + w2 - w));
-          lineName.css('max-width', w).height('9.4rem').css('margin-top', 0).css('overflow-x', 'auto').css('overflow-y', 'hidden');
+          $('ul[class=\'end\']').width(w2).css('right', -(w1 + w2 - w));
           $('.white_bg_right').css('right', -(w1 + w2 - w));
+          lineName.height('9.4rem').css('margin-top', 0).css('overflow-x', 'auto').css('overflow-y', 'hidden');
           return lineName.children().each(function (index, item) {
             return $(item).css('margin-top', '1.1rem');
+          });
+        } else {
+          $('ul[class=\'end\']').width('').css('right', '');
+          $('.white_bg_right').css('right', '');
+          lineName.css('margin-top', '').css('overflow-x', '').css('overflow-y', '');
+          return lineName.children().each(function (index, item) {
+            return $(item).css('margin-top', '');
           });
         }
       }

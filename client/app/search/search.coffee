@@ -14,20 +14,18 @@ angular.module('InterCityBus.services')
     return {} =
         fixTooLongIssue: ->
 
-            console.log 'fix it'
 
 
             lineName =  $(".line_name")
 
-            w1 = $("ul[class='start']").width()
-            w2 = $("ul[class='end']").width()
+            angular.forEach lineName, (item, key)->
 
-            console.log 'sb'+ (w1+w2)
-            console.log 'sb2' + ($("ul[class='start']").width()+$("ul[class='end']").width())
 
-            lineName.css("min-width",w1+w2)
+                w1 = $(item).find("ul[class='start']").width()
+                w2 = $(item).find("ul[class='end']").width()
 
-            console.log "linname min width:" + lineName.css("min-width")
+
+                $(item).css("min-width",w1+w2)
 
             return
 

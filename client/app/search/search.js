@@ -11,15 +11,14 @@
   angular.module('InterCityBus.services').factory('Utils', function() {
     return {
       fixTooLongIssue: function() {
-        var lineName, w, w1, w2;
-        console.log('fix it');
+        var lineName, w;
         lineName = $(".line_name");
-        w1 = $("ul[class='start']").width();
-        w2 = $("ul[class='end']").width();
-        console.log('sb' + (w1 + w2));
-        console.log('sb2' + ($("ul[class='start']").width() + $("ul[class='end']").width()));
-        lineName.css("min-width", w1 + w2);
-        console.log("linname min width:" + lineName.css("min-width"));
+        angular.forEach(lineName, function(item, key) {
+          var w1, w2;
+          w1 = $(item).find("ul[class='start']").width();
+          w2 = $(item).find("ul[class='end']").width();
+          return $(item).css("min-width", w1 + w2);
+        });
         return;
         w = lineName.width();
         if (w1 + w2 > w) {
