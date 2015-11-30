@@ -7,8 +7,8 @@
         <item url="file://$PROJECT_DIR$/client/app/admin/account/login/login.controller.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/account/account.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/requestlines/requestlines.js" />
-        <item url="file://$PROJECT_DIR$/server/api/users/index.js" />
         <item url="file://$PROJECT_DIR$/client/app/admin/requestlines/requestlines.controller.js" />
+        <item url="file://$PROJECT_DIR$/server/api/users/index.js" />
         <item url="file://$PROJECT_DIR$/server/api/users/users.controller.js" />
         <item url="file://$PROJECT_DIR$/server/config/environment/development.js" />
         <item url="file://$PROJECT_DIR$/server/models/index.js" />
@@ -42,6 +42,7 @@
         <item url="file://$PROJECT_DIR$/node_modules/js2coffee/lib/transforms/unsupported.js" />
         <item url="file://$PROJECT_DIR$/node_modules/js2coffee/test/setup.js" />
         <item url="file://$PROJECT_DIR$/node_modules/js2coffee/test/build.js" />
+        <item url="file://$PROJECT_DIR$/models/index.js" />
         <item url="file://$PROJECT_DIR$/node_modules/js2coffee/js2coffee.js" />
         <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/cup.js" />
         <item url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/test/fixtures/test.js" />
@@ -122,15 +123,13 @@
       <root url="file://$PROJECT_DIR$/server/api/phones/buslines.controller.js" />
       <root url="file://$PROJECT_DIR$/server/api/stations/phones.controller.js" />
       <root url="file://$PROJECT_DIR$/server/api/stations/phones.controller.js" />
-      <root url="file://$PROJECT_DIR$/models/index.js" />
-      <root url="file://$PROJECT_DIR$/models/index.js" />
       <root url="file://$PROJECT_DIR$/client/components/auth/auth.service.js" />
       <root url="file://$PROJECT_DIR$/client/components/auth/user.service.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/account/login/login.controller.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/account/account.js" />
       <root url="file://$PROJECT_DIR$/client/app/admin/requestlines/requestlines.js" />
-      <root url="file://$PROJECT_DIR$/client/app/admin/requestlines/requestlines.controller.js" />
       <root url="file://$PROJECT_DIR$/server/api/users/index.js" />
+      <root url="file://$PROJECT_DIR$/client/app/admin/requestlines/requestlines.controller.js" />
       <root url="file://$PROJECT_DIR$/server/api/users/users.controller.js" />
       <root url="file://$PROJECT_DIR$/server/config/environment/development.js" />
       <root url="file://$PROJECT_DIR$/server/config/config.js" />
@@ -164,6 +163,7 @@
       <root url="file://$PROJECT_DIR$/node_modules/js2coffee/lib/transforms/unsupported.js" />
       <root url="file://$PROJECT_DIR$/node_modules/js2coffee/test/setup.js" />
       <root url="file://$PROJECT_DIR$/node_modules/js2coffee/test/build.js" />
+      <root url="file://$PROJECT_DIR$/models/index.js" />
       <root url="file://$PROJECT_DIR$/node_modules/js2coffee/js2coffee.js" />
       <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/liftoff/node_modules/resolve/test/resolver/cup.js" />
       <root url="file://$PROJECT_DIR$/node_modules/gulp/node_modules/vinyl-fs/node_modules/glob-watcher/test/fixtures/test.js" />

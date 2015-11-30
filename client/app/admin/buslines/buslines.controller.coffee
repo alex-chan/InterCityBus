@@ -39,6 +39,9 @@ angular.module('InterCityBus.controllers')
 
 
     $scope.addBusline = ->
+
+        # TODO: remove all stations not belong to startCity and endCity
+
         $scope.busline.$save ->
             $state.go "buslines"
 
