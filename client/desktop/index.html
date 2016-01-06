@@ -1,0 +1,397 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="/assets/stylesheets/normalize.css">
+        <link rel="stylesheet" href="/assets/stylesheets/main.css">
+        <link rel="stylesheet" href="/assets/stylesheets/jquery.fullPage.css">
+        <script src="/assets/javascripts/wjs-setrem.js"></script>
+        <style>
+            html {
+                font-family: "sans-serif", "Microsoft yahei", "STHeiti";
+                text-align: center;
+            }
+            body {
+                min-width: 960px;
+            }
+            h2 {
+                font-size: 40px;
+                font-family:  "Microsoft yahei", "STHeiti";
+
+            }
+            header {
+                background-color:#E95513;
+
+                height: 60px;
+
+                position: relative;
+                top: 0;
+                /*position: fixed;*/
+                /*top: 0;*/
+                z-index: 9999;
+                /*width: 100%;*/
+                color: #f0f0f0;
+
+            }
+            header .brand {
+                float: left;
+                left: 25%;
+                position: relative;
+                top: 20px;
+            }
+            header .corp {
+                float: right;
+                height: 100%;
+                vertical-align: middle;
+                padding-right: 25%;
+                font-size: 0.8rem;
+                /*right: 25%;*/
+                /*position: relative;*/
+                /*top: 6px;*/
+            }
+
+            footer {
+                position: relative;
+            }
+
+
+            div.section {
+                width:100%;
+                height:560px;
+                position: relative;
+                
+            }
+            div.section .doc {
+                z-index: 100;
+                position: absolute;
+            }
+            
+            div.section p {
+                line-height: 32px;
+            }
+
+            .section1 {
+                background-image:  url("/assets/images/desktop/1_1.jpg") ;
+                background-size:100% 100%;
+                background-repeat:no-repeat;
+                position: relative;
+                height: 100%;
+            }
+
+            .section1 .fp-tableCell {
+                vertical-align: top;
+            }
+
+            .section1 .followwechat {
+
+                right: 30%;
+                top: 40%;
+                position: absolute;
+                text-align: center;
+            }
+
+            .section1 div {
+
+            }
+
+            .section1 h2 {
+                color: #E95513;
+                font-size: 2rem;
+                margin-left: 5%;
+                display: inline-block;
+                margin-top: 8%;
+                /*margin-left: -20%;*/
+            }
+
+
+
+            .section2 {
+                background: #000000; /* For browsers that do not support gradients */
+                background: -webkit-linear-gradient(#000000, #3c3c3c); /* For Safari 5.1 to 6.0 */
+                background: -o-linear-gradient(#000000, #3c3c3c); /* For Opera 11.1 to 12.0 */
+                background: -moz-linear-gradient(#000000, #3c3c3c); /* For Firefox 3.6 to 15 */
+                background: linear-gradient(#000000, #3c3c3c); /* Standard syntax */
+            }
+
+            .section2 .doc {
+                position: absolute;
+                top:20%;
+                right:10%;
+                text-align: right;
+            }
+
+            .section2 h2 {
+                color: #ffffff;
+
+            }
+            .section2 p {
+                color: #f0f0f0;
+            }
+
+            .section2 img {
+                position: absolute;
+                bottom: 0;
+                left:5%;
+            }
+
+            .section3 {
+                background-color: #f8f8f9;
+            }
+
+            .section3 .doc {
+                position: absolute;
+                text-align: right;
+                left: 0;
+                top: 20%;
+
+            }
+
+            .section3 h2 {
+                color: #E95513;
+            }
+            .section3 p {
+                color: #ED8658;
+                max-width: 40%;
+                float:right;
+            }
+            .section3 img {
+                position: absolute;
+                bottom: 0;
+                right: 10%;
+            }
+
+            .section4 {
+                background-color: #f8b62d;
+            }
+
+            .section4 .doc {
+                position: absolute;
+                width: 100%;
+                top: 5%;
+            }
+            .section4 h2 {
+                color: #ffffff;
+
+            }
+            .section4 p {
+                color: #F7F8F8;
+            }
+
+            .section4 .img-group {
+                position: absolute;
+                bottom: 10%;
+                right: 20%;
+            }
+
+            .section5 {
+                background-image:  url("/assets/images/desktop/5_1.jpg") ;
+                background-size:100%;
+                background-repeat:no-repeat;
+                position: relative;
+            }
+
+            .section5 .doc {
+                position: absolute;
+                right: 20%;
+                top: 20%;
+                text-align: right;
+            }
+
+            .section5 h2 {
+                color: #E95513;
+
+            }
+            .section5 p {
+                color: #ED8658;
+            }
+
+            .section6 {
+                background-image:  url("/assets/images/desktop/6_1.jpg") ;
+                background-size:100%;
+                background-repeat:repeat;
+                position: relative;
+
+                /*background-color: #E95513;*/
+                vertical-align: middle;
+            }
+            .section6 .doc {
+                padding-top: 15%;
+                width: 100%;
+            }
+            .section6 h2 {
+                margin-top: 0;
+                color: #ffffff;
+            }
+            .section6 p {
+                color: #f8f8f9;
+            }
+
+
+            footer .doc {
+                text-align: left;
+                margin-left: 20%;
+                font-size: 14px;
+            }
+
+            footer .weiboweixin {
+                float: right;
+                position: absolute;
+                right: 5%;
+                top: 20%;
+
+            }
+
+
+
+        </style>
+        <script src="/assets/javascripts/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+
+
+
+        <div id="main">
+
+
+            <div class="section  section1 fp-auto-height">
+
+                <header>
+                    <img class="brand" alt="客运巴巴" title="客运巴巴" src="/assets/images/desktop/brand.png">
+                    <p class="corp">深圳市我爱自由行网络科技有限公司</p>
+                </header>
+
+
+
+                    <h2>
+                        客运巴巴 - 便捷您的出行
+                    </h2>
+                    <div class="followwechat">
+
+                            <img src="/assets/images/desktop/wechat.png">
+                            <p>关注客运巴巴微信号</p>
+
+                    </div>
+
+
+            </div>
+
+            <div class="section section2 fp-auto-height">
+                <div class="doc">
+                    <h2>市际出行一如市内打车</h2>
+                    <p>客运巴巴专注于解决市际出行，</p>
+                    <p>提供城际巴士查询、订票服务。</p>
+                    <p>让市际出行一如市内打车一样方便。</p>
+                </div>
+                <img src="/assets/images/desktop/2_2.png"/>
+            </div>
+
+
+            <div class="section section3 fp-auto-height">
+                <div class="doc">
+                    <h2>作为乘客，发现更懒的自己</h2>
+                    <p>平台公从号覆盖90%以上10～300公里区间距离的城市之间
+                    的客运班车，足不出户，实现在线查询、订票。</p>
+
+
+                </div>
+                <img src="/assets/images/desktop/3_1.png"/>
+            </div>
+
+            <div class="section section4 fp-auto-height">
+                <div class="doc">
+                    <h2>作为乘客，得意更抠门的出行方式</h2>
+                    <p>平台直接和司机、车辆拥有机构合作，互联网化运营，<br/>
+                        打破汽运站高价格车票垄断，为您一省到底。</p>
+
+                </div>
+
+                <div class="img-group">
+
+                    <img src="/assets/images/desktop/4_1.jpg"/>
+                    <img src="/assets/images/desktop/4_2.jpg"/>
+                    <img src="/assets/images/desktop/4_3.jpg"/>
+                </div>
+            </div>
+
+            <div class="section section5 fp-auto-height">
+                <div class="doc">
+
+                    <h2>作为司机，无需所谓的兜客</h2>
+                    <p>运站的班车平日并不满载但不得不发车：<br/>
+                        通过平台合作，可以精准时间接送乘客，<br/>
+                        无需做所谓的兜客行为。</p>
+                </div>
+
+            </div>
+
+
+            <div class="section section6 fp-auto-height">
+                <div class="doc">
+
+                    <h2>作为客运公司，拥有最好的平台</h2>
+                    <p>客运公司无需给客运站支付高额费用。<br/>
+                        平台完全免费，欢迎加盟平台，利己利人。</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <footer>
+            <div class="doc">
+                <div class="contactus">
+                    <h3>联系我们</h3>
+                    <p>名称：深圳市我爱自由行网络科技有限公司<br/>
+                        电话：15914148505<br/>
+                        邮箱：543399138@qq.com<br/>
+                        地址：深圳市龙岗区布吉街道龙岗大道东南侧佳兆业大都汇B座2109室</p>
+                </div>
+                <div class="corperation">
+                    <h3>商务合作</h3>
+                    <p>
+                        客运巴巴致力于解决用户市际出行查询班车、订票困难问题，打造免费查询、订票服务平台，<br/>
+                        欢迎各车企、个人进行广告投放、企业班车、城际班车、周边游等战略合作。
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="weiboweixin">
+                <span>
+                    <img src="/assets/images/desktop/wechat2.png" />
+                    <img src="/assets/images/desktop/weibo.png" />
+                </span>
+            </div>
+        </footer>
+
+        <!--<script>window.jQuery || document.write('<script src="/assets/javascripts/jquery-1.11.3.min.js"><\/script>')</script>-->
+        <!--<script src="/assets/javascripts/plugins.js"></script>-->
+        <!--<script src="/assets/javascripts/jquery.fullPage.min.js"></script>-->
+        <!--<script src="/assets/javascripts/main.js"></script>-->
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+//            $(function(){
+//
+//                $("#main").fullpage({
+////                    scrollBar: true
+//                    paddingTop: 0
+//                    ,paddingBottom: '200px'
+//                });
+//            });
+        </script>
+    </body>
+</html>

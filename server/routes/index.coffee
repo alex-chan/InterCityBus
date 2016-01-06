@@ -13,8 +13,12 @@ Promise =  require("sequelize").Promise
 model = require "../lib/model"
 config = require "../config/config"
 
-router.all "/*", (req, res, next)->
+router.all "/", (req, res, next)->
 
+    res.sendFile  path.join(config.root , 'client/desktop/index.html' )
+
+
+router.all "/*", (req, res, next)->
     # TODO: use config path
     res.sendFile  path.join(config.root , 'client/app/index.html' )
 

@@ -16,6 +16,10 @@
 
   config = require("../config/config");
 
+  router.all("/", function(req, res, next) {
+    return res.sendFile(path.join(config.root, 'client/desktop/index.html'));
+  });
+
   router.all("/*", function(req, res, next) {
     return res.sendFile(path.join(config.root, 'client/app/index.html'));
   });
